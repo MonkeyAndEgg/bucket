@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <span class="title" [routerLink]="'/'">Bucket</span>
+  <span class="spacer"></span>
+  <div *ngIf="isAuth" class="options">
+    <span>{{ AUTH_OPTIONS.SIGN_OUT }}</span>
+  </div>
+  <div *ngIf="!isAuth" class="options">
+    <span>{{ AUTH_OPTIONS.SIGN_UP }}</span>
+    <span>{{ AUTH_OPTIONS.SIGN_IN }}</span>
+  </div>
+</mat-toolbar>
