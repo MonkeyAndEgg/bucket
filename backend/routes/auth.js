@@ -78,7 +78,20 @@ router.post("/api/signout", async (req, res) => {
 });
 
 router.get("/api/user", async (req, res) => {
-  res.status(201).send({});
+  let currentUser = {};
+  if (req.session?.jwt) {
+    try {
+      const payload = jwt.verify(req.session.jwt, 'my_epic_secret_key');
+      req.currentUser = payload;
+    } catch (err) {
+      res.status(500).send({
+        message: err.message
+      })
+    }
+  }
+  res.status(201).send({
+    currentUser
+  });
 });
 
 module.exports = router;
