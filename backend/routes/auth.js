@@ -6,6 +6,11 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.post('/api/signup', async (req, res) => {
+  if (!req.body || (!req.body.email && !req.body.password)) {
+    return res.status(400).send({
+      message: 'Empty request body'
+    });
+  }
   const { email, password } = req.body;
   const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -29,10 +34,11 @@ router.post('/api/signup', async (req, res) => {
       expiresIn: '1h'
     }
   );
-  req.session = {
-    jwt: token
-  };
-  return res.status(201).send(user);
+  return res.status(201).send({
+    userId: user._id,
+    token,
+    expiresIn: 60 // in seconds
+  });
 });
 
 router.post("/api/signin", async (req, res) => {
@@ -60,11 +66,10 @@ router.post("/api/signin", async (req, res) => {
         expiresIn: '1h'
       }
     );
-    req.session = {
-      jwt: token
-    };
     return res.status(200).send({
-      token
+      userId: user._id,
+      token,
+      expiresIn: 60 // in seconds
     });
   } catch (err) {
     return res.status(500).send({
@@ -73,16 +78,16 @@ router.post("/api/signin", async (req, res) => {
   }
 });
 
-router.post("/api/signout", async (req, res) => {
-  res.status(201).send({});
-});
-
 router.get("/api/user", async (req, res) => {
-  let currentUser = {};
-  if (req.session?.jwt) {
+  let currentUser = undefined;
+  const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : undefined;
+  if (token) {
     try {
-      const payload = jwt.verify(req.session.jwt, 'my_epic_secret_key');
-      req.currentUser = payload;
+      const payload = jwt.verify(token, 'my_epic_secret_key');
+      const { id, email } = payload;
+      currentUser = {
+        id, email
+      };
     } catch (err) {
       res.status(500).send({
         message: err.message

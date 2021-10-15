@@ -23,16 +23,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.service.getCurrentUser()
     .pipe(
       takeUntil(this.destroySubscription$)
-    ).subscribe(
-      (user: User) => {
+    ).subscribe((user: User) => {
         // TODO
-        console.log(user);
-      }
-    );
+        // this.isAuth = user && user.email !== '' && user.id !== '';
+        // this.service.updateAuthStatus(this.isAuth);
+    });
+
+    this.service.getIsAuth()
+    .pipe(
+      takeUntil(this.destroySubscription$)
+    ).subscribe((isAuth: boolean) => {
+      this.isAuth = isAuth;
+    });
   }
 
   ngOnDestroy(): void {
     this.destroySubscription$.next(true);
   }
 
+  onSignOut(): void {
+    this.service.signOut();
+  }
 }

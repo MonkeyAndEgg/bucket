@@ -1,0 +1,32 @@
+<div class="content">
+  <h1>{{ title }}</h1>
+
+  <form class="example-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div class="auth-input">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+               placeholder="Ex. jerry@example.com">
+        <mat-error *ngIf="authForm.controls.email.hasError('email') && !authForm.controls.email.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="authForm.controls.email.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="auth-input">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [errorStateMatcher]="matcher">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="authForm.controls.password.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!authForm.valid">Submit</button>
+  </form>
+</div>
