@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AUTH_OPTIONS } from 'src/app/constants/header.constants';
 import { User } from 'src/app/models/user';
@@ -19,21 +19,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private service: HeaderService) { }
 
   ngOnInit(): void {
+    this.service.verifyUserAuth();
     this.service.loadUser();
     this.service.getCurrentUser()
     .pipe(
       takeUntil(this.destroySubscription$)
     ).subscribe((user: User) => {
         // TODO
-        // this.isAuth = user && user.email !== '' && user.id !== '';
-        // this.service.updateAuthStatus(this.isAuth);
     });
 
-    this.service.getIsAuth()
-    .pipe(
+    combineLatest([
+      this.service.getIsAuth(),
+      this.service.getToken(),
+      this.service.getExpiration()
+    ]).pipe(
       takeUntil(this.destroySubscription$)
-    ).subscribe((isAuth: boolean) => {
+    ).subscribe(([isAuth, token, expiresIn]: [boolean, string, number]) => {
       this.isAuth = isAuth;
+      if (token !== '' && expiresIn > 0) {
+        this.service.initAuthTimer(expiresIn);
+        const expiration = new Date().getTime() + expiresIn * 1000;
+        this.service.saveStorageData(token, new Date(expiration));
+      }
     });
   }
 

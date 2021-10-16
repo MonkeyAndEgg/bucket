@@ -13,6 +13,10 @@ export const selectToken = createSelector(
   selectUserState,
   (state: fromAuth.AuthState) => state.token
 );
+export const selectExpiration = createSelector(
+  selectUserState,
+  (state: fromAuth.AuthState) => state.expiresIn
+);
 export const selectIsAuth = createSelector(
   selectUserState,
   (state: fromAuth.AuthState) => state.isAuth

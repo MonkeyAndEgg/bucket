@@ -5,9 +5,10 @@ import * as AuthActions from './auth.actions';
 export const userFeatureKey = 'user';
 
 export interface AuthState {
-  user: User,
-  token: string,
-  isAuth: boolean
+  user: User;
+  token: string;
+  isAuth: boolean;
+  expiresIn: number;
 }
 
 export const initialState: AuthState = {
@@ -16,7 +17,8 @@ export const initialState: AuthState = {
     email: ''
   },
   token: '',
-  isAuth: false
+  isAuth: false,
+  expiresIn: 0
 };
 
 export const authReducer = createReducer(
@@ -31,7 +33,8 @@ export const authReducer = createReducer(
   on(AuthActions.updateToken, (state, data) => {
     return ({
       ...state,
-      token: data.token
+      token: data.token,
+      expiresIn: data.expiresIn
     });
   }),
   on(AuthActions.updateAuthStatus, (state, data) => {
