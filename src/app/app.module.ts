@@ -10,6 +10,7 @@ import { ProductListModule } from './components/product-list/product-list.module
 import { ShowCaseModule } from './components/show-case/show-case.module';
 import { AppStoreModule } from './store/store.module';
 import { ViewProductsModule } from './components/view-products/view-products.module';
+import { ProductDetailModule } from './components/product-detail/product-detail.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ViewProductsModule } from './components/view-products/view-products.mod
     BrowserAnimationsModule,
     HeaderModule,
     LandingModule,
+    ProductDetailModule,
     ProductListModule,
     ShowCaseModule,
     ViewProductsModule
