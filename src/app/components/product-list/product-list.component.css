@@ -1,0 +1,13 @@
+.product {
+  padding: 15px;
+}
+
+.product mat-card {
+  max-width: 300px;
+}
+
+
+.content-footer {
+  display: flex;
+  justify-content: space-around;
+}

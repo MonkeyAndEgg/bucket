@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.products{
+  width: 80%;
+}
