@@ -1,9 +1,12 @@
 const express = require('express');
 const authRouter = require('./routes/auth');
+const productsRouter = require('./routes/products');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/images', express.static(path.join('images')));
 
 app.use((req, res, next) => {
   res.setHeader(
@@ -26,5 +29,6 @@ app.use((req, res, next) => {
 });
 
 app.use(authRouter);
+app.use(productsRouter);
 
 module.exports = app;

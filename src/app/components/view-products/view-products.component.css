@@ -6,3 +6,9 @@
 .products{
   width: 80%;
 }
+
+.admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}

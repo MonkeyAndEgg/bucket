@@ -11,6 +11,7 @@ import { ShowCaseModule } from './components/show-case/show-case.module';
 import { AppStoreModule } from './store/store.module';
 import { ViewProductsModule } from './components/view-products/view-products.module';
 import { ProductDetailModule } from './components/product-detail/product-detail.module';
+import { NewProductDialogModule } from './components/new-product-dialog/new-product-dialog.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ProductDetailModule } from './components/product-detail/product-detail.
     BrowserAnimationsModule,
     HeaderModule,
     LandingModule,
+    NewProductDialogModule,
     ProductDetailModule,
     ProductListModule,
     ShowCaseModule,

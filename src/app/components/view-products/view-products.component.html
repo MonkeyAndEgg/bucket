@@ -3,6 +3,9 @@
     <span>this is filter</span>
   </div>
   <div class="products">
-    <app-product-list></app-product-list>
+    <div class="admin-actions">
+      <button mat-raised-button (click)="openNewProductDialog()">New Product</button>
+    </div>
+    <app-product-list [products]="products"></app-product-list>
   </div>
 </div>

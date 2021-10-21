@@ -1,0 +1,97 @@
+const express = require('express');
+const Product = require('../models/product');
+const storeFile = require('../middlewares/file-storage');
+
+const router = express.Router();
+
+router.post('/api/products', storeFile, async (req, res) => {
+  let imageUrl;
+  const { name, description, numOfStocks } = req.body;
+  if (req.file) {
+    const baseUrl = req.protocol + '://' + req.get('host');
+    imageUrl = baseUrl + '/images/' + req.file.filename;
+  }
+  try {
+    const product = new Product({
+      name,
+      description,
+      numOfStocks,
+      imageUrl
+    });
+    await product.save();
+    res.status(201).send(product);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message
+    });
+  }
+});
+
+router.put('/api/products/:id', storeFile, async (req, res) => {
+  let imageUrl;
+  const { name, description, numOfStocks } = req.body;
+  if (req.file) {
+    const baseUrl = req.protocol + '://' + req.get('host');
+    imageUrl = baseUrl + '/images/' + req.file.filename;
+  }
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    product.set({
+      name,
+      description,
+      numOfStocks,
+      imageUrl
+    });
+    await product.save();
+    res.status(200).send(product);
+  } else {
+    res.status(404).send({
+      message: `The product with id: ${req.params.id} does not exist`
+    });
+  }
+});
+
+router.get('/api/products', async (req, res) => {
+  const products = await Product.find()
+  res.status(200).send(products);
+});
+
+router.get('/api/products/:id', async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      res.status(200).send(product);
+    } else {
+      res.status(404).send({
+        message: 'The target product does not exist.'
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message
+    });
+  }
+});
+
+router.delete('/api/products/:id', async (req, res) => {
+  try {
+    const result = await Product.deleteOne({
+      _id: req.params.id
+    });
+    if (result.deletedCount > 0) {
+      res.status(200).send({
+        message: `Product with id: ${req.params.id} is deleted.`
+      });
+    } else {
+      res.status(404).send({
+        message: 'The product may not exist or you are not authorized to delete it.'
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message
+    });
+  }
+});
+
+module.exports = router;

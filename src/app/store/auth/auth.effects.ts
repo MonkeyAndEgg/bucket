@@ -8,6 +8,9 @@ import { LoginInfo } from "src/app/models/login-info";
 
 @Injectable()
 export class AuthEffects {
+  constructor(private actions$: Actions,
+              private authDataService: AuthDataService) {}
+
   loadUser$ = createEffect(() => this.actions$.pipe(
     ofType(loadCurrentUser),
     mergeMap(() => this.authDataService.getUser()
@@ -33,7 +36,4 @@ export class AuthEffects {
         catchError(() => EMPTY)
       ))
   ));
-
-  constructor(private actions$: Actions,
-              private authDataService: AuthDataService) {}
 }
