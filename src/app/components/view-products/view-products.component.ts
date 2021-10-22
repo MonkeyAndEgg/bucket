@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Product } from 'src/app/models/product';
@@ -31,6 +31,9 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
   }
 
   openNewProductDialog() : void {
-    this.dialog.open(NewProductDialogComponent);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.height = '700px';
+    dialogConfig.minWidth = '700px';
+    this.dialog.open(NewProductDialogComponent, dialogConfig);
   }
 }

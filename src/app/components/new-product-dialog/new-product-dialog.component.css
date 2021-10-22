@@ -6,3 +6,31 @@ mat-form-field {
 input[type="file"] {
   visibility: hidden;
 }
+
+.image-upload {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.image-upload .action {
+  width: 150px;
+}
+
+.image-preview {
+  display: flex;
+  justify-content: center;
+  width: 380px;
+  height: 300px;
+  border: 1px solid grey;
+}
+
+.image-preview > img {
+  max-width: 380px;
+  max-height: 300px;
+}
+
+.footer {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+}
