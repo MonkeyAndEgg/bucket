@@ -1,13 +1,29 @@
 .product {
-  padding: 15px;
+  width: 100%;
+  height: 100%;
 }
 
-.product mat-card {
-  max-width: 300px;
+.title {
+  padding: 10px;
 }
 
+.mat-grid-tile {
+  border: 1px solid #808080;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.mat-grid-tile:hover {
+  border-color: #f8b414;
+}
+
+.product img {
+  width: 100%;
+  height: 75%;
+}
 
 .content-footer {
   display: flex;
   justify-content: space-around;
+  padding: 15px;
 }

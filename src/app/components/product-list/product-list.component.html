@@ -1,21 +1,15 @@
-<mat-grid-list class="product-list" [cols]="cols" rowHeight="450px">
+<mat-grid-list class="product-list" [cols]="cols" [gutterSize]="'20px'" rowHeight="400px">
   <mat-grid-tile *ngFor="let product of products">
     <div class="product">
-      <mat-card>
-        <img mat-card-image [src]="product.imageUrl">
-        <mat-card-content>
-          <div>
-            <p>
-              {{ product.description }}
-            </p>
-            <hr />
-            <div class="content-footer">
-              <label>$999.9</label>
-              <span>Like</span>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
+      <img mat-card-image [src]="product.imageUrl">
+      <label class="title">
+        {{ product.name }}
+      </label>
+      <hr />
+      <div class="content-footer">
+        <label>$999.9</label>
+        <span>Like</span>
+      </div>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
