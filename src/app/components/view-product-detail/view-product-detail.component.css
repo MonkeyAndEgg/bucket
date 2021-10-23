@@ -1,0 +1,44 @@
+.not-found img {
+  width: 100%;
+}
+
+.container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-left {
+  width: 45%;
+}
+
+.content-left img {
+  width: 100%;
+}
+
+.content-right {
+  width: 50%;
+  position: relative;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+.field-value {
+  margin-bottom: 20px;
+}
+
+.checkout {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.checkout label,
+.checkout span {
+  font-size: 30px;
+}

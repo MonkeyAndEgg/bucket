@@ -31,7 +31,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   destroySubscription$ = new Subject();
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
               private authService: AuthService) { }
 
   ngOnInit(): void {

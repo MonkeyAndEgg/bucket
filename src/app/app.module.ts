@@ -10,7 +10,7 @@ import { ProductListModule } from './components/product-list/product-list.module
 import { ShowCaseModule } from './components/show-case/show-case.module';
 import { AppStoreModule } from './store/store.module';
 import { ViewProductsModule } from './components/view-products/view-products.module';
-import { ProductDetailModule } from './components/product-detail/product-detail.module';
+import { ViewProductDetailModule } from './components/view-product-detail/view-product-detail.module';
 import { NewProductDialogModule } from './components/new-product-dialog/new-product-dialog.module';
 
 @NgModule({
@@ -24,9 +24,9 @@ import { NewProductDialogModule } from './components/new-product-dialog/new-prod
     HeaderModule,
     LandingModule,
     NewProductDialogModule,
-    ProductDetailModule,
     ProductListModule,
     ShowCaseModule,
+    ViewProductDetailModule,
     ViewProductsModule
   ],
   providers: [{

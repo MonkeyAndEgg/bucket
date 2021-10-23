@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY } from "rxjs";
-import { catchError, map, mergeMap, switchMap } from "rxjs/operators";
+import { catchError, map, mergeMap } from "rxjs/operators";
 import { Product } from "src/app/models/product";
-import { createNewProduct, loadProducts, loadProductsComplete } from "./product.actions";
+import { createNewProduct, loadProductById, loadProductByIdComplete, loadProducts, loadProductsComplete } from "./product.actions";
 import { ProductDataService } from "./product.data.service";
 
 @Injectable()
@@ -17,6 +17,17 @@ export class ProductEffects {
     .pipe(
       map((products: Product[]) => {
         return loadProductsComplete({ products });
+      }),
+      catchError(() => EMPTY)
+    ))
+  ));
+
+  loadProductById$ = createEffect(() => this.actions$.pipe(
+    ofType(loadProductById),
+    mergeMap((payload) => this.productDataService.getProductById(payload.id)
+    .pipe(
+      map((product: Product) => {
+        return loadProductByIdComplete({ product });
       }),
       catchError(() => EMPTY)
     ))

@@ -6,4 +6,5 @@ export interface Product {
   imageUrl: string;
   createdAt: string;
   updatedAt?: string;
+  _id?: string
 }

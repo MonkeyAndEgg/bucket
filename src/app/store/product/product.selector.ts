@@ -9,3 +9,8 @@ export const selectProducts = createSelector(
   selectProductState,
   (state: fromProduct.ProductState) => state.products
 );
+
+export const selectProductInView = createSelector(
+  selectProductState,
+  (state: fromProduct.ProductState) => state.productInView
+);

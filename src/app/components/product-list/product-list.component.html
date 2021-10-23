@@ -1,6 +1,6 @@
 <mat-grid-list class="product-list" [cols]="cols" [gutterSize]="'20px'" rowHeight="400px">
   <mat-grid-tile *ngFor="let product of products">
-    <div class="product">
+    <div class="product" [routerLink]="['/view-detail', product._id]">
       <img mat-card-image [src]="product.imageUrl">
       <label class="title">
         {{ product.name }}
