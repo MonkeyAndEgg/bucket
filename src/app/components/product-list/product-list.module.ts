@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { ProductListComponent } from "./product-list.component";
 import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from "@angular/common";
 
 @NgModule({
@@ -11,7 +12,8 @@ import { CommonModule } from "@angular/common";
   imports: [
     CommonModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule
   ],
   exports: [
     ProductListComponent
