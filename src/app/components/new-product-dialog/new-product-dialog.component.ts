@@ -12,6 +12,9 @@ export class NewProductDialogComponent implements OnInit {
     name: new FormControl('', [
       Validators.required
     ]),
+    price: new FormControl('', [
+      Validators.required
+    ]),
     description: new FormControl('', []),
     numOfStocks: new FormControl(null, [
       Validators.required

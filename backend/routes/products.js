@@ -6,17 +6,20 @@ const router = express.Router();
 
 router.post('/api/products', storeFile, async (req, res) => {
   let imageUrl;
-  const { name, description, numOfStocks } = req.body;
+  const { name, description, numOfStocks, price } = req.body;
   if (req.file) {
     const baseUrl = req.protocol + '://' + req.get('host');
     imageUrl = baseUrl + '/images/' + req.file.filename;
   }
   try {
+    const currentTime = new Date();
     const product = new Product({
       name,
+      price,
       description,
       numOfStocks,
-      imageUrl
+      imageUrl,
+      createdAt: currentTime.toISOString()
     });
     await product.save();
     res.status(201).send(product);
@@ -29,18 +32,22 @@ router.post('/api/products', storeFile, async (req, res) => {
 
 router.put('/api/products/:id', storeFile, async (req, res) => {
   let imageUrl;
-  const { name, description, numOfStocks } = req.body;
+  const { name, description, numOfStocks, price } = req.body;
   if (req.file) {
     const baseUrl = req.protocol + '://' + req.get('host');
     imageUrl = baseUrl + '/images/' + req.file.filename;
   }
+  const currentTime = new Date();
   const product = await Product.findById(req.params.id);
   if (product) {
     product.set({
       name,
+      price,
       description,
       numOfStocks,
-      imageUrl
+      imageUrl,
+      createdAt: product.createdAt,
+      updatedAt: currentTime.toISOString()
     });
     await product.save();
     res.status(200).send(product);
