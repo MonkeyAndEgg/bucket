@@ -69,7 +69,7 @@ export class HeaderService {
   }
 
   initAuthTimer(expiresInSeconds: number) {
-    console.log('The token expires in:', expiresInSeconds);
+    console.log('The token expires in:', expiresInSeconds + ' seconds');
     const timer = setTimeout(() => {
       this.updateToken('', 0);
       this.updateAuthStatus(false);

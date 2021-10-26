@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { AUTH_OPTIONS } from 'src/app/constants/header.constants';
+import { USER_OPTIONS } from 'src/app/constants/header.constants';
 import { LoginInfo } from 'src/app/models/login-info';
 import { AuthService } from './auth.service';
 
@@ -36,8 +36,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initFormGroup();
     this.route.data.subscribe(data => {
-      this.isSignin = data.page === AUTH_OPTIONS.SIGN_IN ? true : false;
-      this.title = this.isSignin ? AUTH_OPTIONS.SIGN_IN : AUTH_OPTIONS.SIGN_UP;
+      this.isSignin = data.page === USER_OPTIONS.SIGN_IN ? true : false;
+      this.title = this.isSignin ? USER_OPTIONS.SIGN_IN : USER_OPTIONS.SIGN_UP;
     });
   }
 

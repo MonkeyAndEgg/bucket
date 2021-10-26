@@ -1,5 +1,6 @@
-export enum AUTH_OPTIONS {
+export enum USER_OPTIONS {
   SIGN_IN = 'Sign In',
   SIGN_UP = 'Sign Up',
-  SIGN_OUT = 'Sign Out'
+  SIGN_OUT = 'Sign Out',
+  CART = "Cart"
 }

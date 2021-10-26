@@ -1,0 +1,29 @@
+.container,
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  margin-top: 10px;
+}
+
+.info {
+  height: 200px;
+  border: 1px solid #808080;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.checkout {
+  width: 30%;
+}
+
+.orders {
+  width: 65%;
+}
+
+button {
+  width: 160px;
+  margin-right: 10px;
+}

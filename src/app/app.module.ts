@@ -12,6 +12,7 @@ import { AppStoreModule } from './store/store.module';
 import { ViewProductsModule } from './components/view-products/view-products.module';
 import { ViewProductDetailModule } from './components/view-product-detail/view-product-detail.module';
 import { NewProductDialogModule } from './components/new-product-dialog/new-product-dialog.module';
+import { CartModule } from './components/cart/cart.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NewProductDialogModule } from './components/new-product-dialog/new-prod
     AppRoutingModule,
     AppStoreModule,
     BrowserAnimationsModule,
+    CartModule,
     HeaderModule,
     LandingModule,
     NewProductDialogModule,

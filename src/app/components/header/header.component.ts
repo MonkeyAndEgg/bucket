@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AUTH_OPTIONS } from 'src/app/constants/header.constants';
+import { USER_OPTIONS } from 'src/app/constants/header.constants';
 import { User } from 'src/app/models/user';
 import { HeaderService } from './header.service';
 
@@ -13,7 +13,7 @@ import { HeaderService } from './header.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuth = false;
-  AUTH_OPTIONS = AUTH_OPTIONS;
+  USER_OPTIONS = USER_OPTIONS;
   destroySubscription$ = new Subject();
 
   constructor(private service: HeaderService) { }

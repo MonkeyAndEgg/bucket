@@ -37,7 +37,7 @@ router.post('/api/signup', async (req, res) => {
   return res.status(201).send({
     userId: user._id,
     token,
-    expiresIn: 60 // in seconds
+    expiresIn: 60 * 60 // in seconds
   });
 });
 
@@ -69,7 +69,7 @@ router.post("/api/signin", async (req, res) => {
     return res.status(200).send({
       userId: user._id,
       token,
-      expiresIn: 60 // in seconds
+      expiresIn: 60 * 60 // in seconds
     });
   } catch (err) {
     return res.status(500).send({

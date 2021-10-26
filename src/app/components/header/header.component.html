@@ -2,10 +2,11 @@
   <span class="title" [routerLink]="'/'">Bucket</span>
   <span class="spacer"></span>
   <div *ngIf="isAuth" class="options">
-    <span (click)="onSignOut()">{{ AUTH_OPTIONS.SIGN_OUT }}</span>
+    <span [routerLink]="'/cart'">{{ USER_OPTIONS.CART }}</span>
+    <span (click)="onSignOut()">{{ USER_OPTIONS.SIGN_OUT }}</span>
   </div>
   <div *ngIf="!isAuth" class="options">
-    <span [routerLink]="'/signup'">{{ AUTH_OPTIONS.SIGN_UP }}</span>
-    <span [routerLink]="'/signin'">{{ AUTH_OPTIONS.SIGN_IN }}</span>
+    <span [routerLink]="'/signup'">{{ USER_OPTIONS.SIGN_UP }}</span>
+    <span [routerLink]="'/signin'">{{ USER_OPTIONS.SIGN_IN }}</span>
   </div>
 </mat-toolbar>
