@@ -1,7 +1,7 @@
 <mat-grid-list class="product-list" [cols]="cols" [gutterSize]="'20px'" rowHeight="400px">
   <mat-grid-tile *ngFor="let product of products">
-    <div class="product" [routerLink]="['/view-detail', product._id]">
-      <img mat-card-image [src]="product.imageUrl">
+    <div class="product">
+      <img mat-card-image [src]="product.imageUrl" [routerLink]="['/view-detail', product._id]">
       <label class="title">
         {{ product.name }}
       </label>
@@ -15,7 +15,7 @@
           <span class="material-icons">
             shopping_cart
           </span>
-          <span class="material-icons">
+          <span class="material-icons" (click)="onDelete(product._id)">
             delete
           </span>
         </div>

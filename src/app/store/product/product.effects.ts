@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
 import { Product } from "src/app/models/product";
-import { createNewProduct, loadProductById, loadProductByIdComplete, loadProducts, loadProductsComplete } from "./product.actions";
+import { createNewProduct, deleteProduct, loadProductById, loadProductByIdComplete, loadProducts, loadProductsComplete } from "./product.actions";
 import { ProductDataService } from "./product.data.service";
 
 @Injectable()
@@ -39,6 +39,17 @@ export class ProductEffects {
       this.productDataService.createProduct(payload.product)
       .pipe(
         map((res: Product) => {
+          return loadProducts();
+        }),
+        catchError(() => EMPTY)
+      ))
+  ));
+
+  deleteProduct$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteProduct),
+    mergeMap((payload: { id: string }) => this.productDataService.deleteProduct(payload.id)
+      .pipe(
+        map((res: any) => {
           return loadProducts();
         }),
         catchError(() => EMPTY)
