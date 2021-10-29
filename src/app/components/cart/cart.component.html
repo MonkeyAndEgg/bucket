@@ -23,7 +23,9 @@
       <label>Total(USD)</label>
       <span>${{total}}</span>
     </div>
-    <button mat-raised-button color="primary">Continue Shipping</button>
-    <button mat-raised-button color="warn">Checkout</button>
+    <div class="actions">
+      <button mat-raised-button color="primary" [routerLink]="'/view-products'">Continue Shipping</button>
+      <button mat-raised-button color="warn">Checkout</button>
+    </div>
   </div>
 </div>

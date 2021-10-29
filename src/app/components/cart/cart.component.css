@@ -1,5 +1,6 @@
 .container,
-.info {
+.info,
+.actions {
   display: flex;
   justify-content: space-between;
 }
@@ -30,8 +31,7 @@
 }
 
 button {
-  width: 160px;
-  margin-right: 10px;
+  width: 220px;
 }
 
 .order-item {
@@ -45,4 +45,8 @@ button {
 
 .order-item div {
   flex: 1;
+}
+
+label {
+  font-weight: 500;
 }
