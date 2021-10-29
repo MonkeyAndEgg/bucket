@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { CartComponent } from "./cart.component";
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
     CartComponent
   ],
   imports: [
+    CommonModule,
     MatButtonModule,
-    MatDividerModule,
     MatListModule
   ],
   exports: [

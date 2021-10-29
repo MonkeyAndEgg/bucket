@@ -1,18 +1,27 @@
 <div class="container">
   <div class="orders">
-    <mat-list>
-      <mat-list-item>Item 1</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>Item 2</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>Item 3</mat-list-item>
-    </mat-list>
+    <div class="order-item" *ngFor="let productObj of cart.products">
+      <img [src]='productObj?.product?.imageUrl'>
+      <div>
+        <label>{{ productObj?.product?.name }}</label>
+      </div>
+      <div>
+        <label>x{{ productObj?.quantity }}</label>
+      </div>
+      <div>
+        <label *ngIf="productObj?.quantity && productObj?.product?.price">{{ productObj!.quantity * productObj!.product!.price }}</label>
+        <label *ngIf="!productObj?.quantity || !productObj?.product?.price">N/A</label>
+      </div>
+      <div>
+        <button mat-button>Remove</button>
+      </div>
+    </div>
   </div>
 
   <div class="checkout">
     <div class="info">
       <label>Total(USD)</label>
-      <span>$999.99</span>
+      <span>${{total}}</span>
     </div>
     <button mat-raised-button color="primary">Continue Shipping</button>
     <button mat-raised-button color="warn">Checkout</button>

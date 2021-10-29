@@ -25,7 +25,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     .pipe(
       takeUntil(this.destroySubscription$)
     ).subscribe((user: User) => {
-        // TODO
+      if (user && user.id !== '') {
+        this.service.loadUserCart(user.id);
+      }
     });
 
     combineLatest([
@@ -40,6 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.service.initAuthTimer(expiresIn);
         const expiration = new Date().getTime() + expiresIn * 1000;
         this.service.saveStorageData(token, new Date(expiration));
+        this.service.loadUser();
       }
     });
   }

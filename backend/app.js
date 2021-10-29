@@ -1,6 +1,7 @@
 const express = require('express');
 const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/products');
+const orderRouter = require('./routes/ordering');
 const path = require('path');
 
 const app = express();
@@ -30,5 +31,6 @@ app.use((req, res, next) => {
 
 app.use(authRouter);
 app.use(productsRouter);
+app.use(orderRouter);
 
 module.exports = app;

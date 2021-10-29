@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { User } from "src/app/models/user";
 import { loadCurrentUser, updateAuthStatus, updateToken } from "src/app/store/auth/auth.actions";
 import { selectExpiration, selectIsAuth, selectToken, selectUser } from "src/app/store/auth/auth.selector";
+import { loadCartById } from "src/app/store/order/order.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class HeaderService {
 
   loadUser(): void {
     this.store.dispatch(loadCurrentUser());
+  }
+
+  loadUserCart(id: string): void {
+    this.store.dispatch(loadCartById({ id }));
   }
 
   getCurrentUser(): Observable<User> {

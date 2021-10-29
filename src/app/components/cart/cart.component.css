@@ -23,7 +23,26 @@
   width: 65%;
 }
 
+.orders img {
+  width: 70px;
+  height: 70px;
+  margin-right: 30px;
+}
+
 button {
   width: 160px;
   margin-right: 10px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000000;
+}
+
+.order-item div {
+  flex: 1;
 }
