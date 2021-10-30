@@ -1,14 +1,15 @@
 import { Action, createReducer, on } from "@ngrx/store";
+import { Cart } from "src/app/models/cart";
 import * as OrderActions from './order.actions';
 
 export const orderFeatureKey = 'order';
 
 export interface OrderState {
-  currentCart: any;
+  currentCart: Cart;
 }
 
 export const initialState: OrderState = {
-  currentCart: {}
+  currentCart: {} as Cart
 };
 
 export const orderReducer = createReducer(

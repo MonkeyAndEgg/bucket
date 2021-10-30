@@ -2,7 +2,7 @@
   <span class="title" [routerLink]="'/'">Bucket</span>
   <span class="spacer"></span>
   <div *ngIf="isAuth" class="options">
-    <span [routerLink]="'/cart'">{{ USER_OPTIONS.CART }}</span>
+    <span [routerLink]="['/cart', userId]">{{ USER_OPTIONS.CART }}</span>
     <span (click)="onSignOut()">{{ USER_OPTIONS.SIGN_OUT }}</span>
   </div>
   <div *ngIf="!isAuth" class="options">

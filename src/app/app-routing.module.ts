@@ -9,7 +9,7 @@ import { USER_OPTIONS } from './constants/header.constants';
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
-  { path: 'cart', component: CartComponent },
+  { path: 'cart/:id', component: CartComponent },
   { path: 'signin', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_IN }},
   { path: 'signup', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_UP }},
   { path: 'view-products', component: ViewProductsComponent },

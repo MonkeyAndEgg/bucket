@@ -5,3 +5,8 @@ export interface Cart {
   userId: string;
   products: { product: Product, quantity: number }[];
 }
+
+export interface CartRequest {
+  userId: string;
+  productDataList: { product: string, quantity: number }[];
+}

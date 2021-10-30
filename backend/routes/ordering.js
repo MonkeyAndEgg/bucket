@@ -5,7 +5,6 @@ const Product = require('../models/product');
 const router = express.Router();
 
 router.post('/api/orders', async (req, res) => {
-  console.log(req.body);
   const { userId, productDataList } = req.body;
   // one user suppose to have only one cart
   let cart = await Cart.findOne({ userId });
@@ -16,7 +15,7 @@ router.post('/api/orders', async (req, res) => {
   } else {
     let products = [];
     for (const productData of productDataList) {
-      const product = await Product.findById(productData.id)
+      const product = await Product.findById(productData.product)
       if (!product) {
         return res.status(400).send({
           message: 'There is one or more product cannot be found'
@@ -27,7 +26,6 @@ router.post('/api/orders', async (req, res) => {
         quantity: productData.quantity
       });
     }
-    console.log(products);
     cart = new Cart({
       userId,
       products
@@ -37,11 +35,11 @@ router.post('/api/orders', async (req, res) => {
   return res.status(201).send(cart);
 });
 
-router.put('/api/orders:id', async (req, res) => {
+router.put('/api/orders/:id', async (req, res) => {
   const { userId, productDataList } = req.body;
   let products = [];
   for (const productData of productDataList) {
-    const product = await Product.findById(productData.id)
+    const product = await Product.findById(productData.product)
     if (!product) {
       return res.status(400).send({
         message: 'There is one or more product cannot be found'

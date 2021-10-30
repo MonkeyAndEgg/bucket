@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuth = false;
   USER_OPTIONS = USER_OPTIONS;
   destroySubscription$ = new Subject();
+  userId: string | undefined;
 
   constructor(private service: HeaderService) { }
 
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       takeUntil(this.destroySubscription$)
     ).subscribe((user: User) => {
       if (user && user.id !== '') {
+        this.userId = user.id;
         this.service.loadUserCart(user.id);
       }
     });
@@ -53,5 +55,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSignOut(): void {
     this.service.signOut();
+    this.userId = undefined;
   }
 }
