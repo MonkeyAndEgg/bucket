@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { EMPTY } from "rxjs";
+import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
-import { CartRequest } from "src/app/models/cart";
+import { Cart, CartRequest } from "src/app/models/cart";
 import { addToCart, loadCartById, loadCartByIdComplete } from "./order.actions";
 import { OrderDataService } from "./order.data.service";
 
@@ -18,7 +18,12 @@ export class OrderEffects {
       map((cart: any) => {
         return loadCartByIdComplete({ cart });
       }),
-      catchError(() => EMPTY)
+      catchError((err) => {
+        if (err.status === 404) {
+          return of(loadCartByIdComplete({ cart: {} as Cart }));
+        }
+        return EMPTY;
+      })
     ))
   ));
 
