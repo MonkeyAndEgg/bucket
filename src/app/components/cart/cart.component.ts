@@ -36,6 +36,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.destroySubscription$.next(true);
   }
 
+  onClickRemove(productId: string | undefined): void {
+    if (productId) {
+      this.service.addToCart(productId, this.cart);
+    }
+  }
+
   onCheckout(): void {
     // TODO payment
   }
