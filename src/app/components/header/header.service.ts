@@ -49,6 +49,7 @@ export class HeaderService {
     this.store.dispatch(updateToken({ token: '', expiresIn: 0 }))
     this.updateAuthStatus(false);
     this.clearStorageData();
+    this.router.navigate(['/']);
   }
 
   saveStorageData(token: string, expirationDate: Date) {
