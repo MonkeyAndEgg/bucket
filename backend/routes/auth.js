@@ -42,17 +42,22 @@ router.post('/api/signup', async (req, res) => {
 });
 
 router.post("/api/signin", async (req, res) => {
+  if (!req.body || (!req.body.email && !req.body.password)) {
+    return res.status(400).send({
+      message: 'Empty request body'
+    });
+  }
   const { email, password } = req.body;
   const user = await User.findOne({ email })
   if (!user) {
-    return res.status(401).send({
-      message: 'Invalid credentials'
+    return res.status(400).send({
+      message: 'The email does not exist'
     });
   }
   try {
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      return res.status(401).send({
+      return res.status(400).send({
         message: 'Invalid credentials'
       });
     }
