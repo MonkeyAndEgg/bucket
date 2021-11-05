@@ -18,12 +18,6 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private service: CartService) { }
 
   ngOnInit(): void {
-    this.route.params.pipe(takeUntil(this.destroySubscription$))
-      .subscribe(params => {
-        this.service.loadUserCart(params.id);
-      }
-    );
-
     this.service.getUserCart().pipe(takeUntil(
       this.destroySubscription$
     )).subscribe((cart: Cart) => {
