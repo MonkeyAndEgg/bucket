@@ -1,9 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Store } from "@ngrx/store";
 import { EMPTY } from "rxjs";
-import { catchError, map, mergeMap } from "rxjs/operators";
+import { catchError, mergeMap, switchMap, withLatestFrom } from "rxjs/operators";
+import { Cart } from "src/app/models/cart";
 import { Payment, PaymentRequestPayload } from "src/app/models/payment";
+import { updateCart } from "../order/order.actions";
+import { selectCurrentCart } from "../order/order.selector";
 import { processPayment, processPaymentComplete } from "./payment.actions";
 import { PaymentDataService } from "./payment.data.service";
 
@@ -11,15 +15,24 @@ import { PaymentDataService } from "./payment.data.service";
 export class PaymentEffects {
   constructor(private actions$: Actions,
               private router: Router,
+              private store: Store,
               private paymentDataService: PaymentDataService) {}
 
   processPayment$ = createEffect(() => this.actions$.pipe(
     ofType(processPayment),
     mergeMap((payload: { paymentRequest: PaymentRequestPayload }) => this.paymentDataService.processPayment(payload.paymentRequest)
     .pipe(
-      map((paymentRes: { payment: Payment }) => {
+      withLatestFrom(this.store.select(selectCurrentCart)),
+      switchMap(([paymentRes, cart]: [{ payment: Payment }, Cart]) => {
+        // navigate to after payment page
         this.router.navigate(['/payment-complete']);
-        return processPaymentComplete({ payment: paymentRes.payment });
+        // clean the current cart for the user
+        const updatedCart = {...cart};
+        updatedCart.products = [];
+        let actions = [];
+        actions.push(processPaymentComplete({ payment: paymentRes.payment }));
+        actions.push(updateCart({ cart: updatedCart }));
+        return actions;
       }),
       catchError(() => EMPTY)
     ))

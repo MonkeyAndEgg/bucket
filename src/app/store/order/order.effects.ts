@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
 import { Cart, CartRequest } from "src/app/models/cart";
-import { addToCart, loadCartById, loadCartByIdComplete } from "./order.actions";
+import { addToCart, loadCartById, updateCart } from "./order.actions";
 import { OrderDataService } from "./order.data.service";
 
 @Injectable()
@@ -16,11 +16,11 @@ export class OrderEffects {
     mergeMap((payload: { id: string }) => this.orderDataService.getCartById(payload.id)
     .pipe(
       map((cart: any) => {
-        return loadCartByIdComplete({ cart });
+        return updateCart({ cart });
       }),
       catchError((err) => {
         if (err.status === 404) {
-          return of(loadCartByIdComplete({ cart: {} as Cart }));
+          return of(updateCart({ cart: {} as Cart }));
         }
         return EMPTY;
       })

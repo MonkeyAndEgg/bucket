@@ -14,7 +14,7 @@ export const initialState: OrderState = {
 
 export const orderReducer = createReducer(
   initialState,
-  on(OrderActions.loadCartByIdComplete, (state, data) => {
+  on(OrderActions.updateCart, (state, data) => {
     return ({
       ...state,
       currentCart: data.cart
