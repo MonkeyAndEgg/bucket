@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart';
+import { Payment } from 'src/app/models/payment';
 import { CartService } from './cart.service';
 
 @Component({
@@ -24,6 +25,12 @@ export class CartComponent implements OnInit, OnDestroy {
       this.cart = cart;
       this.calculateTotal();
     });
+
+    this.service.getCompletedPayment().pipe(takeUntil(
+      this.destroySubscription$
+    )).subscribe((payment: Payment) => {
+      // TODO navigate to after payment page
+    });
   }
 
   ngOnDestroy(): void {
@@ -36,8 +43,10 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCheckout(): void {
-    // TODO payment
+  onClickCheckout(): void {
+    if (this.cart && this.cart._id) {
+      this.service.processPayment(this.cart._id, this.total);
+    }
   }
 
   private calculateTotal(): void {

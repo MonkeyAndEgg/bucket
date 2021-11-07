@@ -2,9 +2,12 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Cart, CartRequest } from "src/app/models/cart";
+import { Payment } from "src/app/models/payment";
 import { Product } from "src/app/models/product";
 import { addToCart, loadCartById } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
+import { processPayment } from "src/app/store/payment/payment.actions";
+import { selectPayment } from "src/app/store/payment/payment.selector";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +38,27 @@ export class CartService {
     this.store.dispatch(addToCart({ cart: cartPayload, cartId: cart._id }));
   }
 
+  processPayment(cartId: string, amount: number): void {
+    const handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_ntBR2ZUDCrXSAsqAV3qUJPvZ00JjuqM0to',
+      token: (stripeToken: any) => {
+        console.log('token is:', stripeToken);
+        const payment = { token: stripeToken, cartId };
+        this.store.dispatch(processPayment({ payment }));
+      }
+    });
+
+    handler.open({
+      name: 'Checkout',
+      amount: amount * 100
+    })
+  }
+
   getUserCart(): Observable<Cart> {
     return this.store.select(selectCurrentCart);
+  }
+
+  getCompletedPayment(): Observable<Payment> {
+    return this.store.select(selectPayment)
   }
 }
