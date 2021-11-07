@@ -43,8 +43,8 @@ export class CartService {
       key: 'pk_test_ntBR2ZUDCrXSAsqAV3qUJPvZ00JjuqM0to',
       token: (stripeToken: any) => {
         console.log('token is:', stripeToken);
-        const payment = { token: stripeToken, cartId };
-        this.store.dispatch(processPayment({ payment }));
+        const paymentRequest = { token: stripeToken, cartId };
+        this.store.dispatch(processPayment({ paymentRequest }));
       }
     });
 

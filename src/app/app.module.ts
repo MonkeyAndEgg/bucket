@@ -13,12 +13,14 @@ import { ViewProductsModule } from './components/view-products/view-products.mod
 import { ViewProductDetailModule } from './components/view-product-detail/view-product-detail.module';
 import { NewProductDialogModule } from './components/new-product-dialog/new-product-dialog.module';
 import { CartModule } from './components/cart/cart.module';
+import { AfterPaymentModule } from './components/after-payment/after-payment.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    AfterPaymentModule,
     AppRoutingModule,
     AppStoreModule,
     BrowserAnimationsModule,

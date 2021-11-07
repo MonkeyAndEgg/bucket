@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart';
@@ -16,7 +15,7 @@ export class CartComponent implements OnInit, OnDestroy {
   cart = {} as Cart;
   total = 0;
 
-  constructor(private route: ActivatedRoute, private service: CartService) { }
+  constructor(private service: CartService) { }
 
   ngOnInit(): void {
     this.service.getUserCart().pipe(takeUntil(
@@ -29,7 +28,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.service.getCompletedPayment().pipe(takeUntil(
       this.destroySubscription$
     )).subscribe((payment: Payment) => {
-      // TODO navigate to after payment page
+      // TODO
     });
   }
 

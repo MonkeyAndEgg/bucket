@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { PaymentRequestPayload } from "src/app/models/payment";
+import { Payment, PaymentRequestPayload } from "src/app/models/payment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,8 @@ import { PaymentRequestPayload } from "src/app/models/payment";
 export class PaymentDataService {
   constructor(private http: HttpClient) {}
 
-  processPayment(payment: PaymentRequestPayload): Observable<any> {
+  processPayment(payment: PaymentRequestPayload): Observable<{ payment: Payment }> {
     const url = 'http://localhost:3000/api/payment';
-    return this.http.post(url, payment);
+    return this.http.post<{ payment: Payment }>(url, payment);
   }
 }

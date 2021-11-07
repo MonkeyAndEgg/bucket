@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AfterPaymentComponent } from './components/after-payment/after-payment.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthGuard } from './components/auth/auth.guard';
 import { CartComponent } from './components/cart/cart.component';
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'signin', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_IN }},
   { path: 'signup', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_UP }},
   { path: 'view-products', component: ViewProductsComponent },
-  { path: 'view-detail/:id', component: ViewProductDetailComponent }
+  { path: 'view-detail/:id', component: ViewProductDetailComponent },
+  { path: 'payment-complete', component: AfterPaymentComponent }
 ];
 
 @NgModule({
