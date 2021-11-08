@@ -15,7 +15,7 @@ export class OrderEffects {
     ofType(loadCartById),
     mergeMap((payload: { id: string }) => this.orderDataService.getCartById(payload.id)
     .pipe(
-      map((cart: any) => {
+      map((cart: Cart) => {
         return updateCart({ cart });
       }),
       catchError((err) => {
@@ -32,7 +32,7 @@ export class OrderEffects {
     mergeMap((payload: { cart: CartRequest, cartId?: string | undefined }) =>
       this.orderDataService.addToCart(payload.cart, payload.cartId)
       .pipe(
-        map((cart: any) => {
+        map((cart: Cart) => {
           return loadCartById({ id: cart.userId });
         }),
         catchError(() => EMPTY)

@@ -5,6 +5,7 @@ import { AuthDataService } from "./auth.data.service";
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { EMPTY } from "rxjs";
 import { LoginInfo } from "src/app/models/login-info";
+import { User } from "src/app/models/user";
 
 @Injectable()
 export class AuthEffects {
@@ -15,7 +16,7 @@ export class AuthEffects {
     ofType(loadCurrentUser),
     mergeMap(() => this.authDataService.getUser()
     .pipe(
-      map((user: any) => {
+      map((user: { currentUser: User }) => {
         return loadCurrentUserComplete({ user: user.currentUser });
       }),
       catchError(() => EMPTY)
@@ -27,7 +28,7 @@ export class AuthEffects {
     mergeMap((payload: { loginInfo: LoginInfo, isSignin: boolean }) =>
       this.authDataService.requestAuthentication(payload.loginInfo, payload.isSignin)
       .pipe(
-        switchMap((res: any) => {
+        switchMap((res: { userId: string, token: string, expiresIn: number }) => {
           let actions = [];
           actions.push(updateToken({ token: res.token, expiresIn: res.expiresIn }));
           actions.push(updateAuthStatus({ isAuth: true }));

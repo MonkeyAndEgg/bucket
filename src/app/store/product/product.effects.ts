@@ -49,7 +49,7 @@ export class ProductEffects {
     ofType(deleteProduct),
     mergeMap((payload: { id: string }) => this.productDataService.deleteProduct(payload.id)
       .pipe(
-        map((res: any) => {
+        map((res: { message: string }) => {
           return loadProducts();
         }),
         catchError(() => EMPTY)

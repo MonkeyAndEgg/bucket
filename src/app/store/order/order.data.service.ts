@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CartRequest } from "src/app/models/cart";
+import { Cart, CartRequest } from "src/app/models/cart";
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,15 @@ import { CartRequest } from "src/app/models/cart";
 export class OrderDataService {
   constructor(private http: HttpClient) {}
 
-  getCartById(id: string): Observable<any> {
-    return this.http.get(`http://localhost:3000/api/orders/${id}`);
+  getCartById(id: string): Observable<Cart> {
+    return this.http.get<Cart>(`http://localhost:3000/api/orders/${id}`);
   }
 
-  addToCart(cart: CartRequest, cartId?: string): Observable<any> {
+  addToCart(cart: CartRequest, cartId?: string): Observable<Cart> {
     if (cartId) {
-      return this.http.put(`http://localhost:3000/api/orders/${cartId}`, cart)
+      return this.http.put<Cart>(`http://localhost:3000/api/orders/${cartId}`, cart)
     } else {
-      return this.http.post('http://localhost:3000/api/orders', cart);
+      return this.http.post<Cart>('http://localhost:3000/api/orders', cart);
     }
   }
 }
