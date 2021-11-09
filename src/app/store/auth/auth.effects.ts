@@ -6,10 +6,12 @@ import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { EMPTY } from "rxjs";
 import { LoginInfo } from "src/app/models/login-info";
 import { User } from "src/app/models/user";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthEffects {
   constructor(private actions$: Actions,
+              private router: Router,
               private authDataService: AuthDataService) {}
 
   loadUser$ = createEffect(() => this.actions$.pipe(
@@ -32,6 +34,8 @@ export class AuthEffects {
           let actions = [];
           actions.push(updateToken({ token: res.token, expiresIn: res.expiresIn }));
           actions.push(updateAuthStatus({ isAuth: true }));
+          // navigate to landing page
+          this.router.navigate(['/']);
           return actions;
         }),
         catchError(() => EMPTY)

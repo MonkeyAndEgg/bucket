@@ -83,7 +83,6 @@ export class HeaderService {
       clearTimeout(timer);
       this.clearStorageData();
     }, expiresInSeconds * 1000);
-    this.router.navigate(['/']);
   }
 
   verifyUserAuth() {
