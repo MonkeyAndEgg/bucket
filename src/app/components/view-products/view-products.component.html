@@ -4,7 +4,7 @@
   </div>
   <div class="products">
     <div class="admin-actions">
-      <button mat-raised-button (click)="openNewProductDialog()">New Product</button>
+      <button mat-raised-button *ngIf="user?.isAdmin" (click)="openNewProductDialog()">New Product</button>
     </div>
     <app-product-list [products]="products"></app-product-list>
   </div>

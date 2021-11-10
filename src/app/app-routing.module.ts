@@ -5,6 +5,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AuthGuard } from './components/auth/auth.guard';
 import { CartComponent } from './components/cart/cart.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { ViewAdminComponent } from './components/view-admin/view-admin.component';
 import { ViewProductDetailComponent } from './components/view-product-detail/view-product-detail.component';
 import { ViewProductsComponent } from './components/view-products/view-products.component';
 import { USER_OPTIONS } from './constants/header.constants';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_UP }},
   { path: 'view-products', component: ViewProductsComponent },
   { path: 'view-detail/:id', component: ViewProductDetailComponent },
+  { path: 'view-admin', component: ViewAdminComponent },
   { path: 'payment-complete', component: AfterPaymentComponent }
 ];
 

@@ -90,8 +90,9 @@ router.get("/api/user", async (req, res) => {
     try {
       const payload = jwt.verify(token, 'my_epic_secret_key');
       const { id, email } = payload;
+      const user = await User.findById(id);
       currentUser = {
-        id, email
+        id, email, isAdmin: user.isAdmin
       };
     } catch (err) {
       res.status(500).send({

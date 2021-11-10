@@ -14,7 +14,8 @@ export interface AuthState {
 export const initialState: AuthState = {
   user: {
     id: '',
-    email: ''
+    email: '',
+    isAdmin: false
   },
   token: '',
   isAuth: false,
@@ -24,7 +25,7 @@ export const initialState: AuthState = {
 export const authReducer = createReducer(
   initialState,
   on(AuthActions.loadCurrentUserComplete, (state, data) => {
-    const user = data.user ? { id: data.user.id, email: data.user.email } : { id: '', email: '' };
+    const user = data.user ? { id: data.user.id, email: data.user.email, isAdmin: data.user.isAdmin } : { id: '', email: '', isAdmin: false };
     return ({
       ...state,
       user
