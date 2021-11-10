@@ -21,7 +21,7 @@ export class ViewProductService {
     return this.store.select(selectProducts);
   }
 
-  getCurrentUser(): Observable<User> {
+  getCurrentUser(): Observable<User | undefined> {
     return this.store.select(selectUser);
   }
 }

@@ -21,7 +21,7 @@ export class HeaderService {
     this.store.dispatch(loadCartById({ id }));
   }
 
-  getCurrentUser(): Observable<User> {
+  getCurrentUser(): Observable<User | undefined> {
     return this.store.select(selectUser);
   }
 

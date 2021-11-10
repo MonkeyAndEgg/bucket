@@ -27,7 +27,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.service.getCurrentUser().pipe(
       takeUntil(this.destroySubscription$)
-    ).subscribe((user: User) => {
+    ).subscribe((user: User | undefined) => {
       this.user = user;
     });
 

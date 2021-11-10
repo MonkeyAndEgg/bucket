@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.service.getCurrentUser()
     .pipe(
       takeUntil(this.destroySubscription$)
-    ).subscribe((user: User) => {
-      if (user && user.id !== '') {
+    ).subscribe((user: User | undefined) => {
+      if (user) {
         this.userId = user.id;
         this.isAdmin = user.isAdmin ? user.isAdmin : false;
         this.service.loadUserCart(user.id);

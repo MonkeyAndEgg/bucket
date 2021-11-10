@@ -29,7 +29,7 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
 
     this.service.getCurrentUser().pipe(
       takeUntil(this.destroySubscription$)
-    ).subscribe((user: User) => {
+    ).subscribe((user: User | undefined) => {
       this.user = user;
     });
   }

@@ -15,7 +15,7 @@ import { deleteProduct } from "src/app/store/product/product.actions";
 export class ProductListService {
   constructor(private store: Store) {}
 
-  getCurrentUser(): Observable<User> {
+  getCurrentUser(): Observable<User | undefined> {
     return this.store.select(selectUser);
   }
 
