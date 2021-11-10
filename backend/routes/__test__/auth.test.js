@@ -2,12 +2,14 @@ const request = require('supertest');
 const app = require('../../app');
 
 // sign up
-it('returns 201 for valid signup and valid token is provided', async () => {
+it('returns 201 for valid signup with valid token and empty cart', async () => {
   const response = await request(app).post('/api/signup').send({
     email: 'test@test.com',
     password: '1234567'
   }).expect(201);
 
+  const cartResponse = await request(app).get(`/api/orders/${response.body.userId}`);
+  expect(cartResponse.body.userId).toEqual(response.body.userId);
   expect(response.body.token).toBeDefined();
 });
 

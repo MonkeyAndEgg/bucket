@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Cart = require('../models/cart');
 
 const router = express.Router();
 
@@ -34,6 +35,14 @@ router.post('/api/signup', async (req, res) => {
       expiresIn: '1h'
     }
   );
+
+  // generate a cart for this user since the user is just signed up
+  const cart = await new Cart({
+    userId: user._id,
+    products: []
+  });
+  cart.save();
+
   return res.status(201).send({
     userId: user._id,
     token,

@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { Cart, CartRequest } from "src/app/models/cart";
 import { Payment } from "src/app/models/payment";
 import { Product } from "src/app/models/product";
-import { addToCart, loadCartById } from "src/app/store/order/order.actions";
+import { addToCart } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
 import { processPayment } from "src/app/store/payment/payment.actions";
 import { selectPayment } from "src/app/store/payment/payment.selector";
@@ -14,10 +14,6 @@ import { selectPayment } from "src/app/store/payment/payment.selector";
 })
 export class CartService {
   constructor(private store: Store) {}
-
-  loadUserCart(id: string): void {
-    this.store.dispatch(loadCartById({ id }));
-  }
 
   addToCart(productId: string, cart: Cart): void {
     const updatedProducts = cart.products.filter(
