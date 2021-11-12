@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$bucket-theme-primary: mat-palette($mat-amber);
+$bucket-theme-accent: mat-palette($mat-blue);
+$bucket-theme-warn: mat-palette($mat-red);
+
+$bucket-theme: mat-light-theme($bucket-theme-primary, $bucket-theme-accent, $bucket-theme-warn);
+
+@include angular-material-theme($bucket-theme);
