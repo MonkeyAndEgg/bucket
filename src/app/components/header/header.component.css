@@ -10,3 +10,9 @@
   margin-left: 15px;
   cursor: pointer;
 }
+
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}

@@ -14,6 +14,7 @@ import { ViewProductDetailModule } from './components/view-product-detail/view-p
 import { NewProductDialogModule } from './components/new-product-dialog/new-product-dialog.module';
 import { CartModule } from './components/cart/cart.module';
 import { AfterPaymentModule } from './components/after-payment/after-payment.module';
+import { FooterModule } from './components/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AfterPaymentModule } from './components/after-payment/after-payment.mod
     AppStoreModule,
     BrowserAnimationsModule,
     CartModule,
+    FooterModule,
     HeaderModule,
     LandingModule,
     NewProductDialogModule,
