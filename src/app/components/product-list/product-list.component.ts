@@ -16,7 +16,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
 
   @Input()
-  cols = 4;
+  cols = 6;
+
+  @Input()
+  gutterSize = '20px';
 
   user: User | undefined;
   cart: Cart | undefined;

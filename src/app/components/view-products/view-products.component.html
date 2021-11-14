@@ -6,6 +6,6 @@
     <div class="admin-actions">
       <button mat-raised-button *ngIf="user?.isAdmin" (click)="openNewProductDialog()">New Product</button>
     </div>
-    <app-product-list [products]="products"></app-product-list>
+    <app-product-list [products]="products" [cols]="5" [gutterSize]="'40px'"></app-product-list>
   </div>
 </div>

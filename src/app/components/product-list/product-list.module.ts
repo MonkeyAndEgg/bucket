@@ -5,6 +5,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from "@angular/common";
 import { AppRoutingModule } from "src/app/app-routing.module";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AppRoutingModule } from "src/app/app-routing.module";
   imports: [
     AppRoutingModule,
     CommonModule,
+    MatButtonModule,
     MatCardModule,
     MatGridListModule,
     MatIconModule
