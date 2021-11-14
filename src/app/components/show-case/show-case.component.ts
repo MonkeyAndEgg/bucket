@@ -18,7 +18,8 @@ export class ShowCaseComponent implements OnInit {
   };
 
   imageOptions = [
-    { src: './assets/images/showcase_1.jpg', alt: 'showcase_1' },
+    { src: './assets/images/showcase_0.jpg', alt: 'showcase_0' },
+    { src: './assets/images/showcase_1.png', alt: 'showcase_1' },
     { src: './assets/images/showcase_2.jpg', alt: 'showcase_2' },
     { src: './assets/images/showcase_3.jpg', alt: 'showcase_3' },
     { src: './assets/images/showcase_4.jpg', alt: 'showcase_4' }
