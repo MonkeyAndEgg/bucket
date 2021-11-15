@@ -1,6 +1,6 @@
 <div class="content" *ngIf="loadStatus !== LoadStatus.LOADING">
   <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
-    <span class="title">{{ title }}</span>
+    <label class="title">{{ title }}</label>
     <div class="auth-input">
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
