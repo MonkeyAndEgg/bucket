@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService,
     private router: Router
   ) {
-    this.authService.loadIsAuth().subscribe((isAuth: boolean) => {
+    this.authService.getIsAuth().subscribe((isAuth: boolean) => {
       this.isAuth = isAuth;
     });
   }

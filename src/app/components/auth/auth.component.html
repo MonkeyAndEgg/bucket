@@ -1,7 +1,6 @@
-<div class="content">
-  <h1>{{ title }}</h1>
-
-  <form class="example-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+<div class="content" *ngIf="loadStatus !== LoadStatus.LOADING">
+  <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <span class="title">{{ title }}</span>
     <div class="auth-input">
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
@@ -27,6 +26,13 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!authForm.valid">Submit</button>
+    <button mat-raised-button class="submit" color="accent" type="submit" [disabled]="!authForm.valid">Submit</button>
   </form>
+</div>
+
+<div class="loading" *ngIf="loadStatus === LoadStatus.LOADING">
+  <div class="spinner">
+    <mat-spinner [diameter]="'150'"></mat-spinner>
+    <span>Authenticating your identity...</span>
+  </div>
 </div>

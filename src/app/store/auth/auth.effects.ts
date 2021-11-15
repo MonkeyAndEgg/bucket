@@ -1,27 +1,29 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { loadCurrentUser, loadCurrentUserComplete, submitEmailAndPassword, updateAuthStatus, updateToken } from "./auth.actions";
+import { loadCurrentUser, loadCurrentUserComplete, setLoadStatus, submitEmailAndPassword, updateAuthStatus, updateToken } from "./auth.actions";
 import { AuthDataService } from "./auth.data.service";
-import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
-import { EMPTY } from "rxjs";
+import { mergeMap, catchError, switchMap } from 'rxjs/operators';
+import { of } from "rxjs";
 import { LoginInfo } from "src/app/models/login-info";
 import { User } from "src/app/models/user";
-import { Router } from "@angular/router";
+import { LoadStatus } from "src/app/constants/load-status.constants";
 
 @Injectable()
 export class AuthEffects {
   constructor(private actions$: Actions,
-              private router: Router,
               private authDataService: AuthDataService) {}
 
   loadUser$ = createEffect(() => this.actions$.pipe(
     ofType(loadCurrentUser),
     mergeMap(() => this.authDataService.getUser()
     .pipe(
-      map((user: { currentUser: User }) => {
-        return loadCurrentUserComplete({ user: user.currentUser });
+      switchMap((user: { currentUser: User }) => {
+        let actions = [];
+        actions.push(loadCurrentUserComplete({ user: user.currentUser }));
+        actions.push(setLoadStatus({ status: LoadStatus.LOADED }));
+        return actions;
       }),
-      catchError(() => EMPTY)
+      catchError(() => of(setLoadStatus({ status: LoadStatus.NOT_LOADED })))
     ))
   ));
 
@@ -34,11 +36,10 @@ export class AuthEffects {
           let actions = [];
           actions.push(updateToken({ token: res.token, expiresIn: res.expiresIn }));
           actions.push(updateAuthStatus({ isAuth: true }));
-          // navigate to landing page
-          this.router.navigate(['/']);
+          actions.push(setLoadStatus({ status: LoadStatus.LOADED }));
           return actions;
         }),
-        catchError(() => EMPTY)
+        catchError(() => of(setLoadStatus({ status: LoadStatus.NOT_LOADED })))
       ))
   ));
 }

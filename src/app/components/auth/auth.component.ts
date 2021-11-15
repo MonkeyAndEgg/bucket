@@ -3,7 +3,9 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { USER_OPTIONS } from 'src/app/constants/header.constants';
+import { LoadStatus } from 'src/app/constants/load-status.constants';
 import { LoginInfo } from 'src/app/models/login-info';
 import { AuthService } from './auth.service';
 
@@ -29,15 +31,30 @@ export class AuthComponent implements OnInit, OnDestroy {
   });
   matcher = new AuthErrorStateMatcher();
   destroySubscription$ = new Subject();
+  loadStatus = LoadStatus.NOT_LOADED;
+  LoadStatus = LoadStatus;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private authService: AuthService) { }
 
   ngOnInit(): void {
     this.initFormGroup();
+    this.authService.setLoadStatus(LoadStatus.NOT_LOADED);
+
     this.route.data.subscribe(data => {
       this.isSignin = data.page === USER_OPTIONS.SIGN_IN ? true : false;
       this.title = this.isSignin ? USER_OPTIONS.SIGN_IN : USER_OPTIONS.SIGN_UP;
+    });
+
+    this.authService.getLoadStatus().pipe(
+      takeUntil(this.destroySubscription$)
+    ).subscribe((status: LoadStatus) => {
+      this.loadStatus = status;
+      if (this.loadStatus === LoadStatus.LOADED) {
+        // navigate to landing page
+        this.router.navigate(['/']);
+      }
     });
   }
 
