@@ -59,7 +59,13 @@ router.put('/api/products/:id', storeFile, async (req, res) => {
 });
 
 router.get('/api/products', async (req, res) => {
-  const products = await Product.find();
+  let query = {};
+  if (req.query.keyword) {
+    query = {
+      name: new RegExp(req.query.keyword, 'i')
+    };
+  }
+  const products = await Product.find(query);
   res.status(200).send(products);
 });
 

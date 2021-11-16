@@ -128,6 +128,26 @@ it('returns 200 for get products', async () => {
   await request(app).get(`/api/products`).send({}).expect(200);
 });
 
+it('returns 200 for get with search query and the result length is 1', async () => {
+  await request(app).post('/api/products').send({
+    name: 'test',
+    price: 12.99,
+    description: '123',
+    numOfStocks: 3,
+    image: {
+      name: "ps5.jpg",
+      size: 16864,
+      type: "image/jpeg",
+      webkitRelativePath: "",
+      lastModified: 1634790702880,
+      lastModifiedDate: new Date('Wed Oct 20 2021 21:31:42 GMT-0700 (Pacific Daylight Time)')
+    }
+  }).expect(201);
+
+  const searchedResponse = await request(app).get(`/api/products/?keyword=t`).send({}).expect(200);
+  expect(searchedResponse.body.length).toEqual(1);
+});
+
 it('returns 200 for get a exist product', async () => {
   const response = await request(app).post('/api/products').send({
     name: 'test',
