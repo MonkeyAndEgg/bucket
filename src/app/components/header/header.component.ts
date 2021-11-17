@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { USER_OPTIONS } from 'src/app/constants/header.constants';
@@ -17,8 +19,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   destroySubscription$ = new Subject();
   userId: string | undefined;
   isAdmin = false;
+  displaySearchBar = false;
+  searchForm = new FormGroup({
+    search: new FormControl('')
+  });
 
-  constructor(private service: HeaderService) { }
+  constructor(private service: HeaderService, private router: Router) { }
 
   ngOnInit(): void {
     this.service.verifyUserAuth();
@@ -57,5 +63,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onSignOut(): void {
     this.service.signOut();
     this.userId = undefined;
+  }
+
+  onToggleSearch(): void {
+    this.displaySearchBar = !this.displaySearchBar;
+  }
+
+  onSearch(): void {
+    this.router.navigate(['/view-search'], {
+      queryParams: { keyword: this.searchForm.controls.search.value }
+    });
   }
 }

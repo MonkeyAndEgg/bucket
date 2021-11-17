@@ -14,7 +14,7 @@ export class ViewProductService {
   constructor(private store: Store) {}
 
   loadProducts(): void {
-    this.store.dispatch(loadProducts());
+    this.store.dispatch(loadProducts({}));
   }
 
   getProducts(): Observable<Product[]> {

@@ -15,6 +15,7 @@ import { NewProductDialogModule } from './components/new-product-dialog/new-prod
 import { CartModule } from './components/cart/cart.module';
 import { AfterPaymentModule } from './components/after-payment/after-payment.module';
 import { FooterModule } from './components/footer/footer.module';
+import { ViewSearchModule } from './components/view-search/view-search.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FooterModule } from './components/footer/footer.module';
     ProductListModule,
     ShowCaseModule,
     ViewProductDetailModule,
-    ViewProductsModule
+    ViewProductsModule,
+    ViewSearchModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true

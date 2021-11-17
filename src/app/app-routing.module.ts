@@ -8,6 +8,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { ViewAdminComponent } from './components/view-admin/view-admin.component';
 import { ViewProductDetailComponent } from './components/view-product-detail/view-product-detail.component';
 import { ViewProductsComponent } from './components/view-products/view-products.component';
+import { ViewSearchComponent } from './components/view-search/view-search.component';
 import { USER_OPTIONS } from './constants/header.constants';
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'view-products', component: ViewProductsComponent },
   { path: 'view-detail/:id', component: ViewProductDetailComponent },
   { path: 'view-admin', component: ViewAdminComponent },
-  { path: 'payment-complete', component: AfterPaymentComponent }
+  { path: 'payment-complete', component: AfterPaymentComponent },
+  { path: 'view-search', component: ViewSearchComponent }
 ];
 
 @NgModule({

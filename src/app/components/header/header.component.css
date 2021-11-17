@@ -17,6 +17,15 @@
   text-shadow: 2px 2px #9003fc;
 }
 
+.options .material-icons {
+  font-size: 35px;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+}
+
 span {
   color: #ffffff
 }

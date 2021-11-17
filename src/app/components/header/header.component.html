@@ -1,13 +1,29 @@
 <mat-toolbar color="primary">
-  <span class="title" [routerLink]="'/'">Bucket</span>
-  <span class="spacer"></span>
-  <div *ngIf="isAuth" class="options">
-    <span *ngIf="isAdmin" [routerLink]="'/view-admin'">{{ USER_OPTIONS.ADMIN }}</span>
-    <span [routerLink]="'/cart'">{{ USER_OPTIONS.CART }}</span>
-    <span (click)="onSignOut()">{{ USER_OPTIONS.SIGN_OUT }}</span>
-  </div>
-  <div *ngIf="!isAuth" class="options">
-    <span [routerLink]="'/signup'">{{ USER_OPTIONS.SIGN_UP }}</span>
-    <span [routerLink]="'/signin'">{{ USER_OPTIONS.SIGN_IN }}</span>
-  </div>
+  <mat-toolbar-row>
+    <span class="title" [routerLink]="'/'">Bucket</span>
+    <span class="spacer"></span>
+    <form *ngIf="displaySearchBar" [formGroup]="searchForm" class="search-form" (ngSubmit)="onSearch()">
+      <mat-form-field *ngIf="displaySearchBar" class="search-field" appearance="fill" [style.width.px]=500>
+        <mat-label>Search</mat-label>
+        <input type="text"
+          placeholder="Enter product name"
+          matInput
+          formControlName="search">
+      </mat-form-field>
+    </form>
+    <div class="options">
+      <span class="material-icons" (click)="onToggleSearch()">
+        search
+      </span>
+      <div *ngIf="isAuth">
+        <span *ngIf="isAdmin" [routerLink]="'/view-admin'">{{ USER_OPTIONS.ADMIN }}</span>
+        <span [routerLink]="'/cart'">{{ USER_OPTIONS.CART }}</span>
+        <span (click)="onSignOut()">{{ USER_OPTIONS.SIGN_OUT }}</span>
+      </div>
+      <div *ngIf="!isAuth">
+        <span [routerLink]="'/signup'">{{ USER_OPTIONS.SIGN_UP }}</span>
+        <span [routerLink]="'/signin'">{{ USER_OPTIONS.SIGN_IN }}</span>
+      </div>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>

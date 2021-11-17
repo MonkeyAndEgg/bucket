@@ -4,6 +4,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from "src/app/app-routing.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { AuthModule } from "../auth/auth.module";
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -13,7 +17,11 @@ import { AuthModule } from "../auth/auth.module";
     AppRoutingModule,
     AuthModule,
     BrowserModule,
-    MatToolbarModule
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent

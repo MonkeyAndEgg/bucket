@@ -13,7 +13,7 @@ export class ProductEffects {
 
   loadProducts$ = createEffect(() => this.actions$.pipe(
     ofType(loadProducts),
-    mergeMap(() => this.productDataService.getProducts()
+    mergeMap((payload) => this.productDataService.getProducts(payload.keyword)
     .pipe(
       map((products: Product[]) => {
         return loadProductsComplete({ products });
@@ -39,7 +39,7 @@ export class ProductEffects {
       this.productDataService.createProduct(payload.product)
       .pipe(
         map((res: Product) => {
-          return loadProducts();
+          return loadProducts({});
         }),
         catchError(() => EMPTY)
       ))
@@ -50,7 +50,7 @@ export class ProductEffects {
     mergeMap((payload: { id: string }) => this.productDataService.deleteProduct(payload.id)
       .pipe(
         map((res: { message: string }) => {
-          return loadProducts();
+          return loadProducts({});
         }),
         catchError(() => EMPTY)
       ))

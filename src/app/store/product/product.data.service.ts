@@ -9,8 +9,12 @@ import { Product } from "src/app/models/product";
 export class ProductDataService {
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:3000/api/products');
+  getProducts(keyword: string | undefined): Observable<Product[]> {
+    let baseUrl = 'http://localhost:3000/api/products';
+    if (keyword) {
+      baseUrl += `?keyword=${keyword}`;
+    }
+    return this.http.get<Product[]>(baseUrl);
   }
 
   getProductById(id: string): Observable<Product> {

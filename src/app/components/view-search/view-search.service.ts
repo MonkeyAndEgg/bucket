@@ -8,11 +8,11 @@ import { selectProducts } from "src/app/store/product/product.selector";
 @Injectable({
   providedIn: 'root'
 })
-export class LandingService {
+export class ViewSearchService {
   constructor(private store: Store) {}
 
-  loadProducts(): void {
-    this.store.dispatch(loadProducts({}));
+  loadProducts(keyword: string): void {
+    this.store.dispatch(loadProducts({ keyword }));
   }
 
   getProducts(): Observable<Product[]> {
