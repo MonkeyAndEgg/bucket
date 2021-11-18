@@ -74,4 +74,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       queryParams: { keyword: this.searchForm.controls.search.value }
     });
   }
+
+  onSearchBlur(): void {
+    this.onToggleSearch();
+  }
 }

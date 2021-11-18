@@ -36,3 +36,14 @@ mat-toolbar {
   z-index: 2;
   box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
 }
+
+.search-field input {
+  width: 100%;
+  border-radius: 10px;
+  border-color: transparent;
+  height: 40px;
+  margin-top: 7px;
+  font-family: cursive;
+  font-size: 20px;
+  outline: 0;
+}

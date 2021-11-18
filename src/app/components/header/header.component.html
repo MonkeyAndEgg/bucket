@@ -3,12 +3,9 @@
     <span class="title" [routerLink]="'/'">Bucket</span>
     <span class="spacer"></span>
     <form *ngIf="displaySearchBar" [formGroup]="searchForm" class="search-form" (ngSubmit)="onSearch()">
-      <mat-form-field *ngIf="displaySearchBar" class="search-field" appearance="fill" [style.width.px]=500>
+      <mat-form-field *ngIf="displaySearchBar" class="search-field" appearance="fill" [style.width.px]=400>
         <mat-label>Search</mat-label>
-        <input type="text"
-          placeholder="Enter product name"
-          matInput
-          formControlName="search">
+        <input type="text" placeholder="Enter product name" formControlName="search" (blur)="onSearchBlur()">
       </mat-form-field>
     </form>
     <div class="options">
