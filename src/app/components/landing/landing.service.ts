@@ -9,10 +9,12 @@ import { selectProducts } from "src/app/store/product/product.selector";
   providedIn: 'root'
 })
 export class LandingService {
+  SORT_DATE_DSC = 'createdAt:dsc';
+
   constructor(private store: Store) {}
 
   loadProducts(): void {
-    this.store.dispatch(loadProducts({}));
+    this.store.dispatch(loadProducts({ sort: this.SORT_DATE_DSC }));
   }
 
   getProducts(): Observable<Product[]> {

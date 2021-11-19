@@ -9,11 +9,9 @@ import { Product } from "src/app/models/product";
 export class ProductDataService {
   constructor(private http: HttpClient) {}
 
-  getProducts(keyword: string | undefined): Observable<Product[]> {
+  getProducts(keyword: string | undefined, sort: string | undefined): Observable<Product[]> {
     let baseUrl = 'http://localhost:3000/api/products';
-    if (keyword) {
-      baseUrl += `?keyword=${keyword}`;
-    }
+    baseUrl += this.generateQueryParams(keyword, sort);
     return this.http.get<Product[]>(baseUrl);
   }
 
@@ -28,5 +26,22 @@ export class ProductDataService {
 
   deleteProduct(id: string): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`http://localhost:3000/api/products/${id}`);
+  }
+
+  private generateQueryParams(keyword: string | undefined, sort: string | undefined): string {
+    let queryParam = '';
+    if (keyword || sort) {
+      queryParam += '?';
+
+      if (keyword) {
+        queryParam += `keyword=${keyword}`;
+        queryParam = sort ? queryParam + '&' : queryParam;
+      }
+
+      if (sort) {
+        queryParam += `sort=${sort}`;
+      }
+    }
+    return queryParam;
   }
 }

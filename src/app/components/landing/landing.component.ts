@@ -10,6 +10,8 @@ import { LandingService } from './landing.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit, OnDestroy {
+  MAX_PRODUCT_NUM = 6; // set the number of products to be displayed under new products section
+
   destroySubscription$ = new Subject();
   products: Product[] = [];
 
@@ -20,7 +22,7 @@ export class LandingComponent implements OnInit, OnDestroy {
     this.service.getProducts().pipe(
       takeUntil(this.destroySubscription$)
     ).subscribe((products: Product[]) => {
-      this.products = products;
+      this.products = products.slice(0, this.MAX_PRODUCT_NUM);
     });
   }
 

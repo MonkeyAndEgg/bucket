@@ -60,12 +60,33 @@ router.put('/api/products/:id', storeFile, async (req, res) => {
 
 router.get('/api/products', async (req, res) => {
   let query = {};
+  let sortParam = {};
   if (req.query.keyword) {
     query = {
       name: new RegExp(req.query.keyword, 'i')
     };
   }
-  const products = await Product.find(query);
+
+  if (req.query.sort) {
+    const sortValues = req.query.sort.split(':');
+    const sortField = sortValues[0];
+
+    let sortOrder;
+    if (sortValues[1] === 'asc') {
+      sortOrder = 1;
+    } else if (sortValues[1] === 'dsc') {
+      sortOrder = -1;
+    } else {
+      return res.status(400).send({
+        message: 'Invalid sort order'
+      });
+    }
+
+    sortParam = {
+      [sortField]: sortOrder
+    };
+  }
+  const products = await Product.find(query).sort(sortParam);
   res.status(200).send(products);
 });
 
