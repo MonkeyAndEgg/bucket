@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { QueryParam } from 'src/app/constants/query-param.constants';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { NewProductDialogComponent } from '../new-product-dialog/new-product-dialog.component';
@@ -13,6 +14,8 @@ import { ViewProductService } from './view-product.service';
   styleUrls: ['./view-products.component.css']
 })
 export class ViewProductsComponent implements OnInit, OnDestroy {
+  QueryParam = QueryParam;
+
   destroySubscription$ = new Subject();
   products: Product[] = [];
   user: User | undefined;
@@ -43,5 +46,9 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
     dialogConfig.height = '700px';
     dialogConfig.minWidth = '700px';
     this.dialog.open(NewProductDialogComponent, dialogConfig);
+  }
+
+  onSort(sort: string): void {
+    this.service.loadProducts(sort);
   }
 }

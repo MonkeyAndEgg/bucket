@@ -5,6 +5,16 @@
   <div class="products">
     <div class="admin-actions">
       <button mat-raised-button *ngIf="user?.isAdmin" (click)="openNewProductDialog()">New Product</button>
+      <button mat-button [matMenuTriggerFor]="sort">
+        Sort By
+        <span class="material-icons">sort</span>
+      </button>
+      <mat-menu #sort="matMenu">
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_DATE_ASC)">Post Date (earliest to latest)</button>
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_DATE_DSC)">Post Date (latest to earliest)</button>
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_PRICE_DSC)">Price (highest to lowest)</button>
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_PRICE_ASC)">Price (lowest to highest)</button>
+      </mat-menu>
     </div>
     <app-product-list [products]="products" [cols]="5" [gutterSize]="'40px'"></app-product-list>
   </div>

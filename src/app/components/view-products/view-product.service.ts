@@ -13,8 +13,8 @@ import { selectProducts } from "src/app/store/product/product.selector";
 export class ViewProductService {
   constructor(private store: Store) {}
 
-  loadProducts(): void {
-    this.store.dispatch(loadProducts({}));
+  loadProducts(sort?: string): void {
+    this.store.dispatch(loadProducts({ sort }));
   }
 
   getProducts(): Observable<Product[]> {
