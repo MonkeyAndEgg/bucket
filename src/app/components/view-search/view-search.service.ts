@@ -11,8 +11,8 @@ import { selectProducts } from "src/app/store/product/product.selector";
 export class ViewSearchService {
   constructor(private store: Store) {}
 
-  loadProducts(keyword: string): void {
-    this.store.dispatch(loadProducts({ keyword }));
+  loadProducts(filter: string): void {
+    this.store.dispatch(loadProducts({ filter }));
   }
 
   getProducts(): Observable<Product[]> {

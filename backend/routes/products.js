@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/api/products', storeFile, async (req, res) => {
   let imageUrl;
-  const { name, description, numOfStocks, price } = req.body;
+  const { name, description, numOfStocks, price, type } = req.body;
   if (req.file) {
     const baseUrl = req.protocol + '://' + req.get('host');
     imageUrl = baseUrl + '/images/' + req.file.filename;
@@ -18,6 +18,7 @@ router.post('/api/products', storeFile, async (req, res) => {
       price,
       description,
       numOfStocks,
+      type,
       imageUrl,
       createdAt: currentTime.toISOString()
     });
@@ -32,7 +33,7 @@ router.post('/api/products', storeFile, async (req, res) => {
 
 router.put('/api/products/:id', storeFile, async (req, res) => {
   let imageUrl;
-  const { name, description, numOfStocks, price } = req.body;
+  const { name, description, numOfStocks, price, type } = req.body;
   if (req.file) {
     const baseUrl = req.protocol + '://' + req.get('host');
     imageUrl = baseUrl + '/images/' + req.file.filename;
@@ -45,6 +46,7 @@ router.put('/api/products/:id', storeFile, async (req, res) => {
       price,
       description,
       numOfStocks,
+      type,
       imageUrl,
       createdAt: product.createdAt,
       updatedAt: currentTime.toISOString()
@@ -61,10 +63,19 @@ router.put('/api/products/:id', storeFile, async (req, res) => {
 router.get('/api/products', async (req, res) => {
   let query = {};
   let sortParam = {};
-  if (req.query.keyword) {
-    query = {
-      name: new RegExp(req.query.keyword, 'i')
-    };
+
+  if (req.query.filter) {
+    const filterValues = req.query.filter.split(':');
+    const filterField = filterValues[0];
+    if (filterField === 'keyword') {
+      query = {
+        name: new RegExp(filterValues[1], 'i')
+      };
+    } else {
+      query = {
+        [filterField]: filterValues[1]
+      };
+    }
   }
 
   if (req.query.sort) {
@@ -86,8 +97,14 @@ router.get('/api/products', async (req, res) => {
       [sortField]: sortOrder
     };
   }
-  const products = await Product.find(query).sort(sortParam);
-  res.status(200).send(products);
+  try {
+    const products = await Product.find(query).sort(sortParam);
+    res.status(200).send(products);
+  } catch (err) {
+    res.status(500).send({
+      message: 'Internal Error occurred'
+    });
+  }
 });
 
 router.get('/api/products/:id', async (req, res) => {

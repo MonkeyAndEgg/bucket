@@ -14,6 +14,7 @@ it('returns 201 for successfully create an order', async () => {
     price: 12.99,
     description: '123',
     numOfStocks: 3,
+    type: 'Bags',
     image: {
       name: "ps5.jpg",
       size: 16864,
@@ -62,6 +63,7 @@ it('returns 200 for successfully update an order', async () => {
     price: 12.99,
     description: '123',
     numOfStocks: 3,
+    type: 'Bags',
     image: {
       name: "ps5.jpg",
       size: 16864,
@@ -100,6 +102,7 @@ it('returns 200 for successfully delete an order', async () => {
     price: 12.99,
     description: '123',
     numOfStocks: 3,
+    type: 'Bags',
     image: {
       name: "ps5.jpg",
       size: 16864,
@@ -139,6 +142,7 @@ it('returns 200 for successfully get an order', async () => {
     price: 12.99,
     description: '123',
     numOfStocks: 3,
+    type: 'Bags',
     image: {
       name: "ps5.jpg",
       size: 16864,

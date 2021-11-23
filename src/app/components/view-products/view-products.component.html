@@ -1,6 +1,27 @@
 <div class="container">
   <div class="filter">
-    <span>this is filter</span>
+    <section class="filter-section">
+      <span class="filter-list-section">
+        <mat-checkbox class="filter-margin"
+                      [checked]="allChecked"
+                      [color]="filterOption.color"
+                      [indeterminate]="someChecked()"
+                      (change)="setAll($event.checked)">
+          {{filterOption.name}}
+        </mat-checkbox>
+      </span>
+      <span class="filter-list-section">
+        <ul>
+          <li *ngFor="let subOption of filterOption.subOptions">
+            <mat-checkbox [(ngModel)]="subOption.checked"
+                          [color]="subOption.color"
+                          (ngModelChange)="updateAllChecked()">
+              {{ subOption.name }}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </section>
   </div>
   <div class="products">
     <div class="admin-actions">

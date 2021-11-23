@@ -20,7 +20,7 @@ export class ViewSearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams.pipe(takeUntil(this.destroySubscription$)).subscribe(params => {
       this.keyword = params.keyword;
-      this.service.loadProducts(this.keyword);
+      this.service.loadProducts(`keyword:${this.keyword}`);
     });
 
     this.service.getProducts().pipe(takeUntil(this.destroySubscription$)).subscribe((products: Product[]) => {

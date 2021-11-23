@@ -13,7 +13,7 @@ export class ProductEffects {
 
   loadProducts$ = createEffect(() => this.actions$.pipe(
     ofType(loadProducts),
-    mergeMap((payload) => this.productDataService.getProducts(payload.keyword, payload.sort)
+    mergeMap((payload) => this.productDataService.getProducts(payload.filter, payload.sort)
     .pipe(
       map((products: Product[]) => {
         return loadProductsComplete({ products });
