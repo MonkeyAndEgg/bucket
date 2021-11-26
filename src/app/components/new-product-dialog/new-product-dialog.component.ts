@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductTypeEnum } from 'src/app/constants/product-type-enum.constants';
 import { NewProductDialogService } from './new-product-dialog.service';
 
 @Component({
@@ -19,6 +20,11 @@ export class NewProductDialogComponent implements OnInit {
     numOfStocks: new FormControl(null, [
       Validators.required
     ]),
+    type: new FormControl('', {
+      validators: [
+        Validators.required
+      ]
+    }),
     image: new FormControl(null, {
       validators: [
         Validators.required
@@ -26,6 +32,26 @@ export class NewProductDialogComponent implements OnInit {
     })
   });
   imagePreview = '';
+  productTypes = [
+    {
+      label: ProductTypeEnum.BAGS_LABEL, value: ProductTypeEnum.BAGS_VALUE
+    },
+    {
+      label: ProductTypeEnum.ELECTRONIC_DEVICES_LABEL, value: ProductTypeEnum.ELECTRONIC_DEVICES_VALUE
+    },
+    {
+      label: ProductTypeEnum.FURNITURE_LABEL, value: ProductTypeEnum.FURNITURE_VALUE
+    },
+    {
+      label: ProductTypeEnum.FOOD_AND_BEVERAGE_LABEL, value: ProductTypeEnum.FOOD_AND_BEVERAGE_VALUE
+    },
+    {
+      label: ProductTypeEnum.PETS_LABEL, value: ProductTypeEnum.PETS_VALUE
+    },
+    {
+      label: ProductTypeEnum.OTHERS_LABEL, value: ProductTypeEnum.OTHERS_VALUE
+    }
+  ];
 
   constructor(private service: NewProductDialogService) { }
 

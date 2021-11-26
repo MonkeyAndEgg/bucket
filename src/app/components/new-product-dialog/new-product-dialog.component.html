@@ -31,6 +31,16 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Product Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let productType of productTypes" [value]="productType.value">{{ productType.label }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="productForm.controls.type.hasError('required')">
+        Product Type is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
     <div class="image-upload">
       <div class="action">
         <button mat-stroked-button type="button" (click)="filePicker.click()">Select Image</button>

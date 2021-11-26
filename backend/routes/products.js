@@ -67,13 +67,16 @@ router.get('/api/products', async (req, res) => {
   if (req.query.filter) {
     const filterValues = req.query.filter.split(':');
     const filterField = filterValues[0];
+    const filterOptions = filterValues[1].split('-');
     if (filterField === 'keyword') {
       query = {
         name: new RegExp(filterValues[1], 'i')
       };
     } else {
       query = {
-        [filterField]: filterValues[1]
+        [filterField]: {
+          $in: filterOptions
+        }
       };
     }
   }

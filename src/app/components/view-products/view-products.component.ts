@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ProductTypeEnum } from 'src/app/constants/product-type-enum.constants';
 import { QueryParam } from 'src/app/constants/query-param.constants';
 import { FilterOption } from 'src/app/models/filter-option';
 import { Product } from 'src/app/models/product';
@@ -21,15 +22,27 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filterOption: FilterOption = {
     name: 'All',
-    checked: true,
+    checked: false,
     color: 'warn',
     subOptions: [
-      { name: 'Bags', checked: true, color: 'accent' },
-      { name: 'Eletronic Devices', checked: true, color: 'accent' },
-      { name: 'Furniture', checked: true, color: 'accent' },
-      { name: 'Food & Beverage', checked: true, color: 'accent' },
-      { name: 'Pets', checked: true, color: 'accent' },
-      { name: 'Other', checked: true, color: 'accent' }
+      {
+        name: ProductTypeEnum.BAGS_LABEL, value: ProductTypeEnum.BAGS_VALUE, checked: false, color: 'accent'
+      },
+      {
+        name: ProductTypeEnum.ELECTRONIC_DEVICES_LABEL, value: ProductTypeEnum.ELECTRONIC_DEVICES_VALUE, checked: false, color: 'accent'
+      },
+      {
+        name: ProductTypeEnum.FURNITURE_LABEL, value: ProductTypeEnum.FURNITURE_VALUE, checked: false, color: 'accent'
+      },
+      {
+        name: ProductTypeEnum.FOOD_AND_BEVERAGE_LABEL, value: ProductTypeEnum.FOOD_AND_BEVERAGE_VALUE, checked: false, color: 'accent'
+      },
+      {
+        name: ProductTypeEnum.PETS_LABEL, value: ProductTypeEnum.PETS_VALUE, checked: false, color: 'accent'
+      },
+      {
+        name: ProductTypeEnum.OTHERS_LABEL, value: ProductTypeEnum.OTHERS_VALUE, checked: false, color: 'accent'
+      }
     ]
   };
   allChecked = true;
@@ -58,6 +71,7 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
 
   updateAllChecked(): void {
     this.allChecked = this.filterOption.subOptions != null && this.filterOption.subOptions.every(t => t.checked);
+    this.service.loadProducts(this.filterOption.subOptions);
   }
 
   someChecked(): boolean {
@@ -73,6 +87,7 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
       return;
     }
     this.filterOption.subOptions.forEach(t => (t.checked = checked));
+    this.service.loadProducts(this.filterOption.subOptions);
   }
 
   openNewProductDialog() : void {
@@ -83,6 +98,6 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
   }
 
   onSort(sort: string): void {
-    this.service.loadProducts(sort);
+    this.service.loadProducts(undefined, sort);
   }
 }
