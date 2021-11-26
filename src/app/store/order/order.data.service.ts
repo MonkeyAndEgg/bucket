@@ -17,6 +17,7 @@ export class OrderDataService {
     if (cartId) {
       return this.http.put<Cart>(`http://localhost:3000/api/orders/${cartId}`, cart)
     } else {
+      // this usually should not be triggered since each user will have cart once signup
       return this.http.post<Cart>('http://localhost:3000/api/orders', cart);
     }
   }

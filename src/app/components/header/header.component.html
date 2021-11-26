@@ -13,13 +13,23 @@
         search
       </span>
       <div *ngIf="isAuth">
-        <span *ngIf="isAdmin" [routerLink]="'/view-admin'">{{ USER_OPTIONS.ADMIN }}</span>
-        <span [routerLink]="'/cart'">{{ USER_OPTIONS.CART }}</span>
-        <span (click)="onSignOut()">{{ USER_OPTIONS.SIGN_OUT }}</span>
+        <span *ngIf="isAdmin" [routerLink]="'/view-admin'" class="material-icons">
+          admin_panel_settings
+        </span>
+        <span [routerLink]="'/cart'" class="material-icons">
+          shopping_cart
+        </span>
+        <span (click)="onSignOut()" class="material-icons">
+          logout
+        </span>
       </div>
       <div *ngIf="!isAuth">
-        <span [routerLink]="'/signup'">{{ USER_OPTIONS.SIGN_UP }}</span>
-        <span [routerLink]="'/signin'">{{ USER_OPTIONS.SIGN_IN }}</span>
+        <span [routerLink]="'/signup'" class="material-icons">
+          person_add
+        </span>
+        <span [routerLink]="'/signin'" class="material-icons">
+          login
+        </span>
       </div>
     </div>
   </mat-toolbar-row>
