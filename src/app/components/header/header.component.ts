@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { TooltipPosition } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { USER_OPTIONS } from 'src/app/constants/header.constants';
 import { User } from 'src/app/models/user';
 import { HeaderService } from './header.service';
 
@@ -14,6 +16,7 @@ import { HeaderService } from './header.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuth = false;
+  USER_OPTIONS = USER_OPTIONS;
   destroySubscription$ = new Subject();
   userId: string | undefined;
   isAdmin = false;
@@ -21,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   searchForm = new FormGroup({
     search: new FormControl('')
   });
+  matTooltipPosition: TooltipPosition = 'left';  // set to left by default
 
   constructor(private service: HeaderService, private router: Router) { }
 

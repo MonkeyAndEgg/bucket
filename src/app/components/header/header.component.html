@@ -9,25 +9,50 @@
       </mat-form-field>
     </form>
     <div class="options">
-      <span class="material-icons" (click)="onToggleSearch()">
+      <span
+        class="material-icons"
+        (click)="onToggleSearch()"
+        matTooltip="Search your product"
+        [matTooltipPosition]="matTooltipPosition">
         search
       </span>
       <div *ngIf="isAuth">
-        <span *ngIf="isAdmin" [routerLink]="'/view-admin'" class="material-icons">
+        <span
+          *ngIf="isAdmin"
+          class="material-icons"
+          [routerLink]="'/view-admin'"
+          [matTooltip]="USER_OPTIONS.ADMIN"
+          [matTooltipPosition]="matTooltipPosition">
           admin_panel_settings
         </span>
-        <span [routerLink]="'/cart'" class="material-icons">
+        <span
+          class="material-icons"
+          [routerLink]="'/cart'"
+          [matTooltip]="USER_OPTIONS.CART"
+          [matTooltipPosition]="matTooltipPosition">
           shopping_cart
         </span>
-        <span (click)="onSignOut()" class="material-icons">
+        <span
+          class="material-icons"
+          (click)="onSignOut()"
+          [matTooltip]="USER_OPTIONS.SIGN_OUT"
+          [matTooltipPosition]="matTooltipPosition">
           logout
         </span>
       </div>
       <div *ngIf="!isAuth">
-        <span [routerLink]="'/signup'" class="material-icons">
+        <span
+          class="material-icons"
+          [routerLink]="'/signup'"
+          [matTooltip]="USER_OPTIONS.SIGN_UP"
+          [matTooltipPosition]="matTooltipPosition">
           person_add
         </span>
-        <span [routerLink]="'/signin'" class="material-icons">
+        <span
+          class="material-icons"
+          [routerLink]="'/signin'"
+          [matTooltip]="USER_OPTIONS.SIGN_IN"
+          [matTooltipPosition]="matTooltipPosition">
           login
         </span>
       </div>
