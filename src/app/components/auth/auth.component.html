@@ -28,6 +28,11 @@
     </div>
     <button mat-raised-button class="submit" color="accent" type="submit" [disabled]="!authForm.valid">Submit</button>
   </form>
+
+  <div class="info">
+    <div *ngIf="isSignin">Do not have an account yet? <label [routerLink]="'/signup'">Sign Up</label> now!</div>
+    <div *ngIf="!isSignin">Already have an account? <label [routerLink]="'/signin'">Sign In</label> now!</div>
+  </div>
 </div>
 
 <div class="loading" *ngIf="loadStatus === LoadStatus.LOADING">
