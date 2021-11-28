@@ -92,8 +92,7 @@ export class HeaderService {
       const expiresInSeconds = (tokenData?.expirationDate.getTime() - currentTime.getTime()) / 1000;
       if (expiresInSeconds > 0) {
         this.updateToken(tokenData.token, expiresInSeconds);
-        this.updateAuthStatus(true)
-        this.initAuthTimer(expiresInSeconds);
+        this.updateAuthStatus(true);
       } else {
         console.log('Your token is expired.');
       }
