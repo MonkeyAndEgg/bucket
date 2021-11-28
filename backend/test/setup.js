@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 let mongo = new MongoMemoryServer();
 
 beforeAll(async () => {
-  process.env.JWT_KEY = 'my_epic_secret_key';
+  process.env.JWT_KEY = process.env.JWT_KEY;
 
   mongo = await MongoMemoryServer.create();
   const mongoUri = await mongo.getUri();

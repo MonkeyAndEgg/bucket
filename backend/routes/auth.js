@@ -30,7 +30,7 @@ router.post('/api/signup', async (req, res) => {
       email: user.email,
       id: user._id
     },
-    'my_epic_secret_key',
+    process.env.JWT_KEY,
     {
       expiresIn: '1h'
     }
@@ -97,7 +97,7 @@ router.get("/api/user", async (req, res) => {
   const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : undefined;
   if (token) {
     try {
-      const payload = jwt.verify(token, 'my_epic_secret_key');
+      const payload = jwt.verify(token, process.env.JWT_KEY);
       const { id, email } = payload;
       const user = await User.findById(id);
       currentUser = {

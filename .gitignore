@@ -47,4 +47,7 @@ testem.log
 Thumbs.db
 
 # images
-/backend/images
+backend/images
+
+# dotenv
+backend/.env

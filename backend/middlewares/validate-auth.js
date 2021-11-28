@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
         message: 'Invalid Auth'
       });
     }
-    jwt.verify(token, 'my_epic_secret_key');
+    jwt.verify(token, process.env.JWT_KEY);
     next();
   } catch (err) {
     res.status(401).send({

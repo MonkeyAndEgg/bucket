@@ -1,14 +1,13 @@
 const app = require('./app');
 const mongoose = require('mongoose');
-const PORT = 3000;
+// import dotenv to access secrets
+require('dotenv').config()
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
+const PORT = process.env.PORT | 3000;
 
 const start = async () => {
   try {
-    await mongoose.connect('mongodb+srv://admin:admin@cluster0.sfz0v.mongodb.net/BucketDatabase?retryWrites=true&w=majority');
+    await mongoose.connect(process.env.MONGO_URL);
     console.log('Connected to database.');
   } catch (err) {
     console.log(err);
