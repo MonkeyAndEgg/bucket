@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { USER_OPTIONS } from 'src/app/constants/header.constants';
+import { Cart } from 'src/app/models/cart';
 import { User } from 'src/app/models/user';
 import { HeaderService } from './header.service';
 
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   searchForm = new FormGroup({
     search: new FormControl('')
   });
+  cartProductNumber = 0;
   matTooltipPosition: TooltipPosition = 'left';  // set to left by default
 
   constructor(private service: HeaderService, private router: Router) { }
@@ -54,6 +56,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const expiration = new Date().getTime() + expiresIn * 1000;
         this.service.saveStorageData(token, new Date(expiration));
         this.service.loadUser();
+      }
+    });
+
+    this.service.getUserCart().pipe(
+      takeUntil(this.destroySubscription$)
+    ).subscribe((cart: Cart | undefined) => {
+      if (cart) {
+        this.cartProductNumber = cart.products.length;
       }
     });
   }

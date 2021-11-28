@@ -50,7 +50,7 @@ export class CartService {
     })
   }
 
-  getUserCart(): Observable<Cart> {
+  getUserCart(): Observable<Cart | undefined> {
     return this.store.select(selectCurrentCart);
   }
 

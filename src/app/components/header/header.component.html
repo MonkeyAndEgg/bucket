@@ -23,6 +23,8 @@
           admin_panel_settings
         </span>
         <span
+          [matBadge]="cartProductNumber"
+          matBadgeColor="warn"
           class="material-icons"
           [routerLink]="'/cart'"
           [matTooltip]="USER_OPTIONS.CART"

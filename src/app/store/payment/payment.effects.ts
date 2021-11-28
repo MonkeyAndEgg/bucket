@@ -23,16 +23,20 @@ export class PaymentEffects {
     mergeMap((payload: { paymentRequest: PaymentRequestPayload }) => this.paymentDataService.processPayment(payload.paymentRequest)
     .pipe(
       withLatestFrom(this.store.select(selectCurrentCart)),
-      switchMap(([paymentRes, cart]: [{ payment: Payment }, Cart]) => {
-        // navigate to after payment page
-        this.router.navigate(['/payment-complete']);
-        // clean the current cart for the user
-        const updatedCart = {...cart};
-        updatedCart.products = [];
-        let actions = [];
-        actions.push(processPaymentComplete({ payment: paymentRes.payment }));
-        actions.push(updateCart({ cart: updatedCart }));
-        return actions;
+      switchMap(([paymentRes, cart]: [{ payment: Payment }, Cart | undefined]) => {
+        if (cart) {
+          // navigate to after payment page
+          this.router.navigate(['/payment-complete']);
+          // clean the current cart for the user
+          const updatedCart = {...cart};
+          updatedCart.products = [];
+          let actions = [];
+          actions.push(processPaymentComplete({ payment: paymentRes.payment }));
+          actions.push(updateCart({ cart: updatedCart }));
+          return actions;
+        }
+        // TODO handle else case
+        return EMPTY;
       }),
       catchError(() => EMPTY)
     ))

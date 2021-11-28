@@ -12,7 +12,7 @@ import { CartService } from './cart.service';
 })
 export class CartComponent implements OnInit, OnDestroy {
   destroySubscription$ = new Subject();
-  cart = {} as Cart;
+  cart: Cart | undefined;
   total = 0;
 
   constructor(private service: CartService) { }
@@ -20,7 +20,7 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.service.getUserCart().pipe(takeUntil(
       this.destroySubscription$
-    )).subscribe((cart: Cart) => {
+    )).subscribe((cart: Cart | undefined) => {
       this.cart = cart;
       this.calculateTotal();
     });
@@ -37,7 +37,7 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onClickRemove(productId: string | undefined): void {
-    if (productId) {
+    if (productId && this.cart) {
       this.service.addToCart(productId, this.cart);
     }
   }
@@ -50,7 +50,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   private calculateTotal(): void {
     this.total = 0;
-    if (this.cart.products && this.cart.products.length > 0) {
+    if (this.cart && this.cart.products && this.cart.products.length > 0) {
       for (const item of this.cart.products) {
         if (item?.product?.price && item?.quantity) {
           this.total += item.product.price * item.quantity;

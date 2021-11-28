@@ -2,10 +2,12 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { Cart } from "src/app/models/cart";
 import { User } from "src/app/models/user";
 import { loadCurrentUser, updateAuthStatus, updateToken } from "src/app/store/auth/auth.actions";
 import { selectExpiration, selectIsAuth, selectToken, selectUser } from "src/app/store/auth/auth.selector";
 import { loadCartById } from "src/app/store/order/order.actions";
+import { selectCurrentCart } from "src/app/store/order/order.selector";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,10 @@ export class HeaderService {
 
   getCurrentUser(): Observable<User | undefined> {
     return this.store.select(selectUser);
+  }
+
+  getUserCart(): Observable<Cart | undefined> {
+    return this.store.select(selectCurrentCart);
   }
 
   getIsAuth(): Observable<boolean> {

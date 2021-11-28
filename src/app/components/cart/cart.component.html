@@ -1,6 +1,6 @@
 <div class="container">
   <div class="orders">
-    <div class="order-item" *ngFor="let productObj of cart.products">
+    <div class="order-item" *ngFor="let productObj of cart?.products">
       <img [src]='productObj?.product?.imageUrl'>
       <div>
         <label>{{ productObj?.product?.name }}</label>

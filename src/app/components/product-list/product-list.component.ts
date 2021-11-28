@@ -36,7 +36,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     this.service.getUserCart().pipe(
       takeUntil(this.destroySubscription$)
-    ).subscribe((cart: Cart) => {
+    ).subscribe((cart: Cart | undefined) => {
       this.cart = cart && cart.products && cart.userId ? cart : undefined;
     });
   }

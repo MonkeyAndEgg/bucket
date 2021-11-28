@@ -6,6 +6,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AuthModule } from "../auth/auth.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AppRoutingModule,
     AuthModule,
     BrowserModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatTooltipModule,
     ReactiveFormsModule

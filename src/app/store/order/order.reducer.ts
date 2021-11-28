@@ -5,11 +5,11 @@ import * as OrderActions from './order.actions';
 export const orderFeatureKey = 'order';
 
 export interface OrderState {
-  currentCart: Cart;
+  currentCart: Cart | undefined;
 }
 
 export const initialState: OrderState = {
-  currentCart: {} as Cart
+  currentCart: undefined
 };
 
 export const orderReducer = createReducer(

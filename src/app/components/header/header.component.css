@@ -18,13 +18,13 @@
 }
 
 .options .material-icons {
-  font-size: 35px;
-  padding: 14px 5px;
+  font-size: 40px;
 }
 
 .options {
   display: flex;
   justify-content: center;
+  margin-top: 15px;
 }
 
 span {

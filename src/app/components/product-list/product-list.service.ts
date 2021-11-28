@@ -19,7 +19,7 @@ export class ProductListService {
     return this.store.select(selectUser);
   }
 
-  getUserCart(): Observable<Cart> {
+  getUserCart(): Observable<Cart | undefined> {
     return this.store.select(selectCurrentCart);
   }
 
