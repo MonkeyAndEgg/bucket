@@ -1,26 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AfterPaymentComponent } from './components/after-payment/after-payment.component';
-import { AuthComponent } from './components/auth/auth.component';
 import { AuthGuard } from './components/auth/auth.guard';
-import { CartComponent } from './components/cart/cart.component';
-import { LandingComponent } from './components/landing/landing.component';
-import { ViewAdminComponent } from './components/view-admin/view-admin.component';
-import { ViewProductDetailComponent } from './components/view-product-detail/view-product-detail.component';
-import { ViewProductsComponent } from './components/view-products/view-products.component';
-import { ViewSearchComponent } from './components/view-search/view-search.component';
-import { USER_OPTIONS } from './constants/header.constants';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent},
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  { path: 'signin', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_IN }},
-  { path: 'signup', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_UP }},
-  { path: 'view-products', component: ViewProductsComponent },
-  { path: 'view-detail/:id', component: ViewProductDetailComponent },
-  { path: 'view-admin', component: ViewAdminComponent },
-  { path: 'payment-complete', component: AfterPaymentComponent },
-  { path: 'view-search', component: ViewSearchComponent }
+  { path: '', loadChildren: () => import('./components/landing/landing.module').then(m => m.LandingModule)},
+  { path: 'cart', loadChildren: () => import('./components/cart/cart.module').then(m => m.CartModule), canActivate: [AuthGuard] },
+  { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)},
+  { path: 'view-products', loadChildren: () => import('./components/view-products/view-products.module').then(m => m.ViewProductsModule) },
+  { path: 'view-detail/:id', loadChildren: () => import('./components/view-product-detail/view-product-detail.module').then(m => m.ViewProductDetailModule) },
+  { path: 'view-admin', loadChildren: () => import('./components/view-admin/view-admin.module').then(m => m.ViewAdminModule) },
+  { path: 'payment-complete', loadChildren: () => import('./components/after-payment/after-payment.module').then(m => m.AfterPaymentModule) },
+  { path: 'view-search', loadChildren: () => import('./components/view-search/view-search.module').then(m => m.ViewSearchModule) }
 ];
 
 @NgModule({

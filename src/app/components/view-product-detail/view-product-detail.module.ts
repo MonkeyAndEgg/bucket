@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { ViewProductDetailRoutingModule } from "./view-product-detail-routing.module";
 import { ViewProductDetailComponent } from "./view-product-detail.component";
 
 @NgModule({
@@ -7,7 +8,8 @@ import { ViewProductDetailComponent } from "./view-product-detail.component";
     ViewProductDetailComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ViewProductDetailRoutingModule
   ],
   exports: [
     ViewProductDetailComponent

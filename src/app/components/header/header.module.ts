@@ -1,25 +1,25 @@
 import { NgModule } from "@angular/core";
 import { HeaderComponent } from "./header.component";
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AppRoutingModule } from "src/app/app-routing.module";
-import { BrowserModule } from "@angular/platform-browser";
 import { AuthModule } from "../auth/auth.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
+import { RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
     HeaderComponent
   ],
   imports: [
-    AppRoutingModule,
     AuthModule,
-    BrowserModule,
+    CommonModule,
     MatBadgeModule,
     MatToolbarModule,
     MatTooltipModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent

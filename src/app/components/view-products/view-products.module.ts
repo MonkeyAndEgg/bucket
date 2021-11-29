@@ -6,6 +6,7 @@ import { CommonModule } from "@angular/common";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from "@angular/forms";
+import { ViewProductsRoutingModule } from "./view-products-routing.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from "@angular/forms";
     MatButtonModule,
     MatCheckboxModule,
     MatMenuModule,
-    ProductListModule
+    ProductListModule,
+    ViewProductsRoutingModule
   ],
   exports: [
     ViewProductsComponent

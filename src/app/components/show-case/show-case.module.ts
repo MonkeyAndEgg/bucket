@@ -1,6 +1,5 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CarouselModule } from "ngx-owl-carousel-o";
 import { ShowCaseComponent } from "./show-case.component";
 
@@ -10,9 +9,8 @@ import { ShowCaseComponent } from "./show-case.component";
     ShowCaseComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    CarouselModule
+    CarouselModule,
+    CommonModule
   ],
   exports: [
     ShowCaseComponent

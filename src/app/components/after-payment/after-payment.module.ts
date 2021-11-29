@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
-import { AppRoutingModule } from "src/app/app-routing.module";
+import { RouterModule } from "@angular/router";
+import { AfterPaymentRoutingModule } from "./after-payment-routing.module";
 import { AfterPaymentComponent } from "./after-payment.component";
 
 
@@ -9,8 +10,9 @@ import { AfterPaymentComponent } from "./after-payment.component";
     AfterPaymentComponent
   ],
   imports: [
-    AppRoutingModule,
-    MatButtonModule
+    AfterPaymentRoutingModule,
+    MatButtonModule,
+    RouterModule
   ],
   exports: [
     AfterPaymentComponent

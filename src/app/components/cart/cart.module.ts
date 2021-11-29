@@ -2,16 +2,18 @@ import { NgModule } from "@angular/core";
 import { CartComponent } from "./cart.component";
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from "@angular/common";
-import { AppRoutingModule } from "src/app/app-routing.module";
+import { RouterModule } from "@angular/router";
+import { CartRoutingModule } from "./cart-routing.module";
 
 @NgModule({
   declarations: [
     CartComponent
   ],
   imports: [
-    AppRoutingModule,
+    CartRoutingModule,
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule
   ],
   exports: [
     CartComponent

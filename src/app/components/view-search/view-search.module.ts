@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ProductListModule } from "../product-list/product-list.module";
+import { ViewSearchRoutingModule } from "./view-search-routing.module";
 import { ViewSearchComponent } from "./view-search.component";
 
 @NgModule({
@@ -7,7 +8,8 @@ import { ViewSearchComponent } from "./view-search.component";
     ViewSearchComponent
   ],
   imports: [
-    ProductListModule
+    ProductListModule,
+    ViewSearchRoutingModule
   ],
   exports: [
     ViewSearchComponent

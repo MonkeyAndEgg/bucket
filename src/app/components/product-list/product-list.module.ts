@@ -4,20 +4,20 @@ import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from "@angular/common";
-import { AppRoutingModule } from "src/app/app-routing.module";
 import { MatButtonModule } from "@angular/material/button";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
     ProductListComponent
   ],
   imports: [
-    AppRoutingModule,
     CommonModule,
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   exports: [
     ProductListComponent
