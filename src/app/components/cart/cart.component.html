@@ -20,8 +20,18 @@
 
   <div class="checkout">
     <div class="info">
-      <label>Total(USD)</label>
-      <span>${{total}}</span>
+      <div class="info-field">
+        <label>Product Subtotal</label>
+        <span>${{total}}</span>
+      </div>
+      <div class="info-field">
+        <label>Shipping</label>
+        <span>Free</span>
+      </div>
+      <div class="info-field">
+        <label>Order Total(USD)</label>
+        <span>${{total}}</span>
+      </div>
     </div>
     <div class="actions">
       <button mat-raised-button color="primary" [routerLink]="'/view-products'">Continue Shipping</button>
