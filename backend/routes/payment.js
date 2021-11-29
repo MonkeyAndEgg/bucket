@@ -25,7 +25,7 @@ router.post('/api/payment', async (req, res) => {
   }
   const charge = await stripe.charges.create({
     currency: 'usd',
-    amount: totalAmount * 100,
+    amount: Math.round(totalAmount * 100),
     source: token.id
   });
   const payment = new Payment({

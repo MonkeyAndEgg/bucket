@@ -44,9 +44,11 @@ export class CartService {
       }
     });
 
+    // round the amount since *100 gives decimal number
+    const roundedAmout = Math.round(amount * 100)
     handler.open({
       name: 'Checkout',
-      amount: amount * 100
+      amount: roundedAmout
     })
   }
 
