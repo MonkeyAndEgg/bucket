@@ -1,7 +1,8 @@
+require('dotenv').config()
+
 const app = require('./app');
 const mongoose = require('mongoose');
 // import dotenv to access secrets
-require('dotenv').config()
 
 const PORT = process.env.PORT | 3000;
 
