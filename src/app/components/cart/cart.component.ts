@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart';
 import { Payment } from 'src/app/models/payment';
+import { calculateProductTotal } from '../common/calculate-product-total';
 import { CartService } from './cart.service';
 
 @Component({
@@ -22,7 +23,9 @@ export class CartComponent implements OnInit, OnDestroy {
       this.destroySubscription$
     )).subscribe((cart: Cart | undefined) => {
       this.cart = cart;
-      this.calculateTotal();
+      if (this.cart) {
+        this.total = calculateProductTotal(this.cart.products);
+      }
     });
 
     this.service.getCompletedPayment().pipe(takeUntil(
@@ -39,23 +42,6 @@ export class CartComponent implements OnInit, OnDestroy {
   onClickRemove(productId: string | undefined): void {
     if (productId && this.cart) {
       this.service.addToCart(productId, this.cart);
-    }
-  }
-
-  onClickCheckout(): void {
-    if (this.cart && this.cart._id) {
-      this.service.processPayment(this.cart._id, this.total);
-    }
-  }
-
-  private calculateTotal(): void {
-    this.total = 0;
-    if (this.cart && this.cart.products && this.cart.products.length > 0) {
-      for (const item of this.cart.products) {
-        if (item?.product?.price && item?.quantity) {
-          this.total += item.product.price * item.quantity;
-        }
-      }
     }
   }
 }
