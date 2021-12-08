@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Cart } from "src/app/models/cart";
 import { User } from "src/app/models/user";
-import { loadCurrentUser, updateAuthStatus, updateToken } from "src/app/store/auth/auth.actions";
+import { loadCurrentUser, setCurrentUser, updateAuthStatus, updateToken } from "src/app/store/auth/auth.actions";
 import { selectExpiration, selectIsAuth, selectToken, selectUser } from "src/app/store/auth/auth.selector";
 import { loadCartById } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
@@ -52,7 +52,8 @@ export class HeaderService {
   }
 
   signOut(): void {
-    this.store.dispatch(updateToken({ token: '', expiresIn: 0 }))
+    this.store.dispatch(updateToken({ token: '', expiresIn: 0 }));
+    this.store.dispatch(setCurrentUser({ user: undefined }));
     this.updateAuthStatus(false);
     this.clearStorageData();
     this.router.navigate(['/']);

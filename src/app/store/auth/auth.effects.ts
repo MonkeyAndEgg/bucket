@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { loadCurrentUser, loadCurrentUserComplete, setLoadStatus, submitEmailAndPassword, updateAuthStatus, updateToken } from "./auth.actions";
+import { loadCurrentUser, setCurrentUser, setLoadStatus, submitEmailAndPassword, updateAuthStatus, updateToken } from "./auth.actions";
 import { AuthDataService } from "./auth.data.service";
 import { mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { of } from "rxjs";
@@ -22,7 +22,7 @@ export class AuthEffects {
     .pipe(
       switchMap((user: { currentUser: User }) => {
         let actions = [];
-        actions.push(loadCurrentUserComplete({ user: user.currentUser }));
+        actions.push(setCurrentUser({ user: user.currentUser }));
         actions.push(setLoadStatus({ status: LoadStatus.LOADED }));
         return actions;
       }),
