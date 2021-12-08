@@ -9,5 +9,6 @@ export function calculateProductTotal(products: { product: Product, quantity: nu
       }
     }
   }
-  return total;
+  // round the result to 2 decimal places
+  return Math.round(total * 100) / 100;
 }
