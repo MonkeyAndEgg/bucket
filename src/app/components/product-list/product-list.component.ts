@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart';
@@ -25,7 +26,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   cart: Cart | undefined;
   destroySubscription$ = new Subject();
 
-  constructor(private service: ProductListService) { }
+  constructor(private service: ProductListService, private router: Router) { }
 
   ngOnInit(): void {
     this.service.getCurrentUser().pipe(
@@ -48,6 +49,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   onAddToCart(productId: string | undefined): void {
     if (productId && this.user) {
       this.service.addToCart(productId, this.user.id, this.cart);
+    } else {
+      this.router.navigate(['/signin']);
     }
   }
 
