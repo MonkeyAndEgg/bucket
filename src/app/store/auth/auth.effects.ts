@@ -7,10 +7,13 @@ import { of } from "rxjs";
 import { LoginInfo } from "src/app/models/login-info";
 import { User } from "src/app/models/user";
 import { LoadStatus } from "src/app/constants/load-status.constants";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { errorHandler } from "src/app/components/common/error-handler";
 
 @Injectable()
 export class AuthEffects {
   constructor(private actions$: Actions,
+              private snackBar: MatSnackBar,
               private authDataService: AuthDataService) {}
 
   loadUser$ = createEffect(() => this.actions$.pipe(
@@ -23,7 +26,10 @@ export class AuthEffects {
         actions.push(setLoadStatus({ status: LoadStatus.LOADED }));
         return actions;
       }),
-      catchError(() => of(setLoadStatus({ status: LoadStatus.NOT_LOADED })))
+      catchError((err) => {
+        errorHandler(this.snackBar, err);
+        return of(setLoadStatus({ status: LoadStatus.NOT_LOADED }));
+      })
     ))
   ));
 
@@ -39,7 +45,10 @@ export class AuthEffects {
           actions.push(setLoadStatus({ status: LoadStatus.LOADED }));
           return actions;
         }),
-        catchError(() => of(setLoadStatus({ status: LoadStatus.NOT_LOADED })))
+        catchError((err) => {
+          errorHandler(this.snackBar, err);
+          return of(setLoadStatus({ status: LoadStatus.NOT_LOADED }));
+        })
       ))
   ));
 }

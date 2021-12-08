@@ -11,6 +11,7 @@ import { AppStoreModule } from './store/store.module';
 import { ViewProductDetailModule } from './components/view-product-detail/view-product-detail.module';
 import { NewProductDialogModule } from './components/new-product-dialog/new-product-dialog.module';
 import { FooterModule } from './components/footer/footer.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FooterModule } from './components/footer/footer.module';
     BrowserAnimationsModule,
     FooterModule,
     HeaderModule,
+    MatSnackBarModule,
     NewProductDialogModule,
     ProductListModule,
     ShowCaseModule,

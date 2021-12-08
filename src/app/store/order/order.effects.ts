@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
+import { errorHandler } from "src/app/components/common/error-handler";
 import { Cart, CartRequest } from "src/app/models/cart";
 import { addToCart, loadCartById, updateCart } from "./order.actions";
 import { OrderDataService } from "./order.data.service";
@@ -9,6 +11,7 @@ import { OrderDataService } from "./order.data.service";
 @Injectable()
 export class OrderEffects {
   constructor(private actions$: Actions,
+              private snackBar: MatSnackBar,
               private orderDataService: OrderDataService) {}
 
   loadCartById$ = createEffect(() => this.actions$.pipe(
@@ -22,6 +25,7 @@ export class OrderEffects {
         if (err.status === 404) {
           return of(updateCart({ cart: {} as Cart }));
         }
+        errorHandler(this.snackBar, err);
         return EMPTY;
       })
     ))
@@ -35,7 +39,10 @@ export class OrderEffects {
         map((cart: Cart) => {
           return loadCartById({ id: cart.userId });
         }),
-        catchError(() => EMPTY)
+        catchError((err) => {
+          errorHandler(this.snackBar, err);
+          return EMPTY;
+        })
       ))
   ));
 }

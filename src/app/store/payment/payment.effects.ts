@@ -1,9 +1,12 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { EMPTY } from "rxjs";
 import { catchError, mergeMap, switchMap, withLatestFrom } from "rxjs/operators";
+import { errorHandler } from "src/app/components/common/error-handler";
 import { Cart } from "src/app/models/cart";
 import { Payment, PaymentRequestPayload } from "src/app/models/payment";
 import { updateCart } from "../order/order.actions";
@@ -16,6 +19,7 @@ export class PaymentEffects {
   constructor(private actions$: Actions,
               private router: Router,
               private store: Store,
+              private snackBar: MatSnackBar,
               private paymentDataService: PaymentDataService) {}
 
   processPayment$ = createEffect(() => this.actions$.pipe(
@@ -35,10 +39,14 @@ export class PaymentEffects {
           actions.push(updateCart({ cart: updatedCart }));
           return actions;
         }
-        // TODO handle else case
+        const errorResponse = new HttpErrorResponse({ error: { message: 'The cart data is undefined, the payment is failed' }});
+        errorHandler(this.snackBar, errorResponse);
         return EMPTY;
       }),
-      catchError(() => EMPTY)
+      catchError((err) => {
+        errorHandler(this.snackBar, err);
+        return EMPTY;
+      })
     ))
   ));
 }

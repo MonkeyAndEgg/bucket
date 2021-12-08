@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
+import { errorHandler } from "src/app/components/common/error-handler";
 import { Product } from "src/app/models/product";
 import { createNewProduct, deleteProduct, loadProductById, loadProductByIdComplete, loadProducts, loadProductsComplete } from "./product.actions";
 import { ProductDataService } from "./product.data.service";
@@ -9,6 +11,7 @@ import { ProductDataService } from "./product.data.service";
 @Injectable()
 export class ProductEffects {
   constructor(private actions$: Actions,
+              private snackBar: MatSnackBar,
               private productDataService: ProductDataService) {}
 
   loadProducts$ = createEffect(() => this.actions$.pipe(
@@ -18,7 +21,10 @@ export class ProductEffects {
       map((products: Product[]) => {
         return loadProductsComplete({ products });
       }),
-      catchError(() => EMPTY)
+      catchError((err) => {
+        errorHandler(this.snackBar, err);
+        return EMPTY;
+      })
     ))
   ));
 
@@ -29,7 +35,10 @@ export class ProductEffects {
       map((product: Product) => {
         return loadProductByIdComplete({ product });
       }),
-      catchError(() => EMPTY)
+      catchError((err) => {
+        errorHandler(this.snackBar, err);
+        return EMPTY;
+      })
     ))
   ));
 
@@ -41,7 +50,10 @@ export class ProductEffects {
         map((res: Product) => {
           return loadProducts({});
         }),
-        catchError(() => EMPTY)
+        catchError((err) => {
+          errorHandler(this.snackBar, err);
+          return EMPTY;
+        })
       ))
   ));
 
@@ -52,7 +64,10 @@ export class ProductEffects {
         map((res: { message: string }) => {
           return loadProducts({});
         }),
-        catchError(() => EMPTY)
+        catchError((err) => {
+          errorHandler(this.snackBar, err);
+          return EMPTY;
+        })
       ))
   ));
 }

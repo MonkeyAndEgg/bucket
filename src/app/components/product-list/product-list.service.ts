@@ -29,7 +29,7 @@ export class ProductListService {
     let productDataList: { product: string, quantity: number }[];
     if (cart) {
       productDataList = cart.products.map((item: { product: Product, quantity: number }) => {
-        // TODO impore this _id condition
+        // TODO improre this _id condition
         return { product: item.product._id ? item.product._id : '', quantity: item!.quantity };
       });
       // TODO improve logic here
