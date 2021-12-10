@@ -1,4 +1,5 @@
-<mat-horizontal-stepper>
+<!-- by using linear we disable the navigation header clikcing -->
+<mat-horizontal-stepper linear>
   <mat-step [stepControl]="shippingForm">
     <div class="content">
       <form class="shipping" [formGroup]="shippingForm">
@@ -36,12 +37,12 @@
   </mat-step>
   <mat-step [stepControl]="billingForm">
     <div class="content">
+      <mat-checkbox [(ngModel)]="sameAddress" (click)="onClickUsingSameAddress()">
+        <label>Use this address as my billing address</label>
+      </mat-checkbox>
       <form class="billing" [formGroup]="billingForm">
         <ng-template matStepLabel>Billing</ng-template>
         <div class="input-fields">
-          <mat-checkbox>
-            <label>Use this address as my billing address</label>
-          </mat-checkbox>
           <div class="title">
             <label>Billing Address</label>
           </div>

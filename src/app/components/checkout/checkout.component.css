@@ -15,8 +15,8 @@
   flex-direction: column;
 }
 
-.input-fields mat-checkbox {
-  margin-bottom: 40px;
+mat-checkbox {
+  margin-bottom: 30px;
 }
 
 .input-row:nth-last-child(2) mat-form-field {

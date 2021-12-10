@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   destroySubscription$ = new Subject();
   cart: Cart | undefined;
   total = 0;
-  sameAddress = true;
+  sameAddress = false;
   shippingForm = new FormGroup({
     address: new FormControl('', [
       Validators.required
@@ -66,6 +66,18 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   onClickCheckout(): void {
     if (this.cart && this.cart._id) {
       this.service.processPayment(this.cart._id, this.total);
+    }
+  }
+
+  onClickUsingSameAddress(): void {
+    // when clicking the checkbox and triggering this function, the value of sameAddress is going to updated as the opposite one
+    if (!this.sameAddress) {
+      this.billingForm.setValue({
+        address: this.shippingForm.controls.address.value,
+        city: this.shippingForm.controls.city.value,
+        state: this.shippingForm.controls.state.value,
+        postCode: this.shippingForm.controls.postCode.value
+      });
     }
   }
 }
