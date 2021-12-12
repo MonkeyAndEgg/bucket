@@ -1,7 +1,7 @@
 <div class="container">
   <div class="orders">
     <div class="order-item" *ngFor="let productObj of cart?.products">
-      <img [src]='productObj?.product?.imageUrl'>
+      <img [src]='productObj?.product?.imageUrl' [routerLink]="['/view-detail', productObj?.product?._id]">
       <div class="item-field">
         <label>{{ productObj?.product?.name }}</label>
       </div>
