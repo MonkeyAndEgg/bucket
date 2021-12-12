@@ -49,7 +49,24 @@ button {
   border-bottom: 1px solid #000000;
 }
 
-.order-item div {
+.order-item .item-field {
   flex: 1;
 }
 
+.item-field {
+  display: flex;
+}
+
+.item-field label {
+  align-self: center;
+  padding: 5px;
+}
+
+.material-icons {
+  cursor: pointer;
+  color: rgba(255,193,7, 0.6);
+}
+
+.material-icons:hover {
+  color: rgba(255,193,7, 1);
+}

@@ -6,7 +6,6 @@ import { Payment } from "src/app/models/payment";
 import { Product } from "src/app/models/product";
 import { addToCart } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
-import { processPayment } from "src/app/store/payment/payment.actions";
 import { selectPayment } from "src/app/store/payment/payment.selector";
 
 @Injectable({
@@ -15,18 +14,21 @@ import { selectPayment } from "src/app/store/payment/payment.selector";
 export class CartService {
   constructor(private store: Store) {}
 
-  addToCart(productId: string, cart: Cart): void {
-    const updatedProducts = cart.products.filter(
-      (productData: { product: Product, quantity: number }) => productData.product._id !== productId
-    );
+  updateCart(productData: { product: Product, quantity: number }, cart: Cart): void {
+    let updatedProducts: { product: Product, quantity: number }[];
     let productDataList: { product: string, quantity: number }[];
-    if (updatedProducts.length > 0) {
-      productDataList = updatedProducts.map((productData: { product: Product, quantity: number }) => {
-        return { product: productData.product._id ? productData.product._id : '', quantity: productData.quantity };
-      });
+    if (productData.quantity === 0) {
+      updatedProducts = cart.products.filter(
+        (productObj: { product: Product, quantity: number }) => productObj.product._id !== productData.product._id
+      );
     } else {
-      productDataList = [];
+      updatedProducts = cart.products;
     }
+    productDataList = updatedProducts.map((productObj: { product: Product, quantity: number }) => {
+      return {
+        product: productObj.product._id ? productObj.product._id : '',
+        quantity: productObj.product._id === productData.product._id ? productData.quantity : productObj.quantity };
+    });
     const cartPayload = {
       userId: cart.userId,
       productDataList

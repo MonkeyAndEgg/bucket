@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart';
 import { Payment } from 'src/app/models/payment';
+import { Product } from 'src/app/models/product';
 import { calculateProductTotal } from '../common/calculate-product-total';
 import { CartService } from './cart.service';
 
@@ -39,9 +40,25 @@ export class CartComponent implements OnInit, OnDestroy {
     this.destroySubscription$.next(true);
   }
 
-  onClickRemove(productId: string | undefined): void {
-    if (productId && this.cart) {
-      this.service.addToCart(productId, this.cart);
+  onClickRemove(productData: { product: Product, quantity: number }): void {
+    if (this.cart) {
+      this.service.updateCart({ product: productData.product, quantity: 0 }, this.cart);
+    }
+  }
+
+  decrementQuantity(productData: { product: Product, quantity: number }): void {
+    let updatedQuantity = productData.quantity;
+    if (this.cart && productData.quantity > 0) {
+      updatedQuantity -= 1;
+      this.service.updateCart({ product: productData.product, quantity: updatedQuantity }, this.cart);
+    }
+  }
+
+  incrementQuantity(productData: { product: Product, quantity: number }): void {
+    let updatedQuantity = productData.quantity;
+    if (this.cart && productData.quantity < productData.product.numOfStocks) {
+      updatedQuantity += 1;
+      this.service.updateCart({ product: productData.product, quantity: updatedQuantity }, this.cart);
     }
   }
 }
