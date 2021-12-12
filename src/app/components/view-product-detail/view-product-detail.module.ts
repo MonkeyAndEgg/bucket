@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
 import { ViewProductDetailRoutingModule } from "./view-product-detail-routing.module";
 import { ViewProductDetailComponent } from "./view-product-detail.component";
 
@@ -9,6 +10,7 @@ import { ViewProductDetailComponent } from "./view-product-detail.component";
   ],
   imports: [
     CommonModule,
+    MatButtonModule,
     ViewProductDetailRoutingModule
   ],
   exports: [

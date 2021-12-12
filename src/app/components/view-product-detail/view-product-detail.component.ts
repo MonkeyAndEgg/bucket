@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Cart } from 'src/app/models/cart';
 import { Product } from 'src/app/models/product';
 import { ViewProductDetailService } from './view-product-detail.service';
 
@@ -12,8 +13,16 @@ import { ViewProductDetailService } from './view-product-detail.service';
 })
 export class ViewProductDetailComponent implements OnInit, OnDestroy {
   destroySubscription$ = new Subject();
+  numOfProductsToAdd = 1;
+
   product: Product | undefined;
-  constructor(private route: ActivatedRoute, private service: ViewProductDetailService) { }
+  cart: Cart | undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private service: ViewProductDetailService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.route.params.pipe(takeUntil(this.destroySubscription$)).subscribe(params => {
@@ -25,9 +34,39 @@ export class ViewProductDetailComponent implements OnInit, OnDestroy {
       .subscribe((product: Product | undefined) => {
         this.product = product;
       });
+
+    this.service.getUserCart()
+      .pipe(takeUntil(this.destroySubscription$))
+      .subscribe((cart: Cart | undefined) => {
+        this.cart = cart;
+      });
   }
 
   ngOnDestroy(): void {
     this.destroySubscription$.next(true);
+  }
+
+  onAddToCart(): void {
+    if (this.cart) {
+      if (this.product && this.product._id) {
+        this.service.addToCart(this.product._id, this.numOfProductsToAdd, this.cart);
+      } else {
+        console.error('product id is not defined, cannot add to cart');
+      }
+    } else {
+      this.router.navigate(['/signin']);
+    }
+  }
+
+  decrementProducts(): void {
+    if (this.numOfProductsToAdd > 1) {
+      this.numOfProductsToAdd -= 1;
+    }
+  }
+
+  incrementProducts(): void {
+    if (this.product && this.product.numOfStocks > this.numOfProductsToAdd && 99 > this.numOfProductsToAdd) {
+      this.numOfProductsToAdd += 1;
+    }
   }
 }

@@ -17,6 +17,18 @@
       <label>Number of stocks</label>
       <span>{{ product.numOfStocks }}</span>
     </div>
+    <div class="field-value">
+      <div class="number-input">
+        <span class="material-icons" (click)="decrementProducts()">
+          remove_circle_outline
+        </span>
+        <span>{{ numOfProductsToAdd }}</span>
+        <span class="material-icons" (click)="incrementProducts()">
+          add_circle_outline
+        </span>
+      </div>
+      <button mat-raised-button color="primary" (click)="onAddToCart()">Add to Cart</button>
+    </div>
     <div class="checkout">
       <div class="field-value">
         <label>Price</label>
