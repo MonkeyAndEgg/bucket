@@ -14,7 +14,7 @@ const start = async () => {
     console.log(err);
   }
   app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`)
+    console.log(`Bucket app BE listening at http://localhost:${PORT}`)
   });
 }
 
