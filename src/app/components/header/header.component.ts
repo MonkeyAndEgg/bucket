@@ -6,6 +6,7 @@ import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { USER_OPTIONS } from 'src/app/constants/header.constants';
 import { Cart } from 'src/app/models/cart';
+import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { HeaderService } from './header.service';
 
@@ -62,8 +63,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.service.getUserCart().pipe(
       takeUntil(this.destroySubscription$)
     ).subscribe((cart: Cart | undefined) => {
+      this.cartProductNumber = 0;
       if (cart) {
-        this.cartProductNumber = cart.products.length;
+        cart.products.forEach((productData: { product: Product; quantity: number; }) => {
+          this.cartProductNumber += productData.quantity;
+        });
       }
     });
   }
