@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../../app');
+const mongoose = require('mongoose');
 
 // sign up
 it('returns 201 for valid signup with valid token and empty cart', async () => {
@@ -71,4 +72,20 @@ it('returns 400 for empty request body', async () => {
   }).expect(400);
 });
 
+it('returns 404 for invalid user id when resetting password', async () => {
+  const id = new mongoose.Types.ObjectId().toHexString();
+  await request(app).post(`/api/reset-password/${id}`).send({
+    password: '1234567'
+  }).expect(404);
+});
 
+it('returns 200 when reset a valid user password', async () => {
+  const response = await request(app).post('/api/signup').send({
+    email: 'test@test.com',
+    password: '1234567'
+  }).expect(201);
+
+  await request(app).post(`/api/reset-password/${response.body.userId}`).send({
+    password: '12345'
+  }).expect(200);
+});
