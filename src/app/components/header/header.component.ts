@@ -8,6 +8,7 @@ import { USER_OPTIONS } from 'src/app/constants/header.constants';
 import { Cart } from 'src/app/models/cart';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
+import { saveStorageData } from '../common/process-storage-data';
 import { HeaderService } from './header.service';
 
 @Component({
@@ -55,7 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (token !== '' && expiresIn > 0) {
         this.service.initAuthTimer(expiresIn);
         const expiration = new Date().getTime() + expiresIn * 1000;
-        this.service.saveStorageData(token, new Date(expiration));
+        saveStorageData(token, new Date(expiration));
         this.service.loadUser();
       }
     });

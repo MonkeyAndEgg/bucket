@@ -1,21 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { USER_OPTIONS } from 'src/app/constants/header.constants';
 import { LoadStatus } from 'src/app/constants/load-status.constants';
 import { LoginInfo } from 'src/app/models/login-info';
+import { CommonErrorStateMatcher } from '../common/common-error-matcher';
 import { AuthService } from './auth.service';
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class AuthErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -29,7 +22,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     email: new FormControl(''),
     password: new FormControl('')
   });
-  matcher = new AuthErrorStateMatcher();
+  matcher = new CommonErrorStateMatcher();
   destroySubscription$ = new Subject();
   loadStatus = LoadStatus.NOT_LOADED;
   LoadStatus = LoadStatus;

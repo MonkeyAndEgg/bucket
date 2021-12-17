@@ -9,3 +9,4 @@ export const updateToken = createAction('[Auth] update user token', props<{ toke
 export const updateAuthStatus = createAction('[Auth] udpate auth status', props<{ isAuth: boolean }>());
 export const submitEmailAndPassword = createAction('[Auth] submit email and password', props<{ loginInfo: LoginInfo, isSignin: boolean }>());
 export const setLoadStatus = createAction('[Auth] set auth loading status', props<{ status: LoadStatus }>());
+export const resetPassword = createAction('[Auth] reset user password', props<{ userId: string, password: string }>());

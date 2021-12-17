@@ -27,7 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NewProductDialogModule,
     ProductListModule,
     ShowCaseModule,
-    ViewProductDetailModule,
+    ViewProductDetailModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true

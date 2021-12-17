@@ -8,6 +8,7 @@ import { loadCurrentUser, setCurrentUser, updateAuthStatus, updateToken } from "
 import { selectExpiration, selectIsAuth, selectToken, selectUser } from "src/app/store/auth/auth.selector";
 import { loadCartById } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
+import { clearStorageData } from "../common/process-storage-data";
 
 @Injectable({
   providedIn: 'root'
@@ -55,18 +56,8 @@ export class HeaderService {
     this.store.dispatch(updateToken({ token: '', expiresIn: 0 }));
     this.store.dispatch(setCurrentUser({ user: undefined }));
     this.updateAuthStatus(false);
-    this.clearStorageData();
+    clearStorageData();
     this.router.navigate(['/']);
-  }
-
-  saveStorageData(token: string, expirationDate: Date) {
-    localStorage.setItem('token', token);
-    localStorage.setItem('expiration', expirationDate.toISOString());
-  }
-
-  clearStorageData() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
   }
 
   getStorageTokenData(): { token: string, expirationDate: Date } | undefined {
@@ -88,7 +79,7 @@ export class HeaderService {
       this.updateAuthStatus(false);
       this.router.navigate(['/']);
       clearTimeout(timer);
-      this.clearStorageData();
+      clearStorageData();
     }, expiresInSeconds * 1000);
   }
 

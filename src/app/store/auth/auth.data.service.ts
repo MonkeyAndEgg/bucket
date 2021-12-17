@@ -8,19 +8,32 @@ import { User } from "src/app/models/user";
   providedIn: 'root'
 })
 export class AuthDataService {
+  BASE_URL = 'http://localhost:3000';
   constructor(private http: HttpClient) {}
 
   getUser(): Observable<{ currentUser: User }> {
-    return this.http.get<{ currentUser: User }>('http://localhost:3000/api/user');
+    return this.http.get<{ currentUser: User }>(`${this.BASE_URL}/api/user`);
   }
 
   requestAuthentication(loginInfo: LoginInfo, isSignin: boolean): Observable<{ userId: string, token: string, expiresIn: number }> {
-    const baseUrl = 'http://localhost:3000';
-    const url = isSignin ? baseUrl + '/api/signin' : baseUrl + '/api/signup';
+    const url = isSignin ? this.BASE_URL + '/api/signin' : this.BASE_URL + '/api/signup';
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       withCredentials: true
     };
     return this.http.post<{ userId: string, token: string, expiresIn: number }>(url, loginInfo, httpOptions);
+  }
+
+  resetPassword(userId: string, password: string): Observable<{ userId: string, token: string, expiresIn: number }> {
+    const requestBody = {
+      password
+    };
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      withCredentials: true
+    };
+    return this.http.post<{ userId: string, token: string, expiresIn: number }>(
+      this.BASE_URL + `/api/reset-password/${userId}`, requestBody, httpOptions
+    );
   }
 }

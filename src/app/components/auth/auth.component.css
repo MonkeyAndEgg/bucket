@@ -25,23 +25,6 @@
   margin-top: 20px;
 }
 
-.loading {
-  display: flex;
-  justify-content: center;
-  padding: 200px 0px;
-}
-
-.spinner span {
-  margin: 20px;
-  display: inline-block;
-  font-weight: 700;
-  font-family: cursive;
-}
-
-mat-spinner {
-  margin: auto;
-}
-
 .info {
   margin-top: 50px;
 }
