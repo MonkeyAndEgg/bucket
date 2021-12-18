@@ -10,3 +10,4 @@ export const updateAuthStatus = createAction('[Auth] udpate auth status', props<
 export const submitEmailAndPassword = createAction('[Auth] submit email and password', props<{ loginInfo: LoginInfo, isSignin: boolean }>());
 export const setLoadStatus = createAction('[Auth] set auth loading status', props<{ status: LoadStatus }>());
 export const resetPassword = createAction('[Auth] reset user password', props<{ userId: string, password: string }>());
+export const requestPasswordReset = createAction('[Auth] request user password reset', props<{ email: string }>());

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
-import { loadCurrentUser, resetPassword, setCurrentUser, setLoadStatus, submitEmailAndPassword, updateAuthStatus, updateToken } from "./auth.actions";
+import { loadCurrentUser, requestPasswordReset, resetPassword, setCurrentUser, setLoadStatus, submitEmailAndPassword, updateAuthStatus, updateToken } from "./auth.actions";
 import { AuthDataService } from "./auth.data.service";
 import { mergeMap, catchError, switchMap } from 'rxjs/operators';
-import { of } from "rxjs";
+import { EMPTY, Observable, of } from "rxjs";
 import { LoginInfo } from "src/app/models/login-info";
 import { User } from "src/app/models/user";
 import { LoadStatus } from "src/app/constants/load-status.constants";
@@ -50,6 +50,24 @@ export class AuthEffects {
           return of(setLoadStatus({ status: LoadStatus.NOT_LOADED }));
         })
       ))
+  ));
+
+  requestPasswordReset$ = createEffect(() => this.actions$.pipe(
+    ofType(requestPasswordReset),
+    mergeMap((payload: { email: string }) =>
+      this.authDataService.requestPasswordReset(payload.email)
+      .pipe(
+        switchMap((res: any) => {
+          // doing nothing
+          return of(setLoadStatus({ status: LoadStatus.LOADED }));
+        }),
+        catchError((err) => {
+          // TODO find a better way to handle the error
+          errorHandler(this.snackBar, err);
+          return of(setLoadStatus({ status: LoadStatus.NOT_LOADED }));
+        })
+      )
+    )
   ));
 
   resetPassword$ = createEffect(() => this.actions$.pipe(

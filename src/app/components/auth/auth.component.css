@@ -29,10 +29,12 @@
   margin-top: 50px;
 }
 
-.info label{
+.info label,
+.reset-password {
   cursor: pointer;
 }
 
-.info label:hover {
+.info label:hover,
+.reset-password:hover {
   color: #ffc107;
 }

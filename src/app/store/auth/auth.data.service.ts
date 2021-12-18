@@ -24,6 +24,13 @@ export class AuthDataService {
     return this.http.post<{ userId: string, token: string, expiresIn: number }>(url, loginInfo, httpOptions);
   }
 
+  requestPasswordReset(email: string): Observable<any> {
+    const requestBody = {
+      email
+    };
+    return this.http.post(this.BASE_URL + '/api/reset-password', requestBody);
+  }
+
   resetPassword(userId: string, password: string): Observable<{ userId: string, token: string, expiresIn: number }> {
     const requestBody = {
       password

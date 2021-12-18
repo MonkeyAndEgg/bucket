@@ -26,6 +26,7 @@
         </mat-error>
       </mat-form-field>
     </div>
+    <label class="reset-password" *ngIf="isSignin" [routerLink]="'/forget-password'">Forget Password?</label>
     <button mat-raised-button class="submit" color="accent" type="submit" [disabled]="!authForm.valid">Submit</button>
   </form>
 

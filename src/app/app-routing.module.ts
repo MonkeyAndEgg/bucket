@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'view-admin', loadChildren: () => import('./components/view-admin/view-admin.module').then(m => m.ViewAdminModule) },
   { path: 'payment-complete', loadChildren: () => import('./components/after-payment/after-payment.module').then(m => m.AfterPaymentModule) },
   { path: 'view-search', loadChildren: () => import('./components/view-search/view-search.module').then(m => m.ViewSearchModule) },
-  { path: 'reset-password/:userId', loadChildren: () => import('./components/reset-password/reset-password.module').then(m => m.ResetPasswordModule) }
+  { path: 'reset-password/:userId', loadChildren: () => import('./components/reset-password/reset-password.module').then(m => m.ResetPasswordModule) },
+  { path: 'forget-password', loadChildren: () => import('./components/forget-password/forget-password.module').then(m => m.ForgetPasswordModule) }
 ];
 
 @NgModule({
