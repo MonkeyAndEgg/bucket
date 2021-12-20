@@ -39,20 +39,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
       takeUntil(this.destroySubscription$)
     ).subscribe((user: User | undefined) => {
       if (user) {
+        this.isAuth = true;
         this.userId = user.id;
         this.isAdmin = user.isAdmin ? user.isAdmin : false;
         this.service.loadUserCart(user.id);
+      } else {
+        this.isAuth = false;
       }
     });
 
     combineLatest([
-      this.service.getIsAuth(),
       this.service.getToken(),
       this.service.getExpiration()
     ]).pipe(
       takeUntil(this.destroySubscription$)
-    ).subscribe(([isAuth, token, expiresIn]: [boolean, string, number]) => {
-      this.isAuth = isAuth;
+    ).subscribe(([token, expiresIn]: [string, number]) => {
       if (token !== '' && expiresIn > 0) {
         this.service.initAuthTimer(expiresIn);
         const expiration = new Date().getTime() + expiresIn * 1000;

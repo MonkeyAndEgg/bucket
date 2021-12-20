@@ -9,8 +9,10 @@ it('returns 201 for valid signup with valid token and empty cart', async () => {
     password: '1234567'
   }).expect(201);
 
-  const cartResponse = await request(app).get(`/api/orders/${response.body.userId}`);
+  const tokenResponse = await request(app).get(`/api/token/${response.body.userId}`).expect(200);
+  const cartResponse = await request(app).get(`/api/orders/${response.body.userId}`).expect(200);
   expect(cartResponse.body.userId).toEqual(response.body.userId);
+  expect(tokenResponse.body.token).toBeDefined();
   expect(response.body.token).toBeDefined();
 });
 
@@ -44,6 +46,8 @@ it('returns 200 for valid signin and valid token is provided', async () => {
     password: '1234567'
   }).expect(200);
 
+  const tokenResponse = await request(app).get(`/api/token/${response.body.userId}`).expect(200);
+  expect(tokenResponse.body.token).toBeDefined();
   expect(response.body.token).toBeDefined();
 });
 
@@ -88,4 +92,7 @@ it('returns 200 when reset a valid user password', async () => {
   await request(app).post(`/api/reset-password/${response.body.userId}`).send({
     password: '12345'
   }).expect(200);
+
+  const tokenResponse = await request(app).get(`/api/token/${response.body.userId}`).expect(200);
+  expect(tokenResponse.body.token).toBeDefined();
 });

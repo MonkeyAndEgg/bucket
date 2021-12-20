@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Cart = require('../models/cart');
-// const Token = require('../models/token');
+const Token = require('../models/token');
 const nodemailer = require('nodemailer');
 
 exports.createUser = async (req, res) => {
@@ -24,23 +24,15 @@ exports.createUser = async (req, res) => {
     password: hashedPassword
   });
   await user.save();
-  const token = jwt.sign(
-    {
-      email: user.email,
-      id: user._id
-    },
-    process.env.JWT_KEY,
-    {
-      expiresIn: '1h'
-    }
-  );
+
+  const token = await generateToken(user);
 
   // generate a cart for this user since the user is just signed up
   const cart = await new Cart({
     userId: user._id,
     products: []
   });
-  cart.save();
+  await cart.save();
 
   return res.status(201).send({
     userId: user._id,
@@ -69,16 +61,9 @@ exports.loginUser = async (req, res) => {
         message: 'Invalid credentials'
       });
     }
-    const token = jwt.sign(
-      {
-        email: user.email,
-        id: user._id
-      },
-      process.env.JWT_KEY,
-      {
-        expiresIn: '1h'
-      }
-    );
+
+    const token = await generateToken(user);
+
     return res.status(200).send({
       userId: user._id,
       token,
@@ -86,6 +71,26 @@ exports.loginUser = async (req, res) => {
     });
   } catch (err) {
     return res.status(500).send({
+      message: err.message
+    });
+  }
+}
+
+exports.logoutUser = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const result = await Token.deleteOne({ userId });
+    if (result.deletedCount > 0) {
+      res.status(200).send({
+        message: `User with id: ${userId} is signed out.`
+      });
+    } else {
+      res.status(404).send({
+        message: `The token with user id: ${userId} does not exist.`
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
       message: err.message
     });
   }
@@ -99,23 +104,8 @@ exports.resetPasswords = async (req, res) => {
       message: 'The email does not exist'
     });
   }
-  // TODO added token verification
-  // const currentTime = new Date();
-  // const token = await new Token({
-  //   userId: user._id,
-  //   token: jwt.sign(
-  //     {
-  //       email: user.email,
-  //       id: user._id
-  //     },
-  //     process.env.JWT_KEY,
-  //     {
-  //       expiresIn: '1h'
-  //     }
-  //   ),
-  //   createdAt: currentTime.toISOString()
-  // });
-  // token.save();
+
+  const token = await generateToken(user);
 
   const transporter = nodemailer.createTransport({
     host: process.env.HOST,
@@ -135,7 +125,11 @@ exports.resetPasswords = async (req, res) => {
   });
 
   console.log("Reset email sent sucessfully!");
-  return res.status(200).send({});
+  return res.status(200).send({
+    userId: user._id,
+    token,
+    expiresIn: 60 * 60 // in seconds
+  });
 }
 
 exports.resetPassword = async (req, res) => {
@@ -147,26 +141,35 @@ exports.resetPassword = async (req, res) => {
         message: 'The user does not exist'
       });
     }
-    const hashedPassword = await bcrypt.hash(password, 15);
-    user.set({
-      password: hashedPassword
-    });
-    await user.save();
-    console.log('Password is reset.');
-    const token = jwt.sign(
-      {
-        email: user.email,
-        id: user._id
-      },
-      process.env.JWT_KEY,
-      {
-        expiresIn: '1h'
+    const existingToken = await Token.findOne({ userId: user._id });
+    if (existingToken) {
+      // check expiration of the token
+      const tokenCreationDate = new Date(existingToken.createdAt);
+      // adding 1 hour to the create date and it is used as the expiration date
+      tokenCreationDate.setHours(tokenCreationDate.getHours() + 1);
+      const expireTime= tokenCreationDate.getTime();
+      const currentTime = new Date().getTime();
+      if (expireTime > currentTime) {
+        const hashedPassword = await bcrypt.hash(password, 15);
+        user.set({
+          password: hashedPassword
+        });
+        await user.save();
+        console.log('Password is reset.');
+        // re-generate the token after password reset so the user can be signin status without login again
+        existingToken.set({
+          createdAt: new Date().toISOString()
+        });
+        await existingToken.save();
+        return res.status(200).send({
+          userId: user._id,
+          token: existingToken.token,
+          expiresIn: 60 * 60 // in seconds
+        });
       }
-    );
-    res.status(200).send({
-      userId: user._id,
-      token,
-      expiresIn: 60 * 60 // in seconds
+    }
+    res.status(400).send({
+      message: 'Sorry, the token with the email has expired. Please request another email to reset your password.'
     });
   } catch (err) {
     res.status(500).send({
@@ -195,4 +198,54 @@ exports.getUser = async (req, res) => {
   res.status(200).send({
     currentUser
   });
+}
+
+// used for testing
+exports.getUserToken = async (req, res) => {
+  try {
+    const token = await Token.findOne({
+      userId: req.params.userId
+    });
+    if (token) {
+      return res.status(200).send(token);
+    } else {
+      return res.status(404).send({
+        message: `The token with user id: ${userId} does not exist`
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message
+    })
+  }
+}
+
+async function generateToken(user) {
+  const tokenStr = jwt.sign(
+    {
+      email: user.email,
+      id: user._id
+    },
+    process.env.JWT_KEY,
+    {
+      expiresIn: '1h'
+    }
+  );
+  const currentTime = new Date();
+  const existingToken = await Token.findOne({ userId: user._id });
+  if (existingToken) {
+    existingToken.set({
+      token: tokenStr,
+      createdAt: currentTime.toISOString()
+    });
+    await existingToken.save();
+  } else {
+    const token = await new Token({
+      userId: user._id,
+      token: tokenStr,
+      createdAt: currentTime.toISOString()
+    });
+    await token.save();
+  }
+  return tokenStr;
 }

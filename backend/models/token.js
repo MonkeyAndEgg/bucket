@@ -13,8 +13,7 @@ const tokenSchema = new Schema({
   },
   createdAt: {
     type: String,
-    required: true,
-    expires: 3600
+    required: true
   }
 });
 

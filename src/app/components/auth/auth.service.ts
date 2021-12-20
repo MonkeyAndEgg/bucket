@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
 import { LoadStatus } from "src/app/constants/load-status.constants";
 import { LoginInfo } from "src/app/models/login-info";
-import { loadCurrentUser, setLoadStatus, submitEmailAndPassword} from "src/app/store/auth/auth.actions";
-import { selectIsAuth, selectLoadStatus } from "src/app/store/auth/auth.selector";
+import { User } from "src/app/models/user";
+import { setLoadStatus, submitEmailAndPassword} from "src/app/store/auth/auth.actions";
+import { selectLoadStatus, selectUser } from "src/app/store/auth/auth.selector";
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,8 @@ import { selectIsAuth, selectLoadStatus } from "src/app/store/auth/auth.selector
 export class AuthService {
   constructor(private store: Store) {}
 
-  loadUser(): void {
-    this.store.dispatch(setLoadStatus({ status: LoadStatus.LOADING }));
-    this.store.dispatch(loadCurrentUser());
-  }
-
-  getIsAuth(): Observable<boolean> {
-    return this.store.select(selectIsAuth);
+  getCurrentUser(): Observable<User | undefined> {
+    return this.store.select(selectUser);
   }
 
   getLoadStatus(): Observable<LoadStatus> {

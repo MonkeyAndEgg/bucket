@@ -8,7 +8,6 @@ export const userFeatureKey = 'user';
 export interface AuthState {
   user: User | undefined;
   token: string;
-  isAuth: boolean;
   expiresIn: number;
   loadStatus: LoadStatus;
 }
@@ -16,7 +15,6 @@ export interface AuthState {
 export const initialState: AuthState = {
   user: undefined,
   token: '',
-  isAuth: false,
   expiresIn: 0,
   loadStatus: LoadStatus.NOT_LOADED
 };
@@ -34,12 +32,6 @@ export const authReducer = createReducer(
       ...state,
       token: data.token,
       expiresIn: data.expiresIn
-    });
-  }),
-  on(AuthActions.updateAuthStatus, (state, data) => {
-    return ({
-      ...state,
-      isAuth: data.isAuth
     });
   }),
   on(AuthActions.setLoadStatus, (state, data) => {
