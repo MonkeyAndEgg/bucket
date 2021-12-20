@@ -121,7 +121,17 @@ exports.resetPasswords = async (req, res) => {
     from: process.env.USER,
     to: email,
     subject: 'Password Reset',
-    text: `Please reset your password with this link: ${process.env.RESET_BASE_URL}/reset-password/${user._id}`,
+    html: `
+      <div style="width:100%;height: 56px;background-color: #ffc107;color: #ffffff;margin-bottom: 30px;">
+        <label style="font-size: 40px;font-family: cursive;margin-left: 16px;">Bucket</label>
+      </div>
+      <div style="display: flex;flex-direction: column;">
+        Please reset your password with this link:<br>
+        <a style="font-family: cursive;align-self: center;margin-top: 10px;background: #2196f3;border-radius: 3px;height: 23px;width: 140px;text-align: center;color: #ffffff;" href="${process.env.RESET_BASE_URL}/reset-password/${user._id}">
+          Reset Password
+        </a>
+      </div>
+    `
   });
 
   console.log("Reset email sent sucessfully!");
