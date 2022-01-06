@@ -63,7 +63,7 @@ export class ProductListService {
     this.store.dispatch(addToCart({ cart: cartPayload, cartId }));
   }
 
-  deleteProduct(id: string) {
+  deleteProduct(id: string): void {
     this.store.dispatch(deleteProduct({ id }));
   }
 }

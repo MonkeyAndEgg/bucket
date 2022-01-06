@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { of } from 'rxjs';
+import { ViewProductService } from './view-product.service';
 import { ViewProductsComponent } from './view-products.component';
 
 describe('ViewProductsComponent', () => {
@@ -7,8 +9,17 @@ describe('ViewProductsComponent', () => {
   let fixture: ComponentFixture<ViewProductsComponent>;
 
   beforeEach(async () => {
+    const serviceSpy = jasmine.createSpyObj('ViewProductService', {
+      'loadProducts': null,
+      'getProducts': of([]),
+      'getCurrentUser': of(undefined)
+    });
     await TestBed.configureTestingModule({
-      declarations: [ ViewProductsComponent ]
+      imports: [ MatMenuModule ],
+      declarations: [ ViewProductsComponent ],
+      providers: [
+        { provide: ViewProductService, useValue: serviceSpy }
+      ]
     })
     .compileComponents();
   });

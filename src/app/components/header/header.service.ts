@@ -40,12 +40,8 @@ export class HeaderService {
     return this.store.select(selectExpiration);
   }
 
-  updateToken(token: string, expiresIn: number): void {
-    this.store.dispatch(updateToken({ token, expiresIn }));
-  }
-
   signOut(): void {
-    this.store.dispatch(updateToken({ token: '', expiresIn: 0 }));
+    this.updateToken('', 0);
     this.store.dispatch(setCurrentUser({ user: undefined }));
     clearStorageData();
     this.router.navigate(['/']);
@@ -63,7 +59,7 @@ export class HeaderService {
     };
   }
 
-  initAuthTimer(expiresInSeconds: number) {
+  initAuthTimer(expiresInSeconds: number): void {
     console.log('The token expires in:', expiresInSeconds + ' seconds');
     const timer = setTimeout(() => {
       this.updateToken('', 0);
@@ -73,7 +69,7 @@ export class HeaderService {
     }, expiresInSeconds * 1000);
   }
 
-  verifyUserAuth() {
+  verifyUserAuth(): void {
     const currentTime = new Date();
     const tokenData = this.getStorageTokenData();
     if (tokenData) {
@@ -84,5 +80,9 @@ export class HeaderService {
         console.log('Your token is expired.');
       }
     }
+  }
+
+  private updateToken(token: string, expiresIn: number): void {
+    this.store.dispatch(updateToken({ token, expiresIn }));
   }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './components/auth/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', loadChildren: () => import('./components/landing/landing.module').then(m => m.LandingModule)},
   { path: 'cart', loadChildren: () => import('./components/cart/cart.module').then(m => m.CartModule), canActivate: [AuthGuard] },
   { path: 'checkout', loadChildren: () => import('./components/checkout/checkout.module').then(m => m.CheckoutModule) },

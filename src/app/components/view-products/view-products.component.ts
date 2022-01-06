@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ProductTypeEnum } from 'src/app/constants/product-type-enum.constants';
@@ -7,7 +7,6 @@ import { QueryParam } from 'src/app/constants/query-param.constants';
 import { FilterOption } from 'src/app/models/filter-option';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
-import { NewProductDialogComponent } from '../new-product-dialog/new-product-dialog.component';
 import { ViewProductService } from './view-product.service';
 
 @Component({
@@ -48,7 +47,7 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
   allChecked = true;
   user: User | undefined;
 
-  constructor(public dialog: MatDialog, private service: ViewProductService) { }
+  constructor(private service: ViewProductService) { }
 
   ngOnInit(): void {
     this.service.loadProducts();
@@ -94,7 +93,7 @@ export class ViewProductsComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.height = '700px';
     dialogConfig.minWidth = '700px';
-    this.dialog.open(NewProductDialogComponent, dialogConfig);
+    this.service.openDialog(dialogConfig);
   }
 
   onSort(sort: string): void {
