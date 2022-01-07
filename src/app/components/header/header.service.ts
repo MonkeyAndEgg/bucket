@@ -62,10 +62,8 @@ export class HeaderService {
   initAuthTimer(expiresInSeconds: number): void {
     console.log('The token expires in:', expiresInSeconds + ' seconds');
     const timer = setTimeout(() => {
-      this.updateToken('', 0);
-      this.router.navigate(['/']);
+      this.signOut();
       clearTimeout(timer);
-      clearStorageData();
     }, expiresInSeconds * 1000);
   }
 
