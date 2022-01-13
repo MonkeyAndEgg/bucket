@@ -30,7 +30,7 @@ describe('AfterPaymentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should display with image and back home button', () => {
+  it('should display with image and back home button', () => {
     const img = el.queryAll(By.css('img'));
     expect(img.length).toBe(1);
     const messages = el.queryAll(By.css('span'));
