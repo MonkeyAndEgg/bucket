@@ -1,6 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { HeaderComponent } from './header.component';
@@ -27,7 +33,13 @@ describe('HeaderComponent', () => {
     });
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        CommonModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        NoopAnimationsModule,
+        MatBadgeModule,
+        ReactiveFormsModule
       ],
       declarations: [ HeaderComponent ],
       providers: [
