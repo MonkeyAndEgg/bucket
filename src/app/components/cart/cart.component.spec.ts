@@ -1,6 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { CartComponent } from './cart.component';
 import { CartService } from './cart.service';
@@ -56,6 +60,12 @@ describe('CartComponent', () => {
       'getCompletedPayment': of({})
     });
     TestBed.configureTestingModule({
+      imports: [
+        CommonModule,
+        MatButtonModule,
+        RouterTestingModule,
+        NoopAnimationsModule
+      ],
       declarations: [ CartComponent ],
       providers: [
         { provide: CartService, useValue: serviceSpy }
