@@ -67,7 +67,7 @@ describe('CheckoutComponent', () => {
     expect(matLabels[3].nativeElement.textContent).toEqual('Postal Code');
   });
 
-  it('should still display shipping address page by default', () => {
+  it('should still display shipping address page when try to go next page with empty inputs', () => {
     const headers = el.queryAll(By.css('mat-step-header'));
     expect(headers.length).toEqual(3);
     headers[1].triggerEventHandler('click', { button: 0 });
@@ -77,7 +77,7 @@ describe('CheckoutComponent', () => {
     expect(labels[0].nativeElement.textContent).toEqual('Shipping Address');
   });
 
-  it('should display billing address page by default', () => {
+  it('should display billing address page when go to next page with valid inputs', () => {
     component.shippingForm.controls.address.setValue('Test Address');
     component.shippingForm.controls.city.setValue('Melbourne');
     component.shippingForm.controls.state.setValue('VIC');
@@ -92,7 +92,7 @@ describe('CheckoutComponent', () => {
     expect(labels[0].nativeElement.textContent).toEqual('Billing Address');
   });
 
-  it('should display Review&Confirm page by default', () => {
+  it('should display Review&Confirm page when go to next page with valid inputs', () => {
     component.shippingForm.controls.address.setValue('Test Address');
     component.shippingForm.controls.city.setValue('Melbourne');
     component.shippingForm.controls.state.setValue('VIC');

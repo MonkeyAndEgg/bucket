@@ -76,7 +76,7 @@ describe('ProductListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should display the input products as the list', () => {
+  it('should display the input products as the list', () => {
     spyOn(component, 'onAddToCart');
     component.products = products;
     fixture.detectChanges();
