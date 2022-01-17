@@ -20,6 +20,7 @@ describe('ShowCaseComponent', () => {
     .compileComponents().then(() => {
       fixture = TestBed.createComponent(ShowCaseComponent);
       component = fixture.componentInstance;
+      component.imageOptions = [];
       fixture.detectChanges();
     });
   }));
