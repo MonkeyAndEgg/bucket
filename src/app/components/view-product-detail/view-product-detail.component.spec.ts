@@ -17,7 +17,7 @@ describe('ViewProductDetailComponent', () => {
     name: "guinea pig",
     price: 29.3,
     description: "Guinea Pigs are considered to be an ideal first pet! They are adorable and loving animals that are easy to maintain and handle. There are a number of treats and toys available to use when bonding with your guinea pig. Guinea pigs are very affectionate and will snuggle up to their pet parents. They are one of the few small animals that may enjoy interacting with you as much as you do with them!",
-    imageUrl: "http://localhost:3000/images/1637910031081.png",
+    imageUrl: "",
     numOfStocks: 99,
     type: "pets",
     createdAt: "2021-11-26T07:00:31.143Z",

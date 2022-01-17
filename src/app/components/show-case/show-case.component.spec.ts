@@ -20,12 +20,12 @@ describe('ShowCaseComponent', () => {
     .compileComponents().then(() => {
       fixture = TestBed.createComponent(ShowCaseComponent);
       component = fixture.componentInstance;
-      component.imageOptions = [];
-      fixture.detectChanges();
     });
   }));
 
   it('should create', () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });
