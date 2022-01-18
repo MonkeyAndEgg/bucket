@@ -1,6 +1,13 @@
 # Bucket
 A simple online shopping website. This is a MEAN application, which is built by using mongodb, express, angular and node.
 
+![screenshot_1](https://user-images.githubusercontent.com/19787326/149854832-088b7c32-a232-4c67-b04f-fdc986819120.PNG)
+
+![screenshot_2](https://user-images.githubusercontent.com/19787326/149854855-d3dbc1ba-0970-4bfe-aea9-3edaa3162eae.PNG)
+
+![screenshot_3](https://user-images.githubusercontent.com/19787326/149854873-8a4649fa-7cd7-411b-ae53-fc7dc0059181.PNG)
+
+
 ## Getting Started
 ### For frondend
 - Install dependencies first
