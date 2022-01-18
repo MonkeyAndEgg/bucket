@@ -29,6 +29,7 @@ RESET_BASE_URL=http://localhost:4200 // this will be the base url when the user 
 ```bash
 npm start
 ```
+- Create a normal account through UI or DB and then transfer it to admin account. For now, the user are not able to create admin account on UI, the only way to create that account is to go to your mongodb and set the `isAdmin` field of the normal account from false (by default) to true. Only admin account is able to add/remove products
 
 ## Testing
 You can run some provided unit tests by following command:
