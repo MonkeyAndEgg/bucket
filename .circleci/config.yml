@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install cli
+          command: npm i angular-cli@11.1.0 -g
+      - run:
           name: NPM Install
           command: npm install
 
