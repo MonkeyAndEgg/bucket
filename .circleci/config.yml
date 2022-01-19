@@ -1,0 +1,18 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: circleci/node:16.13.1
+    steps:
+      - checkout
+      - run:
+          name: Install cli
+          command: npm i angular-cli@11 -g
+          command: npm i angular-cli
+      - run:
+          name: NPM Install
+          command: npm install
+workflows:
+  bucket-ci-workflow:
+    jobs:
+      - test
