@@ -7,14 +7,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install cli
-          command: sudo npm i angular-cli -g
-      - run:
           name: NPM Install
           command: npm install
-      - run:
-          name: NPM Test
-          command: npm run test
 
 workflows:
   bucket-ci-workflow:
