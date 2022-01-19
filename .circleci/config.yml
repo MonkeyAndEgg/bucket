@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install cli
-          command: sudo npm install angular-cli@latest -g
+          command: sudo npm i -g @angular-cli
       - run:
           name: NPM Install
           command: npm install
