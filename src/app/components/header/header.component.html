@@ -1,0 +1,60 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="title" [routerLink]="'/'">Bucket</span>
+    <span class="spacer"></span>
+    <form *ngIf="displaySearchBar" [formGroup]="searchForm" class="search-form" (ngSubmit)="onSearch()">
+      <input type="text" placeholder="Enter product name" formControlName="search" (blur)="onSearchBlur()">
+    </form>
+    <div class="options">
+      <span
+        class="material-icons"
+        (click)="onToggleSearch()"
+        matTooltip="Search your product"
+        [matTooltipPosition]="matTooltipPosition">
+        search
+      </span>
+      <span
+        *ngIf="isAuth && isAdmin"
+        class="material-icons"
+        [routerLink]="'/view-admin'"
+        [matTooltip]="USER_OPTIONS.ADMIN"
+        [matTooltipPosition]="matTooltipPosition">
+        admin_panel_settings
+      </span>
+      <span
+        *ngIf="isAuth"
+        [matBadge]="cartProductNumber"
+        matBadgeColor="warn"
+        class="material-icons"
+        [routerLink]="'/cart'"
+        [matTooltip]="USER_OPTIONS.CART"
+        [matTooltipPosition]="matTooltipPosition">
+        shopping_cart
+      </span>
+      <span
+        *ngIf="isAuth"
+        class="material-icons"
+        (click)="onSignOut()"
+        [matTooltip]="USER_OPTIONS.SIGN_OUT"
+        [matTooltipPosition]="matTooltipPosition">
+        logout
+      </span>
+      <span
+        *ngIf="!isAuth"
+        class="material-icons"
+        [routerLink]="'/signup'"
+        [matTooltip]="USER_OPTIONS.SIGN_UP"
+        [matTooltipPosition]="matTooltipPosition">
+        person_add
+      </span>
+      <span
+        *ngIf="!isAuth"
+        class="material-icons"
+        [routerLink]="'/signin'"
+        [matTooltip]="USER_OPTIONS.SIGN_IN"
+        [matTooltipPosition]="matTooltipPosition">
+        login
+      </span>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

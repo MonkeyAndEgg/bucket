@@ -1,0 +1,31 @@
+<mat-grid-list class="product-list" [cols]="cols" [gutterSize]="gutterSize" rowHeight="300px">
+  <mat-grid-tile *ngFor="let product of products">
+    <mat-card>
+      <div class="product">
+        <img mat-card-image [src]="product.imageUrl" [routerLink]="['/view-detail', product._id]" alt="product photo">
+        <mat-card-content>
+          <label class="title">
+            {{ product.name }}
+          </label>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <div class="content-footer">
+            <label>${{ product.price }}</label>
+            <div class="actions">
+              <span class="material-icons">
+                favorite
+              </span>
+              <span class="material-icons" (click)="onAddToCart(product._id)">
+                shopping_cart
+              </span>
+              <span *ngIf="user?.isAdmin" class="material-icons" (click)="onDelete(product._id)">
+                delete
+              </span>
+            </div>
+          </div>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

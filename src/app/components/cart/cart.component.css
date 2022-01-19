@@ -1,0 +1,73 @@
+.container,
+.info-field,
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  margin-top: 10px;
+}
+
+.info {
+  height: 200px;
+  border: 1px solid #808080;
+  margin-bottom: 15px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-field:nth-last-child(2) {
+  flex-grow: 1;
+}
+
+.checkout {
+  width: 30%;
+}
+
+.orders {
+  width: 65%;
+}
+
+.orders img {
+  width: 70px;
+  height: 70px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+button {
+  width: 220px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000000;
+}
+
+.order-item .item-field {
+  flex: 1;
+}
+
+.item-field {
+  display: flex;
+}
+
+.item-field label {
+  align-self: center;
+  padding: 5px;
+}
+
+.material-icons {
+  cursor: pointer;
+  color: rgba(255,193,7, 0.6);
+}
+
+.material-icons:hover {
+  color: rgba(255,193,7, 1);
+}

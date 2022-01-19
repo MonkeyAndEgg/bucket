@@ -1,0 +1,119 @@
+<!-- by using linear we disable the navigation header clikcing -->
+<mat-horizontal-stepper linear>
+  <mat-step [stepControl]="shippingForm">
+    <div class="content">
+      <form class="shipping" [formGroup]="shippingForm">
+        <ng-template matStepLabel>Shipping</ng-template>
+        <div class="input-fields">
+          <div class="title">
+            <label>Shipping Address</label>
+          </div>
+          <div class="input-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address" placeholder="Stree Info">
+            </mat-form-field>
+          </div>
+          <div class="input-row">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city" placeholder="Ex. San Francisco">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>State</mat-label>
+              <input matInput formControlName="state" placeholder="Ex. California">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Postal Code</mat-label>
+              <input matInput formControlName="postCode" value="">
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <div class="action-btns">
+        <button mat-button color="accent" matStepperNext [disabled]="!shippingForm.valid">Next</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="billingForm">
+    <div class="content">
+      <mat-checkbox [(ngModel)]="sameAddress" (click)="onClickUsingSameAddress()">
+        <label>Use this address as my billing address</label>
+      </mat-checkbox>
+      <form class="billing" [formGroup]="billingForm">
+        <ng-template matStepLabel>Billing</ng-template>
+        <div class="input-fields">
+          <div class="title">
+            <label>Billing Address</label>
+          </div>
+          <div class="input-row">
+            <mat-form-field appearance="fill">
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address" placeholder="Stree Info">
+            </mat-form-field>
+          </div>
+          <div class="input-row">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city" placeholder="Ex. San Francisco">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>State</mat-label>
+              <input matInput formControlName="state" placeholder="Ex. California">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Postal Code</mat-label>
+              <input matInput formControlName="postCode"  value="">
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <div class="action-btns">
+        <button mat-button color="warn" matStepperPrevious>Back</button>
+        <button mat-button color="accent" matStepperNext [disabled]="!billingForm.valid">Next</button>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <div class="content">
+      <div class="info">
+        <span class="material-icons">
+          info
+        </span>
+        <span>Please confirm your information and then process payment</span>
+      </div>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <label>Shipping Address:</label>
+          <span>{{ shippingForm.controls.address.value }}</span>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <label>City</label>
+          <span>{{ shippingForm.controls.city.value }}</span>
+          <label>State</label>
+          <span>{{ shippingForm.controls.state.value }}</span>
+          <label>Post Code</label>
+          <span>{{ shippingForm.controls.postCode.value }}</span>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <label>Billing Address:</label>
+          <span>{{ billingForm.controls.address.value }}</span>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+          <label>City</label>
+          <span>{{ billingForm.controls.city.value }}</span>
+          <label>State</label>
+          <span>{{ billingForm.controls.state.value }}</span>
+          <label>Post Code</label>
+          <span>{{ billingForm.controls.postCode.value }}</span>
+        </mat-list-item>
+      </mat-list>
+      <ng-template matStepLabel>Review & Confirm</ng-template>
+
+      <div class="action-btns">
+        <button mat-button color="warn" matStepperPrevious>Back</button>
+        <button mat-raised-button color="accent" (click)="onClickCheckout()">Checkout</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

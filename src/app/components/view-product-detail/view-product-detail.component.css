@@ -1,0 +1,72 @@
+.not-found img {
+  width: 100%;
+}
+
+.container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-left {
+  width: 45%;
+}
+
+.content-left img {
+  width: 100%;
+}
+
+.content-right {
+  width: 50%;
+  position: relative;
+}
+
+label {
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+.field-value {
+  margin-bottom: 20px;
+}
+
+.checkout {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.checkout label,
+.checkout span {
+  font-size: 30px;
+}
+
+.number-input {
+  display: flex;
+  margin: 20px 0px;
+}
+
+.number-input span {
+  align-self: center;
+}
+
+.number-input span:nth-child(2) {
+  font-size: 30px;
+  width: 90px;
+  text-align: center;
+}
+
+.material-icons {
+  font-size: 40px;
+  cursor: pointer;
+  color: rgba(255,193,7, 0.6);
+}
+
+.material-icons:hover {
+  color: rgba(255,193,7, 1);
+}
+
+button:hover {
+  box-shadow: 2px 2px 2px 2px #ccc8c8;
+}

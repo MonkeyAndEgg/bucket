@@ -1,27 +1,50 @@
 # Bucket
+A simple online shopping website. This is a MEAN application, which is built by using mongodb, express, angular and node.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
+![screenshot_1](https://user-images.githubusercontent.com/19787326/149854832-088b7c32-a232-4c67-b04f-fdc986819120.PNG)
 
-## Development server
+![screenshot_2](https://user-images.githubusercontent.com/19787326/149854855-d3dbc1ba-0970-4bfe-aea9-3edaa3162eae.PNG)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![screenshot_3](https://user-images.githubusercontent.com/19787326/149854873-8a4649fa-7cd7-411b-ae53-fc7dc0059181.PNG)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting Started
+### For frondend
+- Install dependencies first
+```bash
+npm install
+```
+- Start the application
+```bash
+npm start
+```
 
-## Build
+### For backend
+- Install dependencies first
+- Need to create a file '.env' which includes following configuration:
+```bash
+JWT_KEY={{ your json web token key here }} // used for authentication
+PORT=3000   // my BE port is 3000 but you can choose any other port number you want
+MONGO_URL= {{ the url to your mongodb }}
+STRIPE_KEY= {{ your secret key from your stripe account }}
+USER= {{ your contact email address }} // will be used when sending the reset password mail to users
+PASS= {{ your contact email password }}
+HOST=smtp.gmail.com // i used gmail account so this is smpt for gmail, and this is used for sending reset password email too
+RESET_BASE_URL=http://localhost:4200 // this will be the base url when the user gets the reset password link 
+```
+- Start the server
+```bash
+npm start
+```
+- Create a normal account through UI or DB and then transfer it to admin account. For now, the user are not able to create admin account on UI, the only way to create that account is to go to your mongodb and set the `isAdmin` field of the normal account from false (by default) to true. Only admin account is able to add/remove products
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Testing
+You can run some provided unit tests by following command:
+```bash
+npm run test
+```
 
-## Running unit tests
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Please make sure to update tests as appropriate.

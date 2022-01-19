@@ -1,0 +1,43 @@
+<div class="container" *ngIf="product">
+  <div class="content-left">
+    <img [src]="product.imageUrl">
+  </div>
+  <div class="content-right">
+    <h1>Product Details</h1>
+    <div class="field-value">
+      <label>Product Name</label>
+      <span>{{ product.name }}</span>
+    </div>
+    <div class="field-value">
+      <label>Description</label>
+      <span>{{ product.description }}</span>
+    </div>
+    <div class="field-value">
+      <label>Number of stocks</label>
+      <span>{{ product.numOfStocks }}</span>
+    </div>
+    <div class="field-value">
+      <div class="number-input">
+        <span class="material-icons" (click)="decrementProducts()">
+          remove_circle_outline
+        </span>
+        <span>{{ numOfProductsToAdd }}</span>
+        <span class="material-icons" (click)="incrementProducts()">
+          add_circle_outline
+        </span>
+      </div>
+      <button mat-raised-button color="primary" (click)="onAddToCart()">Add to Cart</button>
+    </div>
+    <div class="checkout">
+      <div class="field-value">
+        <label>Price</label>
+        <span>${{ product.price }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!product">
+  <img src="./assets/images/product_404.png">
+</div>
+

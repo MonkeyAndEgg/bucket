@@ -1,0 +1,50 @@
+.product {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  padding: 10px;
+}
+
+mat-grid-tile {
+  min-width: 240px;
+  transition: box-shadow .3s;
+}
+
+mat-grid-tile:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+mat-card {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+
+.product img {
+  height: 150px;
+  object-fit: contain;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.content-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.content-footer label {
+  font-size: 22px;
+}
+
+.actions span {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.actions span:hover {
+  color: #f8b414;
+}
+

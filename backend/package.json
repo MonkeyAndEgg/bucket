@@ -1,0 +1,38 @@
+{
+  "name": "bucket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "jest --watchAll -no-cache"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./test/setup.js"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/mongoose": "^5.11.97",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.9",
+    "multer": "^1.4.3",
+    "nodemailer": "^6.7.2",
+    "stripe": "^8.186.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/supertest": "^2.0.11",
+    "jest": "^27.3.1",
+    "mongodb-memory-server": "^7.6.0",
+    "nodemon": "^2.0.13",
+    "supertest": "^6.1.6"
+  }
+}

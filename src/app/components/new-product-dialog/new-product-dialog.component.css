@@ -1,0 +1,37 @@
+mat-form-field {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-upload {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.image-upload .action {
+  width: 150px;
+}
+
+.image-preview {
+  display: flex;
+  justify-content: center;
+  width: 380px;
+  height: 300px;
+  border: 1px solid #808080;
+  padding: 5px;
+}
+
+.image-preview > img {
+  max-width: 380px;
+  max-height: 300px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
