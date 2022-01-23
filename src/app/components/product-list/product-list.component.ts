@@ -59,4 +59,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.service.deleteProduct(id);
     }
   }
+
+  prepareAlterImage(event: any): void {
+    event.target.src = './assets/images/product_404.png';
+  }
 }

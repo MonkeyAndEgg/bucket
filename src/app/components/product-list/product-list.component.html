@@ -2,7 +2,10 @@
   <mat-grid-tile *ngFor="let product of products">
     <mat-card>
       <div class="product">
-        <img mat-card-image [src]="product.imageUrl" [routerLink]="['/view-detail', product._id]" alt="product photo">
+        <img mat-card-image
+          [src]="product.imageUrl"
+          (error)="prepareAlterImage($event)"
+          [routerLink]="['/view-detail', product._id]">
         <mat-card-content>
           <label class="title">
             {{ product.name }}
