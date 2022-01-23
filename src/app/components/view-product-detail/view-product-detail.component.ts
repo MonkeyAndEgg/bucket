@@ -69,4 +69,8 @@ export class ViewProductDetailComponent implements OnInit, OnDestroy {
       this.numOfProductsToAdd += 1;
     }
   }
+
+  prepareAlterImage(event: any): void {
+    event.target.src = './assets/images/product_404.png';
+  }
 }

@@ -1,6 +1,6 @@
 <div class="container" *ngIf="product">
   <div class="content-left">
-    <img [src]="product.imageUrl">
+    <img [src]="product.imageUrl" (error)="prepareAlterImage($event)">
   </div>
   <div class="content-right">
     <h1>Product Details</h1>
