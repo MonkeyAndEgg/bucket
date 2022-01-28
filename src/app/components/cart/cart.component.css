@@ -71,3 +71,12 @@ button {
 .material-icons:hover {
   color: rgba(255,193,7, 1);
 }
+
+h1 {
+  font-family: cursive;
+}
+
+.order-list {
+  margin-bottom: 20px;
+  min-height: 100%;
+}

@@ -1,26 +1,38 @@
 <div class="container">
   <div class="orders">
-    <div class="order-item" *ngFor="let productObj of cart?.products">
-      <img [src]='productObj?.product?.imageUrl' [routerLink]="['/view-detail', productObj?.product?._id]">
-      <div class="item-field">
-        <label>{{ productObj?.product?.name }}</label>
+    <h1>Shopping Cart</h1>
+    <div class="order-list">
+      <ng-container *ngIf='cart?.products?.length === 0'>
+        Your cart is currently empty.
+      </ng-container>
+      <div class="order-item" *ngFor="let productObj of cart?.products">
+        <img [src]='productObj?.product?.imageUrl' [routerLink]="['/view-detail', productObj?.product?._id]">
+        <div class="item-field">
+          <label>{{ productObj?.product?.name }}</label>
+        </div>
+        <div class="item-field">
+          <span class="material-icons" (click)="decrementQuantity(productObj)">
+            remove_circle_outline
+          </span>
+          <label>{{ productObj?.quantity }}</label>
+          <span class="material-icons" (click)="incrementQuantity(productObj)">
+            add_circle_outline
+          </span>
+        </div>
+        <div class="item-field">
+          <label *ngIf="productObj?.quantity && productObj?.product?.price">$ {{ productObj!.quantity * productObj!.product!.price }}</label>
+          <label *ngIf="!productObj?.quantity || !productObj?.product?.price">N/A</label>
+        </div>
+        <div class="item-field">
+          <button mat-button color="warn" (click)="onClickRemove(productObj)">Remove</button>
+        </div>
       </div>
-      <div class="item-field">
-        <span class="material-icons" (click)="decrementQuantity(productObj)">
-          remove_circle_outline
-        </span>
-        <label>{{ productObj?.quantity }}</label>
-        <span class="material-icons" (click)="incrementQuantity(productObj)">
-          add_circle_outline
-        </span>
-      </div>
-      <div class="item-field">
-        <label *ngIf="productObj?.quantity && productObj?.product?.price">$ {{ productObj!.quantity * productObj!.product!.price }}</label>
-        <label *ngIf="!productObj?.quantity || !productObj?.product?.price">N/A</label>
-      </div>
-      <div class="item-field">
-        <button mat-button color="warn" (click)="onClickRemove(productObj)">Remove</button>
-      </div>
+    </div>
+    <h1>Your items</h1>
+    <div class="order-list">
+      <ng-container>
+        You have not purchased any item yet.
+      </ng-container>
     </div>
   </div>
 
