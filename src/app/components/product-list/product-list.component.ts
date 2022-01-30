@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Cart } from 'src/app/models/cart';
+import { Cart } from 'src/app/models/cart/cart';
 import { Product } from 'src/app/models/product';
 import { User } from '../../models/user';
 import { ProductListService } from './product-list.service';

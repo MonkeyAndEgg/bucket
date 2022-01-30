@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Cart } from 'src/app/models/cart';
+import { Cart } from 'src/app/models/cart/cart';
 import { Payment } from 'src/app/models/payment';
 import { Product } from 'src/app/models/product';
 import { calculateProductTotal } from '../common/calculate-product-total';

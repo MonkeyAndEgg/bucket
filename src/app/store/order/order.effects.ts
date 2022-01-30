@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
 import { errorHandler } from "src/app/components/common/error-handler";
-import { Cart, CartRequest } from "src/app/models/cart";
+import { Cart, CartRequest } from "src/app/models/cart/cart";
 import { addToCart, loadCartById, updateCart } from "./order.actions";
 import { OrderDataService } from "./order.data.service";
 

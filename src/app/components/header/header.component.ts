@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { USER_OPTIONS } from 'src/app/constants/header.constants';
-import { Cart } from 'src/app/models/cart';
+import { Cart } from 'src/app/models/cart/cart';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { saveStorageData } from '../common/process-storage-data';

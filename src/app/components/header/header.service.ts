@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { Cart } from "src/app/models/cart";
+import { Cart } from "src/app/models/cart/cart";
 import { User } from "src/app/models/user";
 import { loadCurrentUser, setCurrentUser, updateToken } from "src/app/store/auth/auth.actions";
 import { selectExpiration, selectToken, selectUser } from "src/app/store/auth/auth.selector";

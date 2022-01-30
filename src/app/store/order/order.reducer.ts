@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { Cart } from "src/app/models/cart";
+import { Cart } from "src/app/models/cart/cart";
 import * as OrderActions from './order.actions';
 
 export const orderFeatureKey = 'order';
