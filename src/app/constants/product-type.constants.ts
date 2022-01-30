@@ -1,4 +1,4 @@
-export enum ProductTypeEnum {
+export enum ProductType {
   BAGS_LABEL = 'Bags',
   BAGS_VALUE = 'bags',
   ELECTRONIC_DEVICES_LABEL = 'Electronic Devices',

@@ -17,7 +17,7 @@
         *ngIf="isAuth && isAdmin"
         class="material-icons"
         [routerLink]="'/view-admin'"
-        [matTooltip]="USER_OPTIONS.ADMIN"
+        [matTooltip]="UserOptions.ADMIN"
         [matTooltipPosition]="matTooltipPosition">
         admin_panel_settings
       </span>
@@ -27,7 +27,7 @@
         matBadgeColor="warn"
         class="material-icons"
         [routerLink]="'/cart'"
-        [matTooltip]="USER_OPTIONS.CART"
+        [matTooltip]="UserOptions.CART"
         [matTooltipPosition]="matTooltipPosition">
         shopping_cart
       </span>
@@ -35,7 +35,7 @@
         *ngIf="isAuth"
         class="material-icons"
         (click)="onSignOut()"
-        [matTooltip]="USER_OPTIONS.SIGN_OUT"
+        [matTooltip]="UserOptions.SIGN_OUT"
         [matTooltipPosition]="matTooltipPosition">
         logout
       </span>
@@ -43,7 +43,7 @@
         *ngIf="!isAuth"
         class="material-icons"
         [routerLink]="'/signup'"
-        [matTooltip]="USER_OPTIONS.SIGN_UP"
+        [matTooltip]="UserOptions.SIGN_UP"
         [matTooltipPosition]="matTooltipPosition">
         person_add
       </span>
@@ -51,7 +51,7 @@
         *ngIf="!isAuth"
         class="material-icons"
         [routerLink]="'/signin'"
-        [matTooltip]="USER_OPTIONS.SIGN_IN"
+        [matTooltip]="UserOptions.SIGN_IN"
         [matTooltipPosition]="matTooltipPosition">
         login
       </span>

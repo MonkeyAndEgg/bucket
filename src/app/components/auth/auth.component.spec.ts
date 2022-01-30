@@ -12,7 +12,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { USER_OPTIONS } from 'src/app/constants/header.constants';
+import { UserOptions } from 'src/app/constants/header.constants';
 import { LoadStatus } from 'src/app/constants/load-status.constants';
 import { AuthComponent } from './auth.component';
 import { AuthService } from './auth.service';
@@ -49,7 +49,7 @@ describe('AuthComponent', () => {
         { provide: AuthService, useValue: serviceSpy },
         {
           provide: ActivatedRoute, useValue: {
-            data: of({page: USER_OPTIONS.SIGN_IN})
+            data: of({page: UserOptions.SIGN_IN})
           }
         }
       ]
@@ -117,7 +117,7 @@ describe('AuthComponent', () => {
   });
 
   it('should display sign up page when isSignin is false', () => {
-    route.data = of({page: USER_OPTIONS.SIGN_UP});
+    route.data = of({page: UserOptions.SIGN_UP});
     fixture.detectChanges();
     const title = el.queryAll(By.css('.title'));
     expect(title.length).toEqual(1);

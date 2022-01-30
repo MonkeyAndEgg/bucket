@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { USER_OPTIONS } from 'src/app/constants/header.constants';
+import { UserOptions } from 'src/app/constants/header.constants';
 import { LoadStatus } from 'src/app/constants/load-status.constants';
 import { LoginInfo } from 'src/app/models/login-info';
 import { CommonErrorStateMatcher } from '../common/common-error-matcher';
@@ -36,8 +36,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.authService.setLoadStatus(LoadStatus.NOT_LOADED);
 
     this.route.data.subscribe(data => {
-      this.isSignin = data.page === USER_OPTIONS.SIGN_IN ? true : false;
-      this.title = this.isSignin ? USER_OPTIONS.SIGN_IN : USER_OPTIONS.SIGN_UP;
+      this.isSignin = data.page === UserOptions.SIGN_IN ? true : false;
+      this.title = this.isSignin ? UserOptions.SIGN_IN : UserOptions.SIGN_UP;
     });
 
     this.authService.getLoadStatus().pipe(

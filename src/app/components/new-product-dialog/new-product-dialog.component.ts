@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProductTypeEnum } from 'src/app/constants/product-type-enum.constants';
+import { ProductType } from 'src/app/constants/product-type.constants';
 import { NewProductDialogService } from './new-product-dialog.service';
 
 @Component({
@@ -34,22 +34,22 @@ export class NewProductDialogComponent implements OnInit {
   imagePreview = '';
   productTypes = [
     {
-      label: ProductTypeEnum.BAGS_LABEL, value: ProductTypeEnum.BAGS_VALUE
+      label: ProductType.BAGS_LABEL, value: ProductType.BAGS_VALUE
     },
     {
-      label: ProductTypeEnum.ELECTRONIC_DEVICES_LABEL, value: ProductTypeEnum.ELECTRONIC_DEVICES_VALUE
+      label: ProductType.ELECTRONIC_DEVICES_LABEL, value: ProductType.ELECTRONIC_DEVICES_VALUE
     },
     {
-      label: ProductTypeEnum.FURNITURE_LABEL, value: ProductTypeEnum.FURNITURE_VALUE
+      label: ProductType.FURNITURE_LABEL, value: ProductType.FURNITURE_VALUE
     },
     {
-      label: ProductTypeEnum.FOOD_AND_BEVERAGE_LABEL, value: ProductTypeEnum.FOOD_AND_BEVERAGE_VALUE
+      label: ProductType.FOOD_AND_BEVERAGE_LABEL, value: ProductType.FOOD_AND_BEVERAGE_VALUE
     },
     {
-      label: ProductTypeEnum.PETS_LABEL, value: ProductTypeEnum.PETS_VALUE
+      label: ProductType.PETS_LABEL, value: ProductType.PETS_VALUE
     },
     {
-      label: ProductTypeEnum.OTHERS_LABEL, value: ProductTypeEnum.OTHERS_VALUE
+      label: ProductType.OTHERS_LABEL, value: ProductType.OTHERS_VALUE
     }
   ];
 

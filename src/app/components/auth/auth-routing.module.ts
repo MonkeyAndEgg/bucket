@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { USER_OPTIONS } from "src/app/constants/header.constants";
+import { UserOptions } from "src/app/constants/header.constants";
 import { AuthComponent } from "./auth.component";
 
 export const routes: Routes = [
-  { path: 'signin', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_IN } },
-  { path: 'signup', component: AuthComponent, data: { page: USER_OPTIONS.SIGN_UP } }
+  { path: 'signin', component: AuthComponent, data: { page: UserOptions.SIGN_IN } },
+  { path: 'signup', component: AuthComponent, data: { page: UserOptions.SIGN_UP } }
 ];
 
 @NgModule({
