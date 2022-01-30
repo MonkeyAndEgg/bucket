@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart/cart';
 import { CartProductData } from 'src/app/models/cart/cart-product-data';
 import { Payment } from 'src/app/models/payment';
+import { RoundToTwoDecimals } from 'src/app/components/common/common-price-utils';
 import { calculateProductTotal } from '../common/calculate-product-total';
 import { CartService } from './cart.service';
 
@@ -16,6 +17,7 @@ export class CartComponent implements OnInit, OnDestroy {
   destroySubscription$ = new Subject();
   cart: Cart | undefined;
   total = 0;
+  products: CartProductData[] = [];
 
   constructor(private service: CartService) { }
 
@@ -25,6 +27,12 @@ export class CartComponent implements OnInit, OnDestroy {
     )).subscribe((cart: Cart | undefined) => {
       this.cart = cart;
       if (this.cart) {
+        this.products = this.cart.products.map(productData => {
+          return {
+            ...productData,
+            totalPrice: RoundToTwoDecimals(productData.product.price * productData.quantity)
+          };
+        });
         this.total = calculateProductTotal(this.cart.products);
       }
     });

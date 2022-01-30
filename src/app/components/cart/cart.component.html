@@ -5,7 +5,7 @@
       <ng-container *ngIf='cart?.products?.length === 0'>
         Your cart is currently empty.
       </ng-container>
-      <div class="order-item" *ngFor="let productObj of cart?.products">
+      <div class="order-item" *ngFor="let productObj of products">
         <img [src]='productObj?.product?.imageUrl' [routerLink]="['/view-detail', productObj?.product?._id]">
         <div class="item-field">
           <label>{{ productObj?.product?.name }}</label>
@@ -20,7 +20,7 @@
           </span>
         </div>
         <div class="item-field">
-          <label *ngIf="productObj?.quantity && productObj?.product?.price">$ {{ productObj!.quantity * productObj!.product!.price }}</label>
+          <label *ngIf="productObj?.quantity && productObj?.product?.price">$ {{ productObj.totalPrice }}</label>
           <label *ngIf="!productObj?.quantity || !productObj?.product?.price">N/A</label>
         </div>
         <div class="item-field">

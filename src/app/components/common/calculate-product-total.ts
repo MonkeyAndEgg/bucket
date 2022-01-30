@@ -1,4 +1,5 @@
 import { CartProductData } from "src/app/models/cart/cart-product-data";
+import { RoundToTwoDecimals } from "src/app/components/common/common-price-utils";
 
 export function calculateProductTotal(products: CartProductData[]): number {
   let total = 0;
@@ -10,5 +11,5 @@ export function calculateProductTotal(products: CartProductData[]): number {
     }
   }
   // round the result to 2 decimal places
-  return Math.round(total * 100) / 100;
+  return RoundToTwoDecimals(total);
 }
