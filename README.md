@@ -48,3 +48,8 @@ npm run test
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+
+## Trouble Shooting
+If you encounter error when sending reset password email, you probably need to turn on some settings for your mailbox. For example, gmail will need to allow less secure apps
+to send emails: https://stackoverflow.com/questions/59188483/error-invalid-login-535-5-7-8-username-and-password-not-accepted
