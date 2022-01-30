@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { Cart, CartRequest } from "src/app/models/cart";
+import { Cart, CartRequest } from "src/app/models/cart/cart";
+import { CartProductData } from "src/app/models/cart/cart-product-data";
+import { CartProductRequestData } from "src/app/models/cart/cart-product-request-data";
 import { Product } from "src/app/models/product";
 import { addToCart } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
@@ -28,20 +30,20 @@ export class ViewProductDetailService {
 
   addToCart(productId: string, quantity: number, cart: Cart): void {
     let cartPayload: CartRequest;
-    let productDataList: { product: string, quantity: number }[];
-    productDataList = cart.products.map((item: { product: Product, quantity: number }) => {
-      return { product: item.product._id ? item.product._id : '', quantity: item!.quantity };
+    let productDataList: CartProductRequestData[];
+    productDataList = cart.products.map((item: CartProductData) => {
+      return { productId: item.product._id ? item.product._id : '', quantity: item!.quantity };
     });
-    const existProduct = productDataList.find(item => item.product === productId);
+    const existProduct = productDataList.find(item => item.productId === productId);
     if (existProduct) {
       productDataList.forEach(item => {
-        if (item.product === productId) {
+        if (item.productId === productId) {
           item.quantity += quantity;
         }
       })
     } else {
       productDataList.push({
-        product: productId,
+        productId,
         quantity: quantity
       });
     }

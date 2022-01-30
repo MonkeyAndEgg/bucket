@@ -1,7 +1,9 @@
+import { CartProductRequestData } from "./cart/cart-product-request-data";
+
 export interface Payment {
   _id: string;
   amount: number;
-  products: { product: string, quantity: number }[];
+  products: CartProductRequestData[];
   stripeId: string;
 }
 

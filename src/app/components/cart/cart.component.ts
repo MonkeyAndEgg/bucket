@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart/cart';
+import { CartProductData } from 'src/app/models/cart/cart-product-data';
 import { Payment } from 'src/app/models/payment';
-import { Product } from 'src/app/models/product';
 import { calculateProductTotal } from '../common/calculate-product-total';
 import { CartService } from './cart.service';
 
@@ -40,13 +40,13 @@ export class CartComponent implements OnInit, OnDestroy {
     this.destroySubscription$.next(true);
   }
 
-  onClickRemove(productData: { product: Product, quantity: number }): void {
+  onClickRemove(productData: CartProductData): void {
     if (this.cart) {
       this.service.updateCart({ product: productData.product, quantity: 0 }, this.cart);
     }
   }
 
-  decrementQuantity(productData: { product: Product, quantity: number }): void {
+  decrementQuantity(productData: CartProductData): void {
     let updatedQuantity = productData.quantity;
     if (this.cart && productData.quantity > 0) {
       updatedQuantity -= 1;
@@ -54,7 +54,7 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  incrementQuantity(productData: { product: Product, quantity: number }): void {
+  incrementQuantity(productData: CartProductData): void {
     let updatedQuantity = productData.quantity;
     if (this.cart && productData.quantity < productData.product.numOfStocks) {
       updatedQuantity += 1;
