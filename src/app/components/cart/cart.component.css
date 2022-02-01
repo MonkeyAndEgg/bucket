@@ -28,6 +28,8 @@
 
 .orders {
   width: 65%;
+  display: flex;
+  flex-direction: column;
 }
 
 .orders img {
@@ -78,5 +80,4 @@ h1 {
 
 .order-list {
   margin-bottom: 20px;
-  min-height: 100%;
 }
