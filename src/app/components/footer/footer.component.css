@@ -6,3 +6,7 @@ span {
 .content {
   margin: auto;
 }
+
+mat-toolbar {
+  position: fixed;
+}
