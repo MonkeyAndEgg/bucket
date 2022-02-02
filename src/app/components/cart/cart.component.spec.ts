@@ -15,7 +15,7 @@ describe('CartComponent', () => {
   let fixture: ComponentFixture<CartComponent>;
   let el: DebugElement;
   let cartService: any;
-  const mockedCartData ={
+  const mockedCartData = {
     _id: "61a3e8a4cd6c289172fa7a48",
     userId:"618b68225620cb081ba2e9a3",
     products:[
@@ -54,6 +54,29 @@ describe('CartComponent', () => {
     ],
     __v:5
   };
+  const mockedPurchasedData = {
+    _id: "61a3e8a4cd6c289172fa7a48",
+    userId:"618b68225620cb081ba2e9a3",
+    products:[
+      {
+        product: {
+          _id:"619c7ee2241323e04605ef9d",
+          name:"Moschino Teddy Bear Bag",
+          price:669.99,
+          description:"Soft fabric handbag in the shape of Moschino Teddy Bear.",
+          imageUrl:"",
+          numOfStocks:99,
+          type:"bags",
+          createdAt:"2021-11-23T05:40:50.301Z",
+          __v:0
+        },
+        quantity:2,
+        status: ProductStatus.WAIT_TO_DELIVER,
+        _id:"61a3efdbcd6c289172fa7a8e"
+      }
+    ],
+    __v:5
+  };
   let totalPrice: number;
   let serviceSpy: any;
   beforeEach(waitForAsync(() => {
@@ -87,11 +110,15 @@ describe('CartComponent', () => {
   });
 
   it('should display 3 info-field labels on the checkout div', () => {
+    fixture.detectChanges();
     const labels = el.queryAll(By.css('.info-field label'));
     expect(labels.length).toEqual(3);
     expect(labels[0].nativeElement.textContent).toEqual('Product Subtotal');
     expect(labels[1].nativeElement.textContent).toEqual('Shipping');
     expect(labels[2].nativeElement.textContent).toEqual('Order Total(USD)');
+    const values = el.queryAll(By.css('.info-field span'));
+    expect(values[0].nativeElement.textContent).toEqual('$0');
+    expect(values[2].nativeElement.textContent).toEqual('$0');
   });
 
   it('should display 2 buttons under actions div', () => {
@@ -127,5 +154,14 @@ describe('CartComponent', () => {
     expect(buttons.length).toEqual(2);
     expect(buttons[0].nativeElement.textContent).toEqual('Remove');
     expect(buttons[1].nativeElement.textContent).toEqual('Remove');
+  });
+
+  xit('should display 0 total when the the cart is empty but have some purchased items', () => {
+    cartService.getUserCart.and.returnValue(of(mockedPurchasedData));
+    fixture.detectChanges();
+
+    const values = el.queryAll(By.css('.info-field span'));
+    expect(values[0].nativeElement.textContent).toEqual('$0');
+    expect(values[2].nativeElement.textContent).toEqual('$0');
   });
 });
