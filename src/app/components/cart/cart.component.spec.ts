@@ -6,6 +6,7 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { ProductStatus } from 'src/app/constants/product-status.constants';
 import { CartComponent } from './cart.component';
 import { CartService } from './cart.service';
 
@@ -31,6 +32,7 @@ describe('CartComponent', () => {
           __v:0
         },
         quantity:2,
+        status: ProductStatus.WAIT_TO_BUY,
         _id:"61a3efdbcd6c289172fa7a8e"
       },
       {
@@ -46,6 +48,7 @@ describe('CartComponent', () => {
           __v:0
         },
         quantity:1,
+        status: ProductStatus.WAIT_TO_BUY,
         _id:"61a3efdbcd6c289172fa7a8f"
       }
     ],

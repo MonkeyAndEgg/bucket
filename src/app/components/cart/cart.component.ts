@@ -7,6 +7,7 @@ import { Payment } from 'src/app/models/payment';
 import { RoundToTwoDecimals } from 'src/app/components/common/common-price-utils';
 import { CartService } from './cart.service';
 import { ProductStatus } from 'src/app/constants/product-status.constants';
+import { calculateProductTotal } from '../common/calculate-product-total';
 
 @Component({
   selector: 'app-cart',
@@ -27,8 +28,11 @@ export class CartComponent implements OnInit, OnDestroy {
       this.destroySubscription$
     )).subscribe((cart: Cart | undefined) => {
       this.cart = cart;
-      this.purchasedProducts = this.generateProductData(true);
-      this.products = this.generateProductData(false);
+      if (this.cart) {
+        this.purchasedProducts = this.generateProductData(true);
+        this.products = this.generateProductData(false);
+        this.total = calculateProductTotal(this.cart.products);
+      }
     });
     this.service.getCompletedPayment().pipe(takeUntil(
       this.destroySubscription$
@@ -64,21 +68,18 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   private generateProductData(purchased: boolean): CartProductData[] {
-    if (this.cart) {
-      let products = this.cart.products;
-      if (purchased) {
-        products = products.filter(productData => productData.status !== ProductStatus.WAIT_TO_BUY);
-      } else {
-        products = products.filter(productData => productData.status === ProductStatus.WAIT_TO_BUY)
-      }
-      products = products.map(productData => {
-        return {
-          ...productData,
-          totalPrice: RoundToTwoDecimals(productData.product.price * productData.quantity)
-        };
-      });
-      return products;
+    let products = this.cart!.products;
+    if (purchased) {
+      products = products.filter(productData => productData.status !== ProductStatus.WAIT_TO_BUY);
+    } else {
+      products = products.filter(productData => productData.status === ProductStatus.WAIT_TO_BUY)
     }
-    return [];
+    products = products.map(productData => {
+      return {
+        ...productData,
+        totalPrice: RoundToTwoDecimals(productData.product.price * productData.quantity)
+      };
+    });
+    return products;
   }
 }
