@@ -25,12 +25,16 @@ it('returns 201 for successfully create an order', async () => {
     }
   }).expect(201);
 
-  await request(app).post('/api/orders').send({
+  const createOrderRes = await request(app).post('/api/orders').send({
     userId: '1234567',
     productDataList: [
-      { product: `${response.body._id}`, quantity: 2 }
+      { productId: `${response.body._id}`, quantity: 2 }
     ]
   }).expect(201);
+
+  createOrderRes.body.products.forEach(product => {
+    expect(product.status).toEqual('Wait To Buy');
+  });
 });
 
 it('returns 400 for creating an order for one or more non-exist product', async () => {
@@ -77,16 +81,20 @@ it('returns 200 for successfully update an order', async () => {
   const orderResponse = await request(app).post('/api/orders').send({
     userId: '1234567',
     productDataList: [
-      { product: `${response.body._id}`, quantity: 2 }
+      { productId: `${response.body._id}`, quantity: 2}
     ]
   }).expect(201);
 
-  await request(app).put(`/api/orders/${orderResponse.body._id}`).send({
+  const updateOrderRes = await request(app).put(`/api/orders/${orderResponse.body._id}`).send({
     userId: '1234567',
     productDataList: [
-      { product: `${response.body._id}`, quantity: 3 }
+      { productId: `${response.body._id}`, quantity: 3, status: 'Wait To Deliver' }
     ]
   }).expect(200);
+
+  updateOrderRes.body.products.forEach(product => {
+    expect(product.status).toEqual('Wait To Deliver');
+  });
 });
 
 
@@ -116,7 +124,7 @@ it('returns 200 for successfully delete an order', async () => {
   const orderResponse = await request(app).post('/api/orders').send({
     userId: '1234567',
     productDataList: [
-      { product: `${response.body._id}`, quantity: 2 }
+      { productId: `${response.body._id}`, quantity: 2 }
     ]
   }).expect(201);
 
@@ -156,7 +164,7 @@ it('returns 200 for successfully get an order', async () => {
   await request(app).post('/api/orders').send({
     userId: '1234567',
     productDataList: [
-      { product: `${response.body._id}`, quantity: 2 }
+      { productId: `${response.body._id}`, quantity: 2 }
     ]
   }).expect(201);
 

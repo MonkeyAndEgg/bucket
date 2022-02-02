@@ -1,6 +1,13 @@
 const Cart = require('../models/cart');
 const Product = require('../models/product');
 
+const PRODUCT_STATUS = {
+  WAIT_TO_BUY: 'Wait To Buy',
+  WAIT_TO_DELIVER: 'Wait To Deliver',
+  IN_PROGRESS: 'In Progress',
+  DELIVERED: 'Delivered'
+};
+
 exports.createOrder = async (req, res) => {
   const { userId, productDataList } = req.body;
   // one user suppose to have only one cart
@@ -12,7 +19,7 @@ exports.createOrder = async (req, res) => {
   } else {
     let products = [];
     for (const productData of productDataList) {
-      const product = await Product.findById(productData.product)
+      const product = await Product.findById(productData.productId);
       if (!product) {
         return res.status(400).send({
           message: 'There is one or more product cannot be found'
@@ -20,7 +27,8 @@ exports.createOrder = async (req, res) => {
       }
       products.push({
         product,
-        quantity: productData.quantity
+        quantity: productData.quantity,
+        status: PRODUCT_STATUS.WAIT_TO_BUY
       });
     }
     cart = new Cart({
@@ -34,17 +42,19 @@ exports.createOrder = async (req, res) => {
 
 exports.updateOrder = async (req, res) => {
   const { userId, productDataList } = req.body;
-  let products = [];
+  const products = [];
   for (const productData of productDataList) {
-    const product = await Product.findById(productData.product)
+    const product = await Product.findById(productData.productId);
     if (!product) {
       return res.status(400).send({
         message: 'There is one or more product cannot be found'
       });
     }
+    const productStatus = productData.status ? productData.status : PRODUCT_STATUS.WAIT_TO_BUY;
     products.push({
       product,
-      quantity: productData.quantity
+      quantity: productData.quantity,
+      status: productStatus
     });
   }
   const cart = await Cart.findById(req.params.id);
