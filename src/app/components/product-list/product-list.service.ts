@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { ProductStatus } from "src/app/constants/product-status.constants";
 import { Cart, CartRequest } from "src/app/models/cart/cart";
 import { CartProductData } from "src/app/models/cart/cart-product-data";
 import { CartProductRequestData } from "src/app/models/cart/cart-product-request-data";
@@ -30,17 +31,17 @@ export class ProductListService {
     let productDataList: CartProductRequestData[];
     if (cart) {
       productDataList = cart.products.map((item: CartProductData) => {
-        // TODO improre this _id condition
-        return { productId: item.product._id ? item.product._id : '', quantity: item!.quantity };
+        return {
+          productId: item.product._id ? item.product._id : '',
+          quantity: item.quantity,
+          status: item.status
+        };
       });
-      // TODO improve logic here
-      const existProduct = productDataList.find(item => item.productId === productId);
-      if (existProduct) {
-        productDataList.forEach(item => {
-          if (item.productId === productId) {
-            item.quantity += 1;
-          }
-        })
+      const existProductIndex = productDataList.findIndex(item =>
+        item.productId === productId && item.status === ProductStatus.WAIT_TO_BUY
+      );
+      if (existProductIndex > -1) {
+        productDataList[existProductIndex].quantity += 1;
       } else {
         productDataList.push({
           productId,

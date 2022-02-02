@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { ProductStatus } from "src/app/constants/product-status.constants";
 import { Cart, CartRequest } from "src/app/models/cart/cart";
 import { CartProductData } from "src/app/models/cart/cart-product-data";
 import { CartProductRequestData } from "src/app/models/cart/cart-product-request-data";
@@ -20,15 +21,20 @@ export class CartService {
     let productDataList: CartProductRequestData[];
     if (productData.quantity === 0) {
       updatedProducts = cart.products.filter(
-        (productObj: CartProductData) => productObj.product._id !== productData.product._id
+        (productObj: CartProductData) => productObj.product._id !== productData.product._id || productObj.status === ProductStatus.WAIT_TO_DELIVER
       );
     } else {
       updatedProducts = cart.products;
     }
     productDataList = updatedProducts.map((productObj: CartProductData) => {
       return {
-        productId: productObj.product._id ? productObj.product._id : '',
-        quantity: productObj.product._id === productData.product._id ? productData.quantity : productObj.quantity };
+        productId: productObj.product._id ?
+          productObj.product._id : '',
+        quantity: productObj.product._id === productData.product._id && productObj.status === ProductStatus.WAIT_TO_BUY ?
+          productData.quantity : productObj.quantity,
+        status: productObj.status ?
+          productObj.status : undefined
+      };
     });
     const cartPayload = {
       userId: cart.userId,

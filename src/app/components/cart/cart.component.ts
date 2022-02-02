@@ -5,8 +5,8 @@ import { Cart } from 'src/app/models/cart/cart';
 import { CartProductData } from 'src/app/models/cart/cart-product-data';
 import { Payment } from 'src/app/models/payment';
 import { RoundToTwoDecimals } from 'src/app/components/common/common-price-utils';
-import { calculateProductTotal } from '../common/calculate-product-total';
 import { CartService } from './cart.service';
+import { ProductStatus } from 'src/app/constants/product-status.constants';
 
 @Component({
   selector: 'app-cart',
@@ -18,6 +18,7 @@ export class CartComponent implements OnInit, OnDestroy {
   cart: Cart | undefined;
   total = 0;
   products: CartProductData[] = [];
+  purchasedProducts: CartProductData[] = [];
 
   constructor(private service: CartService) { }
 
@@ -26,17 +27,9 @@ export class CartComponent implements OnInit, OnDestroy {
       this.destroySubscription$
     )).subscribe((cart: Cart | undefined) => {
       this.cart = cart;
-      if (this.cart) {
-        this.products = this.cart.products.map(productData => {
-          return {
-            ...productData,
-            totalPrice: RoundToTwoDecimals(productData.product.price * productData.quantity)
-          };
-        });
-        this.total = calculateProductTotal(this.cart.products);
-      }
+      this.purchasedProducts = this.generateProductData(true);
+      this.products = this.generateProductData(false);
     });
-
     this.service.getCompletedPayment().pipe(takeUntil(
       this.destroySubscription$
     )).subscribe((payment: Payment) => {
@@ -68,5 +61,24 @@ export class CartComponent implements OnInit, OnDestroy {
       updatedQuantity += 1;
       this.service.updateCart({ product: productData.product, quantity: updatedQuantity }, this.cart);
     }
+  }
+
+  private generateProductData(purchased: boolean): CartProductData[] {
+    if (this.cart) {
+      let products = this.cart.products;
+      if (purchased) {
+        products = products.filter(productData => productData.status !== ProductStatus.WAIT_TO_BUY);
+      } else {
+        products = products.filter(productData => productData.status === ProductStatus.WAIT_TO_BUY)
+      }
+      products = products.map(productData => {
+        return {
+          ...productData,
+          totalPrice: RoundToTwoDecimals(productData.product.price * productData.quantity)
+        };
+      });
+      return products;
+    }
+    return [];
   }
 }

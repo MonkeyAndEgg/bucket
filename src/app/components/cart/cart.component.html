@@ -2,7 +2,7 @@
   <div class="orders">
     <h1>Shopping Cart</h1>
     <div class="order-list">
-      <ng-container *ngIf='cart?.products?.length === 0'>
+      <ng-container *ngIf='products.length === 0'>
         Your cart is currently empty.
       </ng-container>
       <div class="order-item" *ngFor="let productObj of products">
@@ -30,9 +30,25 @@
     </div>
     <h1>Your items</h1>
     <div class="order-list">
-      <ng-container>
+      <ng-container *ngIf='purchasedProducts.length === 0'>
         You have not purchased any item yet.
       </ng-container>
+      <div class="order-item" *ngFor="let productObj of purchasedProducts">
+        <img [src]='productObj?.product?.imageUrl' [routerLink]="['/view-detail', productObj?.product?._id]">
+        <div class="item-field">
+          <label>{{ productObj?.product?.name }}</label>
+        </div>
+        <div class="item-field">
+          <label>x{{ productObj?.quantity }}</label>
+        </div>
+        <div class="item-field">
+          <label *ngIf="productObj?.quantity && productObj?.product?.price">$ {{ productObj.totalPrice }}</label>
+          <label *ngIf="!productObj?.quantity || !productObj?.product?.price">N/A</label>
+        </div>
+        <div class="item-field">
+          <button mat-button color="primary">Details</button>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserOptions } from 'src/app/constants/header.constants';
+import { ProductStatus } from 'src/app/constants/product-status.constants';
 import { Cart } from 'src/app/models/cart/cart';
-import { Product } from 'src/app/models/product';
+import { CartProductData } from 'src/app/models/cart/cart-product-data';
 import { User } from 'src/app/models/user';
 import { saveStorageData } from '../common/process-storage-data';
 import { HeaderService } from './header.service';
@@ -67,8 +68,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ).subscribe((cart: Cart | undefined) => {
       this.cartProductNumber = 0;
       if (cart) {
-        cart.products.forEach((productData: { product: Product; quantity: number; }) => {
-          this.cartProductNumber += productData.quantity;
+        cart.products.forEach((productData: CartProductData) => {
+          if (productData.status === ProductStatus.WAIT_TO_BUY) {
+            this.cartProductNumber += productData.quantity;
+          }
         });
       }
     });
