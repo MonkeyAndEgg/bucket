@@ -1,14 +1,7 @@
 const Cart = require('../models/cart');
 const Product = require('../models/product');
 
-const PRODUCT_STATUS = {
-  WAIT_TO_BUY: 'Wait To Buy',
-  WAIT_TO_DELIVER: 'Wait To Deliver',
-  IN_PROGRESS: 'In Progress',
-  DELIVERED: 'Delivered'
-};
-
-exports.createOrder = async (req, res) => {
+exports.createCart = async (req, res) => {
   const { userId, productDataList } = req.body;
   // one user suppose to have only one cart
   let cart = await Cart.findOne({ userId });
@@ -27,8 +20,7 @@ exports.createOrder = async (req, res) => {
       }
       products.push({
         product,
-        quantity: productData.quantity,
-        status: PRODUCT_STATUS.WAIT_TO_BUY
+        quantity: productData.quantity
       });
     }
     cart = new Cart({
@@ -40,7 +32,7 @@ exports.createOrder = async (req, res) => {
   return res.status(201).send(cart);
 }
 
-exports.updateOrder = async (req, res) => {
+exports.updateCart = async (req, res) => {
   const { userId, productDataList } = req.body;
   const products = [];
   for (const productData of productDataList) {
@@ -50,11 +42,9 @@ exports.updateOrder = async (req, res) => {
         message: 'There is one or more product cannot be found'
       });
     }
-    const productStatus = productData.status ? productData.status : PRODUCT_STATUS.WAIT_TO_BUY;
     products.push({
       product,
-      quantity: productData.quantity,
-      status: productStatus
+      quantity: productData.quantity
     });
   }
   const cart = await Cart.findById(req.params.id);
@@ -73,14 +63,14 @@ exports.updateOrder = async (req, res) => {
 }
 
 
-exports.getOrder = async (req, res) => {
+exports.getCart = async (req, res) => {
   try {
-    const orders = await Cart.find({
+    const carts = await Cart.find({
       userId: req.params.userId
     }).populate('products.product');
-    if (orders.length > 0) {
-      // the user Id is assumed to be unique which expects only one order(cart) for each userId
-      res.status(200).send(orders[0]);
+    if (carts.length > 0) {
+      // the user Id is assumed to be unique which expects only one cart for each userId
+      res.status(200).send(carts[0]);
     } else {
       res.status(404).send({
         message: `Cannot find the cart with given user id: ${req.params.userId}`
@@ -93,13 +83,13 @@ exports.getOrder = async (req, res) => {
   }
 }
 
-exports.getOrders = async (req, res) => {
-  const orders = await Cart.find().populate('products.product');
+exports.getCarts = async (req, res) => {
+  const carts = await Cart.find().populate('products.product');
 
-  res.status(200).send(orders);
+  res.status(200).send(carts);
 }
 
-exports.deleteOrder = async (req, res) => {
+exports.deleteCart = async (req, res) => {
   try {
     const result = await Cart.deleteOne({
       _id: req.params.id

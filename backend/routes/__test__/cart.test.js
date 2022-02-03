@@ -2,8 +2,8 @@ const request = require('supertest');
 const app = require('../../app');
 const mongoose = require('mongoose');
 
-// add order
-it('returns 201 for successfully create an order', async () => {
+// add new cart
+it('returns 201 for successfully create a cart', async () => {
   await request(app).post('/api/signup').send({
     email: 'test@test.com',
     password: '1234567'
@@ -25,19 +25,15 @@ it('returns 201 for successfully create an order', async () => {
     }
   }).expect(201);
 
-  const createOrderRes = await request(app).post('/api/orders').send({
+  await request(app).post('/api/cart').send({
     userId: '1234567',
     productDataList: [
       { productId: `${response.body._id}`, quantity: 2 }
     ]
   }).expect(201);
-
-  createOrderRes.body.products.forEach(product => {
-    expect(product.status).toEqual('Wait To Buy');
-  });
 });
 
-it('returns 400 for creating an order for one or more non-exist product', async () => {
+it('returns 400 for creating a cart for one or more non-exist product', async () => {
   const productId = mongoose.Types.ObjectId().toHexString();
 
   await request(app).post('/api/signup').send({
@@ -46,7 +42,7 @@ it('returns 400 for creating an order for one or more non-exist product', async 
   }).expect(201);
 
 
-  await request(app).post('/api/orders').send({
+  await request(app).post('/api/cart').send({
     userId: '1234567',
     productDataList: [
       { product: `${productId}`, quantity: 2 }
@@ -55,8 +51,8 @@ it('returns 400 for creating an order for one or more non-exist product', async 
 });
 
 
-// update order
-it('returns 200 for successfully update an order', async () => {
+// update cart
+it('returns 200 for successfully update an cart', async () => {
   await request(app).post('/api/signup').send({
     email: 'test@test.com',
     password: '1234567'
@@ -78,28 +74,24 @@ it('returns 200 for successfully update an order', async () => {
     }
   }).expect(201);
 
-  const orderResponse = await request(app).post('/api/orders').send({
+  const orderResponse = await request(app).post('/api/cart').send({
     userId: '1234567',
     productDataList: [
       { productId: `${response.body._id}`, quantity: 2}
     ]
   }).expect(201);
 
-  const updateOrderRes = await request(app).put(`/api/orders/${orderResponse.body._id}`).send({
+  await request(app).put(`/api/cart/${orderResponse.body._id}`).send({
     userId: '1234567',
     productDataList: [
       { productId: `${response.body._id}`, quantity: 3, status: 'Wait To Deliver' }
     ]
   }).expect(200);
-
-  updateOrderRes.body.products.forEach(product => {
-    expect(product.status).toEqual('Wait To Deliver');
-  });
 });
 
 
-// delete order
-it('returns 200 for successfully delete an order', async () => {
+// delete cart
+it('returns 200 for successfully delete a cart', async () => {
   await request(app).post('/api/signup').send({
     email: 'test@test.com',
     password: '1234567'
@@ -121,24 +113,24 @@ it('returns 200 for successfully delete an order', async () => {
     }
   }).expect(201);
 
-  const orderResponse = await request(app).post('/api/orders').send({
+  const orderResponse = await request(app).post('/api/cart').send({
     userId: '1234567',
     productDataList: [
       { productId: `${response.body._id}`, quantity: 2 }
     ]
   }).expect(201);
 
-  await request(app).delete(`/api/orders/${orderResponse.body._id}`).send({}).expect(200);
+  await request(app).delete(`/api/cart/${orderResponse.body._id}`).send({}).expect(200);
 });
 
-it('returns 404 for delete non-exist order', async () => {
+it('returns 404 for delete non-exist cart', async () => {
   const id = mongoose.Types.ObjectId().toHexString();
 
-  await request(app).delete(`/api/orders/${id}`).send({}).expect(404);
+  await request(app).delete(`/api/cart/${id}`).send({}).expect(404);
 });
 
-// get order
-it('returns 200 for successfully get an order', async () => {
+// get cart
+it('returns 200 for successfully get a cart', async () => {
 
   await request(app).post('/api/signup').send({
     email: 'test@test.com',
@@ -161,20 +153,20 @@ it('returns 200 for successfully get an order', async () => {
     }
   }).expect(201);
 
-  await request(app).post('/api/orders').send({
+  await request(app).post('/api/cart').send({
     userId: '1234567',
     productDataList: [
       { productId: `${response.body._id}`, quantity: 2 }
     ]
   }).expect(201);
 
-  await request(app).get(`/api/orders/1234567`).send({}).expect(200);
+  await request(app).get(`/api/cart/1234567`).send({}).expect(200);
 });
 
-it('returns 404 for getting non-exist order', async () => {
-  await request(app).get(`/api/orders/1234`).send({}).expect(404);
+it('returns 404 for getting non-exist cart', async () => {
+  await request(app).get(`/api/cart/1234`).send({}).expect(404);
 });
 
-it('returns 200 for getting orders', async () => {
-  await request(app).get(`/api/orders`).send({}).expect(200);
+it('returns 200 for getting cart', async () => {
+  await request(app).get(`/api/cart`).send({}).expect(200);
 });

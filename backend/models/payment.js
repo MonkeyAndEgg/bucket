@@ -5,18 +5,10 @@ const paymentSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  products: [
-    {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-      },
-      quantity: {
-        type: Number,
-        required: true
-      }
-    }
-  ],
+  order: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Order'
+  },
   amount: {
     type: Number,
     required: true

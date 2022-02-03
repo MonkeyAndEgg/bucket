@@ -1,12 +1,13 @@
 const Cart = require('../models/cart');
 const Payment = require('../models/payment');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
+const ORDER_STATUS = require('../constants/order-status');
 
 exports.createPayment = async (req, res) => {
   const { token, cartId } = req.body;
 
-  const order = await Cart.findById(cartId).populate('products.product');;
-  if (!order) {
+  const cart = await Cart.findById(cartId).populate('products.product');;
+  if (!cart) {
     res.status(404).send({
       message: `Cannot find the cart with given id: ${cartId}`
     });
@@ -17,7 +18,7 @@ exports.createPayment = async (req, res) => {
     });
   }
   let totalAmount = 0;
-  for (const productData of order.products) {
+  for (const productData of cart.products) {
     totalAmount += productData.product.price * productData.quantity;
   }
   const charge = await stripe.charges.create({
@@ -25,12 +26,25 @@ exports.createPayment = async (req, res) => {
     amount: Math.round(totalAmount * 100),
     source: token.id
   });
-  const payment = new Payment({
-    stripeId: charge.id,
-    products: order.products,
-    amount: totalAmount
-  });
-  await payment.save();
+  if (charge.id) {
+    // generating the order once payment success
+    const order = new Order({
+      userId: cart.userId,
+      products: cart.products,
+      status: ORDER_STATUS.WAIT_TO_DELIVER
+    });
+    await order.save();
+    const payment = new Payment({
+      stripeId: charge.id,
+      order: order,
+      amount: totalAmount
+    });
+    await payment.save();
+  } else {
+    res.status(500).send({
+      message: 'The payment is not completed for some reasons'
+    });
+  }
   res.status(201).send({ payment });
 }
 
