@@ -24,10 +24,10 @@ export class CheckoutService {
     });
 
     // round the amount since *100 gives decimal number
-    const roundedAmout = Math.round(amount * 100)
+    const roundedAmount = Math.round(amount * 100)
     handler.open({
       name: 'Checkout',
-      amount: roundedAmout
+      amount: roundedAmount
     })
   }
 
