@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { ProductStatus } from "src/app/constants/product-status.constants";
-import { Cart, CartRequest } from "src/app/models/cart/cart";
-import { CartProductData } from "src/app/models/cart/cart-product-data";
-import { CartProductRequestData } from "src/app/models/cart/cart-product-request-data";
+import { Cart, CartRequest } from "src/app/models/cart";
+import { ProductData } from "src/app/models/product-data";
+import { ProductRequestData } from "src/app/models/product-request-data";
 import { User } from "src/app/models/user";
 import { selectUser } from "src/app/store/auth/auth.selector";
 import { addToCart } from "src/app/store/order/order.actions";
@@ -28,17 +27,16 @@ export class ProductListService {
   addToCart(productId: string, userId: string, cart?: Cart): void {
     let cartId: string | undefined;
     let cartPayload: CartRequest;
-    let productDataList: CartProductRequestData[];
+    let productDataList: ProductRequestData[];
     if (cart) {
-      productDataList = cart.products.map((item: CartProductData) => {
+      productDataList = cart.products.map((item: ProductData) => {
         return {
           productId: item.product._id ? item.product._id : '',
-          quantity: item.quantity,
-          status: item.status
+          quantity: item.quantity
         };
       });
       const existProductIndex = productDataList.findIndex(item =>
-        item.productId === productId && item.status === ProductStatus.WAIT_TO_BUY
+        item.productId === productId
       );
       if (existProductIndex > -1) {
         productDataList[existProductIndex].quantity += 1;

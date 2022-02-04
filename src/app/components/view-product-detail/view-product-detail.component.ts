@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Cart } from 'src/app/models/cart/cart';
+import { Cart } from 'src/app/models/cart';
 import { Product } from 'src/app/models/product';
 import { ViewProductDetailService } from './view-product-detail.service';
 

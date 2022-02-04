@@ -4,8 +4,9 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
 import { errorHandler } from "src/app/components/common/error-handler";
-import { Cart, CartRequest } from "src/app/models/cart/cart";
-import { addToCart, loadCartById, updateCart } from "./order.actions";
+import { Cart, CartRequest } from "src/app/models/cart";
+import { Order } from "src/app/models/order";
+import { addToCart, loadCartById, loadOrdersByUserId, updateCart, updateOrders } from "./order.actions";
 import { OrderDataService } from "./order.data.service";
 
 @Injectable()
@@ -24,6 +25,23 @@ export class OrderEffects {
       catchError((err) => {
         if (err.status === 404) {
           return of(updateCart({ cart: {} as Cart }));
+        }
+        errorHandler(this.snackBar, err);
+        return EMPTY;
+      })
+    ))
+  ));
+
+  loadOrdersByUserId$ = createEffect(() => this.actions$.pipe(
+    ofType(loadOrdersByUserId),
+    mergeMap((payload: { userId: string }) => this.orderDataService.getOrdersByUserId(payload.userId)
+    .pipe(
+      map((orders: Order[]) => {
+        return updateOrders({ orders });
+      }),
+      catchError((err) => {
+        if (err.status === 404) {
+          return of(updateOrders({ orders: [] }));
         }
         errorHandler(this.snackBar, err);
         return EMPTY;

@@ -1,5 +1,6 @@
 const Cart = require('../models/cart');
 const Payment = require('../models/payment');
+const Order = require('../models/order');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const ORDER_STATUS = require('../constants/order-status');
 
@@ -34,18 +35,25 @@ exports.createPayment = async (req, res) => {
       status: ORDER_STATUS.WAIT_TO_DELIVER
     });
     await order.save();
+
+    // clean the cart products
+    cart.set({
+      products: []
+    });
+    await cart.save();
+
     const payment = new Payment({
       stripeId: charge.id,
       order: order,
       amount: totalAmount
     });
     await payment.save();
+    res.status(201).send({ payment });
   } else {
     res.status(500).send({
       message: 'The payment is not completed for some reasons'
     });
   }
-  res.status(201).send({ payment });
 }
 
 exports.getPayments = async (req, res) => {

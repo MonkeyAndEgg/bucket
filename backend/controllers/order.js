@@ -25,7 +25,6 @@ exports.getOrders = async (req, res) => {
       userId: req.params.userId
     }).populate('products.product');
     if (orders.length > 0) {
-      // the user Id is assumed to be unique which expects only one cart for each userId
       res.status(200).send(orders);
     } else {
       res.status(404).send({

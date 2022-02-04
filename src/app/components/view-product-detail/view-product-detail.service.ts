@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { Cart, CartRequest } from "src/app/models/cart/cart";
-import { CartProductData } from "src/app/models/cart/cart-product-data";
-import { CartProductRequestData } from "src/app/models/cart/cart-product-request-data";
+import { Cart, CartRequest } from "src/app/models/cart";
 import { Product } from "src/app/models/product";
+import { ProductData } from "src/app/models/product-data";
+import { ProductRequestData } from "src/app/models/product-request-data";
 import { addToCart } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
 import { loadProductById } from "src/app/store/product/product.actions";
@@ -30,8 +30,8 @@ export class ViewProductDetailService {
 
   addToCart(productId: string, quantity: number, cart: Cart): void {
     let cartPayload: CartRequest;
-    let productDataList: CartProductRequestData[];
-    productDataList = cart.products.map((item: CartProductData) => {
+    let productDataList: ProductRequestData[];
+    productDataList = cart.products.map((item: ProductData) => {
       return { productId: item.product._id ? item.product._id : '', quantity: item!.quantity };
     });
     const existProduct = productDataList.find(item => item.productId === productId);

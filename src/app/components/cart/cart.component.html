@@ -28,22 +28,15 @@
         </div>
       </div>
     </div>
-    <h1>Your items</h1>
+    <h1>Your Orders</h1>
     <div class="order-list">
-      <ng-container *ngIf='purchasedProducts.length === 0'>
+      <ng-container *ngIf='orders.length === 0'>
         You have not purchased any item yet.
       </ng-container>
-      <div class="order-item" *ngFor="let productObj of purchasedProducts">
-        <img [src]='productObj?.product?.imageUrl' [routerLink]="['/view-detail', productObj?.product?._id]">
+      <div class="order-item" *ngFor="let order of orders">
+        <img [src]='order.products[0].product.imageUrl'>
         <div class="item-field">
-          <label>{{ productObj?.product?.name }}</label>
-        </div>
-        <div class="item-field">
-          <label>x{{ productObj?.quantity }}</label>
-        </div>
-        <div class="item-field">
-          <label *ngIf="productObj?.quantity && productObj?.product?.price">$ {{ productObj.totalPrice }}</label>
-          <label *ngIf="!productObj?.quantity || !productObj?.product?.price">N/A</label>
+          <label>Order ID: {{ order._id }}</label>
         </div>
         <div class="item-field">
           <button mat-button color="primary">Details</button>

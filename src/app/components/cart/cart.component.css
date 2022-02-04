@@ -60,6 +60,10 @@ button {
   display: flex;
 }
 
+.item-field:last-child {
+  justify-content: end;
+}
+
 .item-field label {
   align-self: center;
   padding: 5px;

@@ -1,15 +1,18 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { Cart } from "src/app/models/cart/cart";
+import { Cart } from "src/app/models/cart";
+import { Order } from "src/app/models/order";
 import * as OrderActions from './order.actions';
 
 export const orderFeatureKey = 'order';
 
 export interface OrderState {
   currentCart: Cart | undefined;
+  orders: Order[];
 }
 
 export const initialState: OrderState = {
-  currentCart: undefined
+  currentCart: undefined,
+  orders: []
 };
 
 export const orderReducer = createReducer(
@@ -18,6 +21,12 @@ export const orderReducer = createReducer(
     return ({
       ...state,
       currentCart: data.cart
+    });
+  }),
+  on(OrderActions.updateOrders, (state, data) => {
+    return ({
+      ...state,
+      orders: data.orders
     });
   })
 );
