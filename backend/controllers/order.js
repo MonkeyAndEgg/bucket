@@ -84,7 +84,7 @@ exports.createOrder = async (req, res) => {
       userId,
       products,
       status: ORDER_STATUS.WAIT_TO_DELIVER,
-      trackingNum: 'Tracking#123'
+      createdAt: new Date().toISOString()
     });
     await order.save();
     return res.status(201).send(order);

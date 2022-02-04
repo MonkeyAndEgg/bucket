@@ -18,6 +18,10 @@ const orderSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  createdAt: {
+    type: String,
+    required: true
+  },
   trackingNum: {
     type: String
   }

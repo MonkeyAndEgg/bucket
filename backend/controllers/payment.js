@@ -32,7 +32,8 @@ exports.createPayment = async (req, res) => {
     const order = new Order({
       userId: cart.userId,
       products: cart.products,
-      status: ORDER_STATUS.WAIT_TO_DELIVER
+      status: ORDER_STATUS.WAIT_TO_DELIVER,
+      createdAt: new Date().toISOString()
     });
     await order.save();
 
