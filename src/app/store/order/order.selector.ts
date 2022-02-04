@@ -14,3 +14,8 @@ export const selectOrders = createSelector(
   selectOrderState,
   (state: fromOrder.OrderState) => state.orders
 );
+
+export const selectOrderInView = createSelector(
+  selectOrderState,
+  (state: fromOrder.OrderState) => state.orderInView
+);

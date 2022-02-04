@@ -14,6 +14,10 @@ export class OrderDataService {
     return this.http.get<Cart>(`http://localhost:3000/api/cart/${id}`);
   }
 
+  getOrderById(id: string): Observable<Order> {
+    return this.http.get<Order>(`http://localhost:3000/api/order/${id}`);
+  }
+
   getOrdersByUserId(userId: string): Observable<Order[]> {
     return this.http.get<Order[]>(`http://localhost:3000/api/orders/${userId}`);
   }

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class='summary'>
+    <div class="column-field">
+      <label>Shipping Address</label>
+      <span>6360 Shaka Crescent</span>
+      <span>Canada</span>
+      <span>v7c2r2</span>
+    </div>
+    <div class="column-field">
+      <label>Payment Method</label>
+      <span>Visa</span>
+    </div>
+    <div class="column-field">
+      <label>Order Summary</label>
+      <div *ngFor="let text of summaryTexts">
+        <span>{{ text }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="progress-tracker">
+    <mat-progress-bar mode="determinate" [value]="progressMap.get(order?.status)"></mat-progress-bar>
+    <span>Your current order status is: <label>{{ order?.status }}</label></span>
+  </div>
+  <button mat-raised-button color="primary" [routerLink]="'/cart'">Back To Cart</button>
+</div>

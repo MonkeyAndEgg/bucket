@@ -8,11 +8,13 @@ export const orderFeatureKey = 'order';
 export interface OrderState {
   currentCart: Cart | undefined;
   orders: Order[];
+  orderInView: Order | undefined;
 }
 
 export const initialState: OrderState = {
   currentCart: undefined,
-  orders: []
+  orders: [],
+  orderInView: undefined
 };
 
 export const orderReducer = createReducer(
@@ -27,6 +29,12 @@ export const orderReducer = createReducer(
     return ({
       ...state,
       orders: data.orders
+    });
+  }),
+  on(OrderActions.loadOrderByIdComplete, (state, data) => {
+    return ({
+      ...state,
+      orderInView: data.order
     });
   })
 );

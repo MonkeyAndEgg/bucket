@@ -5,7 +5,7 @@
         <img mat-card-image
           [src]="product.imageUrl"
           (error)="prepareAlterImage($event)"
-          [routerLink]="['/view-detail', product._id]">
+          [routerLink]="['/view-product', product._id]">
         <mat-card-content>
           <label class="title">
             {{ product.name }}
