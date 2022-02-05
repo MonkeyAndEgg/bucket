@@ -38,7 +38,7 @@ button {
   align-items: center;
   margin-top: var(--space-y-s);
   padding-bottom: var(--space-y-s);
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid var(--black);
 }
 
 .order-item .item-field {

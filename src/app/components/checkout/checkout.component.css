@@ -42,7 +42,7 @@ mat-list-item span {
 }
 
 .material-icons {
-  color: #ffc107;
+  color: var(--primary);
 }
 
 .action-btns {

@@ -43,6 +43,6 @@ mat-card {
 }
 
 .actions span:hover {
-  color: #f8b414;
+  color: var(--primary);
 }
 

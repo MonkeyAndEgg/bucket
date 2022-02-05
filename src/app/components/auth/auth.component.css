@@ -34,5 +34,5 @@
 
 .info label:hover,
 .reset-password:hover {
-  color: #ffc107;
+  color: var(--primary);
 }
