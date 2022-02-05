@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private service: HeaderService, private router: Router) { }
 
   ngOnInit(): void {
-    this.service.verifyUserAuth();
+    this.service.verifyUserAuth(this.onSignOut);
     this.service.getCurrentUser()
     .pipe(
       takeUntil(this.destroySubscription$)
@@ -58,8 +58,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const expiration = new Date().getTime() + expiresIn * 1000;
         saveStorageData(token, new Date(expiration));
         this.service.loadUser();
-      } else {
-        this.onSignOut();
       }
     });
 

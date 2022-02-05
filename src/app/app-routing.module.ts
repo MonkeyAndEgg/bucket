@@ -14,8 +14,7 @@ export const routes: Routes = [
   { path: 'view-search', loadChildren: () => import('./components/view-search/view-search.module').then(m => m.ViewSearchModule) },
   { path: 'reset-password/:userId', loadChildren: () => import('./components/reset-password/reset-password.module').then(m => m.ResetPasswordModule) },
   { path: 'forget-password', loadChildren: () => import('./components/forget-password/forget-password.module').then(m => m.ForgetPasswordModule) },
-  { path: 'view-order/:id', loadChildren: () => import('./components/view-order-detail/view-order-detail.module').then(m => m.ViewOrderDetailModule), canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' }
+  { path: 'view-order/:id', loadChildren: () => import('./components/view-order-detail/view-order-detail.module').then(m => m.ViewOrderDetailModule), canActivate: [AuthGuard] }
 ];
 
 @NgModule({
