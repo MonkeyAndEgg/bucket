@@ -44,8 +44,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isAdmin = user.isAdmin ? user.isAdmin : false;
         this.service.loadUserCart(user.id);
         this.service.loadUserOrders(user.id);
-      } else {
-        this.isAuth = false;
       }
     });
 
@@ -60,6 +58,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const expiration = new Date().getTime() + expiresIn * 1000;
         saveStorageData(token, new Date(expiration));
         this.service.loadUser();
+      } else {
+        this.onSignOut();
       }
     });
 
@@ -81,6 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSignOut(): void {
     this.service.signOut();
+    this.isAuth = false;
     this.userId = undefined;
   }
 
