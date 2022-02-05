@@ -40,7 +40,7 @@ mat-card {
 }
 
 .actions span {
-  margin-right: 5px;
+  margin-right: var(--space-x-s);
   cursor: pointer;
 }
 

@@ -2,5 +2,5 @@
   width: 85%;
   min-height: calc(100% - 158px);
   margin: auto;
-  padding-bottom: 30px;
+  padding-bottom: var(--space-y-xl);
 }

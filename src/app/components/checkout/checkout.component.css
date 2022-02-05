@@ -7,7 +7,7 @@
 }
 
 .content {
-  margin-top: 30px;
+  margin-top: var(--space-y-xl);
 }
 
 .input-fields {
@@ -16,7 +16,7 @@
 }
 
 mat-checkbox {
-  margin-bottom: 30px;
+  margin-bottom: var(--space-y-xl);
 }
 
 .input-row:nth-last-child(2) mat-form-field {
@@ -28,7 +28,7 @@ mat-checkbox {
 }
 
 .title {
-  margin-bottom: 30px;
+  margin-bottom: var(--space-y-xl);
 }
 
 label {

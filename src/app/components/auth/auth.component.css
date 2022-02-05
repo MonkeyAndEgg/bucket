@@ -26,7 +26,7 @@
 }
 
 .info {
-  margin-top: 50px;
+  margin-top: var(--space-y-xxl);
 }
 
 .info label,
