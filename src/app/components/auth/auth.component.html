@@ -1,4 +1,4 @@
-<div class="content" *ngIf="loadStatus !== LoadStatus.LOADING">
+<div class="container flex-center" *ngIf="loadStatus !== LoadStatus.LOADING">
   <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
     <label class="title">{{ title }}</label>
     <div class="auth-input">
@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<div class="loading" *ngIf="loadStatus === LoadStatus.LOADING">
+<div class="loading flex-center" *ngIf="loadStatus === LoadStatus.LOADING">
   <div class="spinner">
     <mat-spinner [diameter]="'150'"></mat-spinner>
     <span>Authenticating your identity...</span>

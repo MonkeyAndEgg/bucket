@@ -50,7 +50,7 @@ label {
 }
 
 .container {
-  padding-top: var(--space-top);
+  padding-top: var(--space-y-l);
 }
 
 .custom-snack-bar {
@@ -60,8 +60,6 @@ label {
 }
 
 .loading {
-  display: flex;
-  justify-content: center;
   padding: 200px 0px;
 }
 
@@ -79,3 +77,19 @@ mat-spinner {
 .spinner span {
   font-family: cursive !important;
 }
+
+/* flex start */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+/* flex end */

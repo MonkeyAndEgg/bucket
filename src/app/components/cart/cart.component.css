@@ -1,10 +1,3 @@
-.container,
-.info-field,
-.actions {
-  display: flex;
-  justify-content: space-between;
-}
-
 .container {
   margin-top: var(--space-y-s);
 }
@@ -14,7 +7,6 @@
   border: 1px solid #808080;
   margin-bottom: var(--space-y-m);
   padding: var(--space-xy-s);
-  display: flex;
   flex-direction: column;
 }
 
@@ -28,7 +20,6 @@
 
 .orders {
   width: 65%;
-  display: flex;
   flex-direction: column;
 }
 
@@ -44,8 +35,6 @@ button {
 }
 
 .order-item {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: var(--space-y-s);
   padding-bottom: var(--space-y-s);
@@ -54,10 +43,6 @@ button {
 
 .order-item .item-field {
   flex: 1;
-}
-
-.item-field {
-  display: flex;
 }
 
 .item-field:last-child {

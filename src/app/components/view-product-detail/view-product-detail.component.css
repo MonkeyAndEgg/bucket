@@ -4,8 +4,6 @@
 
 .container {
   margin-top: var(--space-y-m);
-  display: flex;
-  justify-content: space-between;
 }
 
 .content-left {
@@ -33,8 +31,6 @@ label {
 .checkout {
   position: absolute;
   bottom: 0px;
-  display: flex;
-  justify-content: space-evenly;
 }
 
 .checkout label,
@@ -43,8 +39,8 @@ label {
 }
 
 .number-input {
-  display: flex;
-  margin: 20px 0px;
+  margin-top: var(--space-y-m);
+  margin-bottom: var(--space-y-m);
 }
 
 .number-input span {

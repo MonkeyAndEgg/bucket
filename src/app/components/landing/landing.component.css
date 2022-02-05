@@ -1,5 +1,3 @@
 .list-header {
-  display: flex;
-  justify-content: space-between;
   margin-bottom: var(--space-y-m);
 }

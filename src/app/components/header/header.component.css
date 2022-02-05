@@ -20,11 +20,6 @@
   font-size: var(--fs-xl);
 }
 
-.options {
-  display: flex;
-  justify-content: center;
-}
-
 span {
   color: var(--white);
 }

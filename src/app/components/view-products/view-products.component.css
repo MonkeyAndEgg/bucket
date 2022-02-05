@@ -1,14 +1,8 @@
-.container {
-  display: flex;
-  justify-content: space-between;
-}
-
 .products{
   width: 80%;
 }
 
 .actions {
-  display: flex;
   justify-content: flex-end;
   padding: var(--space-xy-l);
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container flex-between">
   <div class="filter">
     <section class="filter-section">
       <span class="filter-list-section">
@@ -24,7 +24,7 @@
     </section>
   </div>
   <div class="products">
-    <div class="actions">
+    <div class="actions flex">
       <button mat-raised-button *ngIf="user?.isAdmin" (click)="openNewProductDialog()">New Product</button>
       <button mat-button [matMenuTriggerFor]="sort">
         Sort By
