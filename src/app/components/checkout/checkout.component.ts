@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart';
-import { calculateProductTotal } from '../common/calculate-product-total';
+import { calculateProductTotal } from '../../common/calculate-product-total';
 import { CheckoutService } from './checkout.service';
 
 @Component({

@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { LoadStatus } from "src/app/constants/load-status.constants";
 import { resetPassword, setCurrentUser, setLoadStatus, updateToken } from "src/app/store/auth/auth.actions";
 import { selectLoadStatus } from "src/app/store/auth/auth.selector";
-import { clearStorageData } from "../common/process-storage-data";
+import { clearStorageData } from "../../common/process-storage-data";
 
 @Injectable({
   providedIn: 'root'

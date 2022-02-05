@@ -6,7 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { UserOptions } from 'src/app/constants/header.constants';
 import { LoadStatus } from 'src/app/constants/load-status.constants';
 import { LoginInfo } from 'src/app/models/login-info';
-import { CommonErrorStateMatcher } from '../common/common-error-matcher';
+import { CommonErrorStateMatcher } from '../../common/common-error-matcher';
 import { AuthService } from './auth.service';
 
 @Component({

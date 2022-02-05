@@ -3,9 +3,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Cart } from 'src/app/models/cart';
 import { Payment } from 'src/app/models/payment';
-import { RoundToTwoDecimals } from 'src/app/components/common/common-price-utils';
+import { RoundToTwoDecimals } from 'src/app/common/common-price-utils';
 import { CartService } from './cart.service';
-import { calculateProductTotal } from '../common/calculate-product-total';
+import { calculateProductTotal } from '../../common/calculate-product-total';
 import { ProductData } from 'src/app/models/product-data';
 import { Order } from 'src/app/models/order';
 

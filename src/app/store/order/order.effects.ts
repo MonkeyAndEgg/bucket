@@ -3,7 +3,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY, of } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
-import { errorHandler } from "src/app/components/common/error-handler";
+import { errorHandler } from "src/app/common/error-handler";
 import { Cart, CartRequest } from "src/app/models/cart";
 import { Order } from "src/app/models/order";
 import { addToCart, loadCartById, loadOrderById, loadOrderByIdComplete, loadOrdersByUserId, updateCart, updateOrders } from "./order.actions";

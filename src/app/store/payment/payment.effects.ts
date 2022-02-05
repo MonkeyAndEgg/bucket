@@ -6,7 +6,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { EMPTY } from "rxjs";
 import { catchError, mergeMap, switchMap, withLatestFrom } from "rxjs/operators";
-import { errorHandler } from "src/app/components/common/error-handler";
+import { errorHandler } from "src/app/common/error-handler";
 import { Cart } from "src/app/models/cart";
 import { Payment, PaymentRequestPayload } from "src/app/models/payment";
 import { updateCart } from "../order/order.actions";

@@ -8,7 +8,7 @@ import { UserOptions } from 'src/app/constants/header.constants';
 import { Cart } from 'src/app/models/cart';
 import { ProductData } from 'src/app/models/product-data';
 import { User } from 'src/app/models/user';
-import { saveStorageData } from '../common/process-storage-data';
+import { saveStorageData } from '../../common/process-storage-data';
 import { HeaderService } from './header.service';
 
 @Component({

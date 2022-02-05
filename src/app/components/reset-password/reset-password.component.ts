@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LoadStatus } from 'src/app/constants/load-status.constants';
-import { CommonErrorStateMatcher } from '../common/common-error-matcher';
+import { CommonErrorStateMatcher } from '../../common/common-error-matcher';
 import { ResetPasswordService } from './reset-password.service';
 
 @Component({

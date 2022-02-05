@@ -8,7 +8,7 @@ import { loadCurrentUser, setCurrentUser, updateToken } from "src/app/store/auth
 import { selectExpiration, selectToken, selectUser } from "src/app/store/auth/auth.selector";
 import { loadCartById, loadOrdersByUserId } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
-import { clearStorageData } from "../common/process-storage-data";
+import { clearStorageData } from "../../common/process-storage-data";
 
 @Injectable({
   providedIn: 'root'

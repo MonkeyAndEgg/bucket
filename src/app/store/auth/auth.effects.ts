@@ -8,7 +8,7 @@ import { LoginInfo } from "src/app/models/login-info";
 import { User } from "src/app/models/user";
 import { LoadStatus } from "src/app/constants/load-status.constants";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { errorHandler } from "src/app/components/common/error-handler";
+import { errorHandler } from "src/app/common/error-handler";
 import { Store } from "@ngrx/store";
 import { selectToken } from "./auth.selector";
 

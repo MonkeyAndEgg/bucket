@@ -1,4 +1,4 @@
-import { RoundToTwoDecimals } from "src/app/components/common/common-price-utils";
+import { RoundToTwoDecimals } from "src/app/common/common-price-utils";
 import { ProductData } from "src/app/models/product-data";
 
 export function calculateProductTotal(products: ProductData[]): number {
