@@ -4,7 +4,7 @@
 }
 
 .title {
-  padding: 10px;
+  padding: var(--space-xy-s);
 }
 
 mat-grid-tile {
@@ -26,17 +26,17 @@ mat-card {
   height: 150px;
   object-fit: contain;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: var(--space-y-s);
 }
 
 .content-footer {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  padding: var(--space-xy-m);
 }
 
 .content-footer label {
-  font-size: 22px;
+  font-size: var(--fs-m);
 }
 
 .actions span {

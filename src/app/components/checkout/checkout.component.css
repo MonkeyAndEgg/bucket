@@ -24,7 +24,7 @@ mat-checkbox {
 }
 
 .input-row:last-child mat-form-field:not(:last-child) {
-  padding-right: 10px;
+  padding-right: var(--space-x-s);
 }
 
 .title {
@@ -32,11 +32,11 @@ mat-checkbox {
 }
 
 label {
-  margin-right: 15px;
+  margin-right: var(--space-x-m);
 }
 
 mat-list-item span {
-  margin-right: 20px;
+  margin-right: var(--space-x-l);
 }
 
 .info {
@@ -52,10 +52,10 @@ mat-list-item span {
 }
 
 .action-btns {
-  margin-top: 20px;
+  margin-top: var(--space-y-l);
 }
 
 .action-btns button {
-  margin-right: 15px;
+  margin-right: var(--space-x-m);
 }
 

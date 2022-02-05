@@ -1,6 +1,6 @@
 span {
-  font-size: 12px;
-  color: #ffffff;
+  font-size: var(--fs-s);
+  color: var(--white);
 }
 
 .content {

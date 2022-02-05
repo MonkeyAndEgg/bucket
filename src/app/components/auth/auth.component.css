@@ -1,6 +1,6 @@
 .auth-input {
   width: 400px;
-  margin-top: 20px;
+  margin-top: var(--space-y-l);
 }
 
 .mat-form-field {
@@ -16,13 +16,13 @@
 }
 
 .title {
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: var(--fs-l);
+  margin-bottom: var(--space-y-s);
 }
 
 .submit {
   float: right;
-  margin-top: 20px;
+  margin-top: var(--space-y-l);
 }
 
 .info {

@@ -10,16 +10,16 @@
 .actions {
   display: flex;
   justify-content: flex-end;
-  padding: 20px;
+  padding: var(--space-xy-l);
 }
 
 .actions button {
-  margin-left: 10px;
+  margin-left: var(--space-x-s);
 }
 
 .filter {
   width: 20%;
-  padding: 20px;
+  padding: var(--space-xy-l);
 }
 
 .filter-section {
@@ -32,9 +32,9 @@
 
 ul {
   list-style-type: none;
-  margin-top: 10px;
+  margin-top: var(--space-y-s);
 }
 
 ul li {
-  margin-top: 10px;
+  margin-top: var(--space-y-s);
 }

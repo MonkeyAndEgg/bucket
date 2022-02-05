@@ -6,12 +6,12 @@
 }
 
 span:first-of-type {
-  font-size: 20px;
-  font-weight: 900;
+  font-size: var(--fs-m);
+  font-weight: var(--fw-h);
 }
 
 span, button {
-  margin-top: 20px;
+  margin-top: var(--space-y-l);
 }
 
 img {

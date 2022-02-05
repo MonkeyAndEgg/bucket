@@ -1,6 +1,6 @@
 mat-form-field {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-y-s);
 }
 
 input[type="file"] {
@@ -33,5 +33,5 @@ input[type="file"] {
 .footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: var(--space-y-s);
 }

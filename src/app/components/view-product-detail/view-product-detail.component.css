@@ -3,7 +3,7 @@
 }
 
 .container {
-  margin-top: 15px;
+  margin-top: var(--space-y-m);
   display: flex;
   justify-content: space-between;
 }
@@ -22,12 +22,12 @@
 }
 
 label {
-  margin-right: 15px;
-  margin-bottom: 20px;
+  margin-right: var(--space-x-m);
+  margin-bottom: var(--space-y-l);
 }
 
 .field-value {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-y-l);
 }
 
 .checkout {
@@ -39,7 +39,7 @@ label {
 
 .checkout label,
 .checkout span {
-  font-size: 30px;
+  font-size: var(--fs-l);
 }
 
 .number-input {
@@ -52,13 +52,13 @@ label {
 }
 
 .number-input span:nth-child(2) {
-  font-size: 30px;
+  font-size: var(--fs-l);
   width: 90px;
   text-align: center;
 }
 
 .material-icons {
-  font-size: 40px;
+  font-size: var(--fs-xl);
   cursor: pointer;
   color: rgba(255,193,7, 0.6);
 }
