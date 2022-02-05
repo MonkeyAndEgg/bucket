@@ -92,7 +92,7 @@ describe('ResetPasswordComponent', () => {
     service.getLoadStatus.and.returnValue(of(LoadStatus.LOADED));
     fixture.detectChanges();
     const button = el.queryAll(By.css('button'))[0];
-    const message = el.queryAll(By.css('.content span'))[0];
+    const message = el.queryAll(By.css('.container span'))[0];
     expect(message.nativeElement.textContent).toContain('Your password is reset successfully');
     expect(button.nativeElement.textContent).toContain('Go Shopping');
   });
