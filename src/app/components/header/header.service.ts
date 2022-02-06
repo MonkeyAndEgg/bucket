@@ -67,7 +67,7 @@ export class HeaderService {
     }, expiresInSeconds * 1000);
   }
 
-  verifyUserAuth(logoutUser: () => void): void {
+  verifyUserAuth(): void {
     const currentTime = new Date();
     const tokenData = this.getStorageTokenData();
     if (tokenData) {
@@ -76,7 +76,6 @@ export class HeaderService {
         this.updateToken(tokenData.token, expiresInSeconds);
       } else {
         console.log('Your token is expired.');
-        logoutUser();
       }
     }
   }

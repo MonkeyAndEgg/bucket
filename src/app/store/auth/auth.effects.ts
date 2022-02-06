@@ -43,7 +43,6 @@ export class AuthEffects {
       .pipe(
         switchMap((res: { userId: string, token: string, expiresIn: number }) => {
           let actions = [];
-          actions.push(loadCurrentUser());
           actions.push(updateToken({ token: res.token, expiresIn: res.expiresIn }));
           actions.push(setLoadStatus({ status: LoadStatus.LOADED }));
           return actions;

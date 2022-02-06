@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private service: HeaderService, private router: Router) { }
 
   ngOnInit(): void {
-    this.service.verifyUserAuth(this.onSignOut);
+    this.service.verifyUserAuth();
     this.service.getCurrentUser()
     .pipe(
       takeUntil(this.destroySubscription$)
@@ -43,6 +43,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.userId = user.id;
         this.isAdmin = user.isAdmin ? user.isAdmin : false;
         this.service.loadUserCart(user.id);
+      } else {
+        this.isAuth = false;
+        this.userId = undefined;
       }
     });
 
@@ -78,8 +81,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSignOut(): void {
     this.service.signOut();
-    this.isAuth = false;
-    this.userId = undefined;
   }
 
   onToggleSearch(): void {
