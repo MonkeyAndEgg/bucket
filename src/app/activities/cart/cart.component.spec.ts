@@ -100,7 +100,7 @@ describe('CartComponent', () => {
     expect(buttons[1].nativeElement.textContent).toEqual('Checkout');
   });
 
-  it('should display 2 order items', async () => {
+  it('should display 2 order items', () => {
     cartService.getUserCart.and.returnValue(of(mockedCartData));
     fixture.detectChanges();
     const items = el.queryAll(By.css('.orders .order-item'));
