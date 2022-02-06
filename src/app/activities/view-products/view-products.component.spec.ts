@@ -1,17 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 import { By } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { ProductListModule } from '../product-list/product-list.module';
-import { ProductListService } from '../product-list/product-list.service';
-import { ViewSearchComponent } from './view-search.component';
-import { ViewSearchService } from './view-search.service';
+import { ProductListModule } from '../../components/product-list/product-list.module';
+import { ProductListService } from '../../components/product-list/product-list.service';
+import { ViewProductService } from './view-product.service';
+import { ViewProductsComponent } from './view-products.component';
 
-describe('ViewSearchComponent', () => {
-  let component: ViewSearchComponent;
-  let fixture: ComponentFixture<ViewSearchComponent>;
+describe('ViewProductsComponent', () => {
+  let component: ViewProductsComponent;
+  let fixture: ComponentFixture<ViewProductsComponent>;
   let el: DebugElement;
   let service: any;
   const products = [
@@ -40,9 +45,10 @@ describe('ViewSearchComponent', () => {
   ];
 
   beforeEach(waitForAsync(() => {
-    const serviceSpy = jasmine.createSpyObj('ViewSearchService', {
-      'getProducts': of([]),
-      'loadProducts': null
+    const serviceSpy = jasmine.createSpyObj('ViewProductService', {
+      'loadProducts': null,
+      'getProducts': of(products),
+      'getCurrentUser': of(undefined)
     });
     const productListServiceSpy = jasmine.createSpyObj('ProductListService', {
       'getCurrentUser': of(undefined),
@@ -52,25 +58,27 @@ describe('ViewSearchComponent', () => {
     });
     TestBed.configureTestingModule({
       imports: [
+        MatMenuModule,
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
         ProductListModule,
-        RouterTestingModule
+        RouterTestingModule,
+        NoopAnimationsModule
       ],
-      declarations: [ ViewSearchComponent ],
+      declarations: [ ViewProductsComponent ],
       providers: [
-        { provide: ViewSearchService, useValue: serviceSpy },
-        { provide: ProductListService, useValue: productListServiceSpy },
-        {
-          provide: ActivatedRoute, useValue: {
-            queryParams: of({keyword: ''})
-          }
-        }
+        { provide: ViewProductService, useValue: serviceSpy },
+        { provide: ProductListService, useValue: productListServiceSpy }
       ]
     })
     .compileComponents().then(() => {
-      fixture = TestBed.createComponent(ViewSearchComponent);
+      fixture = TestBed.createComponent(ViewProductsComponent);
       component = fixture.componentInstance;
       el = fixture.debugElement;
-      service = TestBed.inject(ViewSearchService);
+      service = TestBed.inject(ViewProductService);
+      fixture.detectChanges();
     });
   }));
 
@@ -78,12 +86,10 @@ describe('ViewSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display with search label and products', () => {
-    service.getProducts.and.returnValue(of(products));
-    fixture.detectChanges();
-    const message = el.queryAll(By.css('.container span'))[0];
-    expect(message.nativeElement.textContent).toContain('Search Results with keyword');
+  it('should display products when products is given', () => {
+    const productList = el.queryAll(By.css('app-product-list'));
     const productTiles = el.queryAll(By.css('mat-grid-tile'));
+    expect(productList.length).toEqual(1);
     expect(productTiles.length).toEqual(2);
   });
 });

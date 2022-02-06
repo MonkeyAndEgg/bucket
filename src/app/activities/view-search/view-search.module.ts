@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { ProductListModule } from "../product-list/product-list.module";
+import { ProductListModule } from "../../components/product-list/product-list.module";
 import { ViewSearchRoutingModule } from "./view-search-routing.module";
 import { ViewSearchComponent } from "./view-search.component";
 

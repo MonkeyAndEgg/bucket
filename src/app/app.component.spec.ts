@@ -9,7 +9,7 @@ import { HeaderService } from './components/header/header.service';
 import { NewProductDialogModule } from './components/new-product-dialog/new-product-dialog.module';
 import { ProductListModule } from './components/product-list/product-list.module';
 import { ShowCaseModule } from './components/show-case/show-case.module';
-import { ViewProductDetailModule } from './components/view-product-detail/view-product-detail.module';
+import { ViewProductDetailModule } from './activities/view-product-detail/view-product-detail.module';
 
 describe('AppComponent', () => {
   const headerServiceSpy = jasmine.createSpyObj('HeaderService', {

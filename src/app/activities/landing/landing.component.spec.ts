@@ -5,9 +5,9 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { ProductListModule } from '../product-list/product-list.module';
-import { ProductListService } from '../product-list/product-list.service';
-import { ShowCaseModule } from '../show-case/show-case.module';
+import { ProductListModule } from '../../components/product-list/product-list.module';
+import { ProductListService } from '../../components/product-list/product-list.service';
+import { ShowCaseModule } from '../../components/show-case/show-case.module';
 import { LandingComponent } from './landing.component';
 import { LandingService } from './landing.service';
 

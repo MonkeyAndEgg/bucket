@@ -8,7 +8,7 @@ import { User } from "src/app/models/user";
 import { selectUser } from "src/app/store/auth/auth.selector";
 import { loadProducts } from "src/app/store/product/product.actions";
 import { selectProducts } from "src/app/store/product/product.selector";
-import { NewProductDialogComponent } from "../new-product-dialog/new-product-dialog.component";
+import { NewProductDialogComponent } from "../../components/new-product-dialog/new-product-dialog.component";
 
 @Injectable({
   providedIn: 'root'
