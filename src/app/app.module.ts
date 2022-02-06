@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './components/auth/auth.interceptor';
+import { AuthInterceptor } from './activities/auth/auth.interceptor';
 import { HeaderModule } from './components/header/header.module';
 import { ProductListModule } from './components/product-list/product-list.module';
 import { ShowCaseModule } from './components/show-case/show-case.module';

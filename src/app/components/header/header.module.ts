@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { HeaderComponent } from "./header.component";
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AuthModule } from "../auth/auth.module";
+import { AuthModule } from "../../activities/auth/auth.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
