@@ -81,7 +81,7 @@ describe('ViewOrderDetailComponent', () => {
     expect(fieldValues[1].nativeElement.textContent).toContain('Richmond');
     expect(fieldValues[2].nativeElement.textContent).toContain('BC');
     expect(fieldValues[3].nativeElement.textContent).toContain('V7C2R2');
-    expect(fieldValues[4].nativeElement.textContent).toContain('Saturday, February 5, 2022');
+    expect(fieldValues[4].nativeElement.textContent).toContain('February');
     expect(fieldValues[5].nativeElement.textContent).toContain('Play Station 5 * (3)');
     expect(fieldValues[6].nativeElement.textContent).toContain('$1799.97');
   });
