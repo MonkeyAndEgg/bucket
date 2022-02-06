@@ -4,12 +4,11 @@
 
 .title {
   cursor: pointer;
-  font-size: 40px;
-  font-family: cursive;
+  font-size: var(--fs-xl);
 }
 
 .options span {
-  margin-left: 15px;
+  margin-left: var(--space-x-m);
   cursor: pointer;
 }
 
@@ -18,16 +17,11 @@
 }
 
 .options .material-icons {
-  font-size: 40px;
-}
-
-.options {
-  display: flex;
-  justify-content: center;
+  font-size: var(--fs-xl);
 }
 
 span {
-  color: #ffffff
+  color: var(--white);
 }
 
 mat-toolbar {
@@ -42,7 +36,6 @@ mat-toolbar {
   border-radius: 10px;
   border-color: transparent;
   height: 40px;
-  font-family: cursive;
-  font-size: 20px;
+  font-size: var(--fs-m);
   outline: 0;
 }

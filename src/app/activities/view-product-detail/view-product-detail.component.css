@@ -1,0 +1,68 @@
+.not-found img {
+  width: 100%;
+}
+
+.container {
+  margin-top: var(--space-y-m);
+}
+
+.content-left {
+  width: 45%;
+}
+
+.content-left img {
+  width: 100%;
+}
+
+.content-right {
+  width: 50%;
+  position: relative;
+}
+
+label {
+  margin-right: var(--space-x-m);
+  margin-bottom: var(--space-y-l);
+}
+
+.field-value {
+  margin-bottom: var(--space-y-l);
+}
+
+.checkout {
+  position: absolute;
+  bottom: 0px;
+}
+
+.checkout label,
+.checkout span {
+  font-size: var(--fs-l);
+}
+
+.number-input {
+  margin-top: var(--space-y-m);
+  margin-bottom: var(--space-y-m);
+}
+
+.number-input span {
+  align-self: center;
+}
+
+.number-input span:nth-child(2) {
+  font-size: var(--fs-l);
+  width: 90px;
+  text-align: center;
+}
+
+.material-icons {
+  font-size: var(--fs-xl);
+  cursor: pointer;
+  color: rgba(255,193,7, 0.6);
+}
+
+.material-icons:hover {
+  color: rgba(255,193,7, 1);
+}
+
+button:hover {
+  box-shadow: 2px 2px 2px 2px #ccc8c8;
+}

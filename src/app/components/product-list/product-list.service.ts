@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Cart, CartRequest } from "src/app/models/cart";
-import { Product } from "src/app/models/product";
+import { ProductData } from "src/app/models/product-data";
+import { ProductRequestData } from "src/app/models/product-request-data";
 import { User } from "src/app/models/user";
 import { selectUser } from "src/app/store/auth/auth.selector";
 import { addToCart } from "src/app/store/order/order.actions";
@@ -26,23 +27,22 @@ export class ProductListService {
   addToCart(productId: string, userId: string, cart?: Cart): void {
     let cartId: string | undefined;
     let cartPayload: CartRequest;
-    let productDataList: { product: string, quantity: number }[];
+    let productDataList: ProductRequestData[];
     if (cart) {
-      productDataList = cart.products.map((item: { product: Product, quantity: number }) => {
-        // TODO improre this _id condition
-        return { product: item.product._id ? item.product._id : '', quantity: item!.quantity };
+      productDataList = cart.products.map((item: ProductData) => {
+        return {
+          productId: item.product._id ? item.product._id : '',
+          quantity: item.quantity
+        };
       });
-      // TODO improve logic here
-      const existProduct = productDataList.find(item => item.product === productId);
-      if (existProduct) {
-        productDataList.forEach(item => {
-          if (item.product === productId) {
-            item.quantity += 1;
-          }
-        })
+      const existProductIndex = productDataList.findIndex(item =>
+        item.productId === productId
+      );
+      if (existProductIndex > -1) {
+        productDataList[existProductIndex].quantity += 1;
       } else {
         productDataList.push({
-          product: productId,
+          productId,
           quantity: 1
         });
       }
@@ -50,7 +50,7 @@ export class ProductListService {
       cartId = cart._id;
     } else {
       productDataList = [{
-        product: productId,
+        productId,
         quantity: 1
       }];
     }

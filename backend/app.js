@@ -1,8 +1,9 @@
 const express = require('express');
 const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/products');
-const orderRouter = require('./routes/ordering');
+const cartRouter = require('./routes/cart');
 const paymentRouter = require('./routes/payment');
+const orderRouter = require('./routes/order');
 const path = require('path');
 
 const app = express();
@@ -32,7 +33,8 @@ app.use((req, res, next) => {
 
 app.use(authRouter);
 app.use(productsRouter);
-app.use(orderRouter);
+app.use(cartRouter);
 app.use(paymentRouter);
+app.use(orderRouter);
 
 module.exports = app;

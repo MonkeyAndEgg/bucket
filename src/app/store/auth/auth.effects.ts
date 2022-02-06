@@ -8,7 +8,7 @@ import { LoginInfo } from "src/app/models/login-info";
 import { User } from "src/app/models/user";
 import { LoadStatus } from "src/app/constants/load-status.constants";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { errorHandler } from "src/app/components/common/error-handler";
+import { errorHandler } from "src/app/common/error-handler";
 import { Store } from "@ngrx/store";
 import { selectToken } from "./auth.selector";
 
@@ -43,6 +43,7 @@ export class AuthEffects {
       .pipe(
         switchMap((res: { userId: string, token: string, expiresIn: number }) => {
           let actions = [];
+          actions.push(loadCurrentUser());
           actions.push(updateToken({ token: res.token, expiresIn: res.expiresIn }));
           actions.push(setLoadStatus({ status: LoadStatus.LOADED }));
           return actions;

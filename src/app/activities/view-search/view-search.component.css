@@ -1,0 +1,7 @@
+.container span {
+  font-size: var(--fs-l);
+}
+
+.results {
+  padding-top: var(--space-y-l);
+}

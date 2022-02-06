@@ -1,0 +1,42 @@
+<div class="container flex-between">
+  <div class="filter">
+    <section class="filter-section">
+      <span class="filter-list-section">
+        <mat-checkbox class="filter-margin"
+                      [checked]="allChecked"
+                      [color]="filterOption.color"
+                      [indeterminate]="someChecked()"
+                      (change)="setAll($event.checked)">
+          {{filterOption.name}}
+        </mat-checkbox>
+      </span>
+      <span class="filter-list-section">
+        <ul>
+          <li *ngFor="let subOption of filterOption.subOptions">
+            <mat-checkbox [(ngModel)]="subOption.checked"
+                          [color]="subOption.color"
+                          (ngModelChange)="updateAllChecked()">
+              {{ subOption.name }}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </section>
+  </div>
+  <div class="products">
+    <div class="actions flex">
+      <button mat-raised-button *ngIf="user?.isAdmin" (click)="openNewProductDialog()">New Product</button>
+      <button mat-button [matMenuTriggerFor]="sort">
+        Sort By
+        <span class="material-icons">sort</span>
+      </button>
+      <mat-menu #sort="matMenu">
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_DATE_ASC)">Post Date (earliest to latest)</button>
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_DATE_DSC)">Post Date (latest to earliest)</button>
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_PRICE_DSC)">Price (highest to lowest)</button>
+        <button mat-menu-item (click)="onSort(QueryParam.SORT_PRICE_ASC)">Price (lowest to highest)</button>
+      </mat-menu>
+    </div>
+    <app-product-list [products]="products" [cols]="5" [gutterSize]="'40px'"></app-product-list>
+  </div>
+</div>

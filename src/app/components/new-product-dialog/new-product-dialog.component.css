@@ -1,6 +1,6 @@
 mat-form-field {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-y-s);
 }
 
 input[type="file"] {
@@ -8,7 +8,6 @@ input[type="file"] {
 }
 
 .image-upload {
-  display: flex;
   justify-content: flex-start;
 }
 
@@ -17,12 +16,10 @@ input[type="file"] {
 }
 
 .image-preview {
-  display: flex;
-  justify-content: center;
   width: 380px;
   height: 300px;
   border: 1px solid #808080;
-  padding: 5px;
+  padding: var(--space-xy-xs);
 }
 
 .image-preview > img {
@@ -30,8 +27,3 @@ input[type="file"] {
   max-height: 300px;
 }
 
-.footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-}

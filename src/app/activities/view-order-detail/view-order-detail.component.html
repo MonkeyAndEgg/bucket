@@ -1,0 +1,30 @@
+<div class="container flex">
+  <div class='summary flex'>
+    <div class="column-field flex">
+      <label>Shipping Address</label>
+      <span>{{ shippingAddress.address }}</span>
+      <span>{{ shippingAddress.city }}</span>
+      <span>{{ shippingAddress.state }}</span>
+      <span>{{ shippingAddress.postCode }}</span>
+    </div>
+    <div class="column-field flex">
+      <label>Order Date</label>
+      <span>{{ order?.createdAt | date: 'fullDate' }}</span>
+    </div>
+    <div class="column-field flex">
+      <label>Order Items</label>
+      <div *ngFor="let text of summaryTexts">
+        <span>{{ text }}</span>
+      </div>
+    </div>
+    <div class="column-field flex">
+      <label>Order Summary</label>
+      <span>${{ order?.total }}</span>
+    </div>
+  </div>
+  <div class="progress-tracker flex">
+    <mat-progress-bar mode="determinate" [value]="progressMap.get(order?.status)"></mat-progress-bar>
+    <span>Your current order status is: <label>{{ order?.status }}</label></span>
+  </div>
+  <button mat-raised-button color="primary" [routerLink]="'/cart'">Back To Cart</button>
+</div>

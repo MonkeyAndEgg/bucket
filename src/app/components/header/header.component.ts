@@ -4,11 +4,11 @@ import { TooltipPosition } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { USER_OPTIONS } from 'src/app/constants/header.constants';
+import { UserOptions } from 'src/app/constants/header.constants';
 import { Cart } from 'src/app/models/cart';
-import { Product } from 'src/app/models/product';
+import { ProductData } from 'src/app/models/product-data';
 import { User } from 'src/app/models/user';
-import { saveStorageData } from '../common/process-storage-data';
+import { saveStorageData } from '../../common/process-storage-data';
 import { HeaderService } from './header.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { HeaderService } from './header.service';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   isAuth = false;
-  USER_OPTIONS = USER_OPTIONS;
+  UserOptions = UserOptions;
   destroySubscription$ = new Subject();
   userId: string | undefined;
   isAdmin = false;
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private service: HeaderService, private router: Router) { }
 
   ngOnInit(): void {
-    this.service.verifyUserAuth();
+    this.service.verifyUserAuth(this.onSignOut);
     this.service.getCurrentUser()
     .pipe(
       takeUntil(this.destroySubscription$)
@@ -43,8 +43,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.userId = user.id;
         this.isAdmin = user.isAdmin ? user.isAdmin : false;
         this.service.loadUserCart(user.id);
-      } else {
-        this.isAuth = false;
       }
     });
 
@@ -67,7 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ).subscribe((cart: Cart | undefined) => {
       this.cartProductNumber = 0;
       if (cart) {
-        cart.products.forEach((productData: { product: Product; quantity: number; }) => {
+        cart.products.forEach((productData: ProductData) => {
           this.cartProductNumber += productData.quantity;
         });
       }
@@ -80,6 +78,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSignOut(): void {
     this.service.signOut();
+    this.isAuth = false;
     this.userId = undefined;
   }
 

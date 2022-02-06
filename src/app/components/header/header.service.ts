@@ -8,7 +8,7 @@ import { loadCurrentUser, setCurrentUser, updateToken } from "src/app/store/auth
 import { selectExpiration, selectToken, selectUser } from "src/app/store/auth/auth.selector";
 import { loadCartById } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
-import { clearStorageData } from "../common/process-storage-data";
+import { clearStorageData } from "../../common/process-storage-data";
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +67,7 @@ export class HeaderService {
     }, expiresInSeconds * 1000);
   }
 
-  verifyUserAuth(): void {
+  verifyUserAuth(logoutUser: () => void): void {
     const currentTime = new Date();
     const tokenData = this.getStorageTokenData();
     if (tokenData) {
@@ -76,6 +76,7 @@ export class HeaderService {
         this.updateToken(tokenData.token, expiresInSeconds);
       } else {
         console.log('Your token is expired.');
+        logoutUser();
       }
     }
   }

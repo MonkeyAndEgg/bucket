@@ -1,0 +1,17 @@
+.container {
+  flex-direction: column;
+  align-items: center;
+}
+
+span:first-of-type {
+  font-size: var(--fs-m);
+  font-weight: var(--fw-h);
+}
+
+span, button {
+  margin-top: var(--space-y-l);
+}
+
+img {
+  height: 200px;
+}

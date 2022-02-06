@@ -1,6 +1,43 @@
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
+:root {
+  // color
+  --black: #000000;
+  --white: #ffffff;
+  --error: #ff6f61;
+  --primary: #ffc107;
+
+  // font
+  --fw-m: 700;
+  --fw-h: 900;
+  --fs-s: 12px;
+  --fs-m: 20px;
+  --fs-l: 30px;
+  --fs-xl: 40px;
+
+  // margin/padding
+  // horizontal
+  --space-x-s: 10px;
+  --space-x-m: 15px;
+  --space-x-l: 20px;
+  --space-x-xl: 30px;
+  --space-x-xxl: 50px;
+  // vertical
+  --space-y-s: 10px;
+  --space-y-m: 15px;
+  --space-y-l: 20px;
+  --space-y-xl: 30px;
+  --space-y-xxl: 50px;
+  // both
+  --space-xy-xs: 5px;
+  --space-xy-s: 10px;
+  --space-xy-m: 15px;
+  --space-xy-l: 20px;
+  --space-xy-xl: 30px;
+  --space-xy-xxl: 50px;
+}
+
 html, body {
   height: 100%;
 }
@@ -11,32 +48,50 @@ body {
 }
 
 label {
-  font-weight: 900;
+  font-weight: var(--fw-h);
 }
 
 .container {
-  padding-top: 20px;
+  padding-top: var(--space-y-l);
 }
 
 .custom-snack-bar {
-  background-color: #ff6f61;
-  font-weight: 900;
-  color: #ffffff;
+  background-color: var(--error);
+  font-weight: var(--fw-h);
+  color: var(--white);
 }
 
 .loading {
-  display: flex;
-  justify-content: center;
   padding: 200px 0px;
 }
 
 .spinner span {
-  margin: 20px;
+  margin: var(--space-xy-l);
   display: inline-block;
-  font-weight: 700;
-  font-family: cursive;
+  font-weight: var(--fw-m);
 }
 
 mat-spinner {
   margin: auto;
 }
+
+.ft-cursive,
+.spinner span {
+  font-family: cursive !important;
+}
+
+/* flex start */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+/* flex end */

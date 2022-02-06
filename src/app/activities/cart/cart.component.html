@@ -1,0 +1,68 @@
+<div class="container flex-between">
+  <div class="orders flex">
+    <h1 class="ft-cursive">Shopping Cart</h1>
+    <div class="order-list">
+      <ng-container *ngIf='products.length === 0'>
+        Your cart is currently empty.
+      </ng-container>
+      <div class="order-item flex-between" *ngFor="let productObj of products">
+        <img [src]='productObj?.product?.imageUrl' [routerLink]="['/view-product', productObj?.product?._id]">
+        <div class="item-field flex">
+          <label>{{ productObj?.product?.name }}</label>
+        </div>
+        <div class="item-field flex">
+          <span class="material-icons" (click)="decrementQuantity(productObj)">
+            remove_circle_outline
+          </span>
+          <label>{{ productObj?.quantity }}</label>
+          <span class="material-icons" (click)="incrementQuantity(productObj)">
+            add_circle_outline
+          </span>
+        </div>
+        <div class="item-field flex">
+          <label *ngIf="productObj?.quantity && productObj?.product?.price">$ {{ productObj.totalPrice }}</label>
+          <label *ngIf="!productObj?.quantity || !productObj?.product?.price">N/A</label>
+        </div>
+        <div class="item-field flex">
+          <button mat-button color="warn" (click)="onClickRemove(productObj)">Remove</button>
+        </div>
+      </div>
+    </div>
+    <h1 class="ft-cursive">Your Orders</h1>
+    <div class="order-list">
+      <ng-container *ngIf='orders.length === 0'>
+        You have not purchased any item yet.
+      </ng-container>
+      <div class="order-item flex-between" *ngFor="let order of orders">
+        <img [src]='order.products[0].product.imageUrl'>
+        <div class="item-field flex">
+          <label>Order ID: {{ order._id }}</label>
+        </div>
+        <div class="item-field flex">
+          <button mat-button color="primary" [routerLink]="['/view-order', order._id]">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout">
+    <div class="info flex">
+      <div class="info-field flex-between">
+        <label>Product Subtotal</label>
+        <span>${{total}}</span>
+      </div>
+      <div class="info-field flex-between">
+        <label>Shipping</label>
+        <span>Free</span>
+      </div>
+      <div class="info-field flex-between">
+        <label>Order Total(USD)</label>
+        <span>${{total}}</span>
+      </div>
+    </div>
+    <div class="actions flex-between">
+      <button mat-raised-button color="primary" [routerLink]="'/view-products'">Continue Shipping</button>
+      <button mat-raised-button color="accent" [disabled]="products.length === 0" [routerLink]="'/checkout'">Checkout</button>
+    </div>
+  </div>
+</div>

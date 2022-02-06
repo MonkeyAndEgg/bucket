@@ -1,0 +1,34 @@
+.products{
+  width: 80%;
+}
+
+.actions {
+  justify-content: flex-end;
+  padding: var(--space-xy-l);
+}
+
+.actions button {
+  margin-left: var(--space-x-s);
+}
+
+.filter {
+  width: 20%;
+  padding: var(--space-xy-l);
+}
+
+.filter-section {
+  margin: 12px 0;
+}
+
+.filter-margin {
+  margin: 0 12px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: var(--space-y-s);
+}
+
+ul li {
+  margin-top: var(--space-y-s);
+}
