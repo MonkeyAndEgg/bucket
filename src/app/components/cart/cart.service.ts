@@ -6,7 +6,7 @@ import { Order } from "src/app/models/order";
 import { Payment } from "src/app/models/payment";
 import { ProductData } from "src/app/models/product-data";
 import { ProductRequestData } from "src/app/models/product-request-data";
-import { addToCart } from "src/app/store/order/order.actions";
+import { addToCart, loadOrdersByUserId } from "src/app/store/order/order.actions";
 import { selectCurrentCart, selectOrders } from "src/app/store/order/order.selector";
 import { selectPayment } from "src/app/store/payment/payment.selector";
 
@@ -51,5 +51,9 @@ export class CartService {
 
   getCompletedPayment(): Observable<Payment> {
     return this.store.select(selectPayment)
+  }
+
+  loadUserOrders(userId: string): void {
+    this.store.dispatch(loadOrdersByUserId({ userId }));
   }
 }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const address = require('./address').schema;
 
 const orderSchema = mongoose.Schema({
   userId: { type: String, required: true },
@@ -14,12 +15,26 @@ const orderSchema = mongoose.Schema({
       }
     }
   ],
+  address: {
+    shipping: {
+      type: address,
+      required: true
+    },
+    billing: {
+      type: address,
+      required: true
+    }
+  },
   status: {
     type: String,
     required: true
   },
   createdAt: {
     type: String,
+    required: true
+  },
+  total: {
+    type: Number,
     required: true
   },
   trackingNum: {

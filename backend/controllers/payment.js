@@ -5,7 +5,7 @@ const stripe = require('stripe')(process.env.STRIPE_KEY);
 const ORDER_STATUS = require('../constants/order-status');
 
 exports.createPayment = async (req, res) => {
-  const { token, cartId } = req.body;
+  const { token, cartId, address } = req.body;
 
   const cart = await Cart.findById(cartId).populate('products.product');;
   if (!cart) {
@@ -20,7 +20,7 @@ exports.createPayment = async (req, res) => {
   }
   let totalAmount = 0;
   for (const productData of cart.products) {
-    totalAmount += productData.product.price * productData.quantity;
+    totalAmount += Math.round(productData.product.price * productData.quantity * 100) / 100;
   }
   const charge = await stripe.charges.create({
     currency: 'usd',
@@ -33,7 +33,9 @@ exports.createPayment = async (req, res) => {
       userId: cart.userId,
       products: cart.products,
       status: ORDER_STATUS.WAIT_TO_DELIVER,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      address,
+      total: totalAmount
     });
     await order.save();
 

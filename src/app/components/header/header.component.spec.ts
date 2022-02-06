@@ -22,7 +22,6 @@ describe('HeaderComponent', () => {
     const serviceSpy = jasmine.createSpyObj('HeaderService', {
       'loadUser': null,
       'loadUserCart': null,
-      'loadUserOrders': null,
       'getCurrentUser': of(undefined),
       'getUserCart': of(undefined),
       'getToken': of('123'),

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OrderStatus } from 'src/app/constants/product-status.constants';
+import { AddressData } from 'src/app/models/address-data';
 import { Order } from 'src/app/models/order';
 import { ProductData } from 'src/app/models/product-data';
 import { ViewOrderDetailService } from './view-order-detail.service';
@@ -17,6 +18,7 @@ export class ViewOrderDetailComponent implements OnInit {
   order: Order | undefined;
   summaryTexts: string[] = [];
   progressMap = new Map();
+  shippingAddress = {} as AddressData;
 
   constructor(private service: ViewOrderDetailService, private route: ActivatedRoute) { }
 
@@ -36,6 +38,7 @@ export class ViewOrderDetailComponent implements OnInit {
     ).subscribe((order: Order | undefined) => {
       if (order) {
         this.order = order;
+        this.shippingAddress = order.address.shipping;
         this.summaryTexts = this.generateOrderSummaryTexts(this.order.products);
       }
     });

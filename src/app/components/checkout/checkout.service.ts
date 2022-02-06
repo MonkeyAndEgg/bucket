@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { AddressData } from "src/app/models/address-data";
 import { Cart } from "src/app/models/cart";
 import { Payment } from "src/app/models/payment";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
@@ -13,12 +14,12 @@ import { selectPayment } from "src/app/store/payment/payment.selector";
 export class CheckoutService {
   constructor(private store: Store) {}
 
-  processPayment(cartId: string, amount: number): void {
+  processPayment(cartId: string, amount: number, address: { shipping: AddressData, billing: AddressData }): void {
     const handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_ntBR2ZUDCrXSAsqAV3qUJPvZ00JjuqM0to',
       token: (stripeToken: any) => {
         console.log('token is:', stripeToken);
-        const paymentRequest = { token: stripeToken, cartId };
+        const paymentRequest = { token: stripeToken, cartId, address };
         this.store.dispatch(processPayment({ paymentRequest }));
       }
     });

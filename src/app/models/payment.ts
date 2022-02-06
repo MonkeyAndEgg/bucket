@@ -1,3 +1,4 @@
+import { AddressData } from "./address-data";
 import { ProductRequestData } from "./product-request-data";
 
 export interface Payment {
@@ -10,4 +11,5 @@ export interface Payment {
 export interface PaymentRequestPayload {
   token: object;
   cartId: string;
+  address: { shipping: AddressData, billing: AddressData };
 }

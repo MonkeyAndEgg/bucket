@@ -2,19 +2,24 @@
   <div class='summary flex'>
     <div class="column-field flex">
       <label>Shipping Address</label>
-      <span>6360 Shaka Crescent</span>
-      <span>Canada</span>
-      <span>v7c2r2</span>
+      <span>{{ shippingAddress.address }}</span>
+      <span>{{ shippingAddress.city }}</span>
+      <span>{{ shippingAddress.state }}</span>
+      <span>{{ shippingAddress.postCode }}</span>
     </div>
     <div class="column-field flex">
-      <label>Payment Method</label>
-      <span>Visa</span>
+      <label>Order Date</label>
+      <span>{{ order?.createdAt | date: 'fullDate' }}</span>
     </div>
     <div class="column-field flex">
-      <label>Order Summary</label>
+      <label>Order Items</label>
       <div *ngFor="let text of summaryTexts">
         <span>{{ text }}</span>
       </div>
+    </div>
+    <div class="column-field flex">
+      <label>Order Summary</label>
+      <span>${{ order?.total }}</span>
     </div>
   </div>
   <div class="progress-tracker flex">

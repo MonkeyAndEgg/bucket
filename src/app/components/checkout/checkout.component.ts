@@ -65,7 +65,21 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   onClickCheckout(): void {
     if (this.cart && this.cart._id) {
-      this.service.processPayment(this.cart._id, this.total);
+      const address = {
+        shipping: {
+          address: this.shippingForm.controls.address.value,
+          city: this.shippingForm.controls.city.value,
+          state: this.shippingForm.controls.state.value,
+          postCode: this.shippingForm.controls.postCode.value
+        },
+        billing: {
+          address: this.billingForm.controls.address.value,
+          city: this.billingForm.controls.city.value,
+          state: this.billingForm.controls.state.value,
+          postCode: this.billingForm.controls.postCode.value
+        }
+      };
+      this.service.processPayment(this.cart._id, this.total, address);
     }
   }
 

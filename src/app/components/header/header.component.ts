@@ -43,7 +43,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.userId = user.id;
         this.isAdmin = user.isAdmin ? user.isAdmin : false;
         this.service.loadUserCart(user.id);
-        this.service.loadUserOrders(user.id);
       }
     });
 

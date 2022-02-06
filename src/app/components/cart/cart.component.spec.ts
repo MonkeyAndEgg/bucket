@@ -56,6 +56,7 @@ describe('CartComponent', () => {
   beforeEach(waitForAsync(() => {
     serviceSpy = jasmine.createSpyObj('CartService', {
       'updateCart': null,
+      'loadUserOrders': null,
       'getUserCart': of(undefined),
       'getUserOrders': of([]),
       'getCompletedPayment': of({})

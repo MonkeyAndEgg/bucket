@@ -36,6 +36,7 @@ export class CartComponent implements OnInit, OnDestroy {
           };
         });
         this.total = calculateProductTotal(this.cart.products);
+        this.service.loadUserOrders(this.cart.userId);
       }
     });
 

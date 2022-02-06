@@ -6,7 +6,7 @@ import { Cart } from "src/app/models/cart";
 import { User } from "src/app/models/user";
 import { loadCurrentUser, setCurrentUser, updateToken } from "src/app/store/auth/auth.actions";
 import { selectExpiration, selectToken, selectUser } from "src/app/store/auth/auth.selector";
-import { loadCartById, loadOrdersByUserId } from "src/app/store/order/order.actions";
+import { loadCartById } from "src/app/store/order/order.actions";
 import { selectCurrentCart } from "src/app/store/order/order.selector";
 import { clearStorageData } from "../../common/process-storage-data";
 
@@ -22,10 +22,6 @@ export class HeaderService {
 
   loadUserCart(id: string): void {
     this.store.dispatch(loadCartById({ id }));
-  }
-
-  loadUserOrders(userId: string): void {
-    this.store.dispatch(loadOrdersByUserId({ userId }));
   }
 
   getCurrentUser(): Observable<User | undefined> {
