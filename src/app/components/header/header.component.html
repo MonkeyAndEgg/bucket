@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+    <img class="logo" src="../../../assets/images/logo.png" alt="Logo" [routerLink]="'/'" />
     <span class="title ft-cursive" [routerLink]="'/'">Bucket</span>
     <span class="spacer"></span>
     <form *ngIf="displaySearchBar" [formGroup]="searchForm" class="search-form" (ngSubmit)="onSearch()">
