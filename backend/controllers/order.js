@@ -1,6 +1,7 @@
 const ORDER_STATUS = require('../constants/order-status');
 const Order = require('../models/order');
 const Product = require('../models/product');
+const errHandler = require('../util/errorHandler');
 
 exports.getOrder = async (req, res) => {
   try {
@@ -13,9 +14,7 @@ exports.getOrder = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).send({
-      message: err.message
-    });
+    errHandler(e, res);
   }
 }
 
@@ -32,9 +31,7 @@ exports.getOrders = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).send({
-      message: err.message
-    });
+    errHandler(e, res);
   }
 }
 
@@ -53,9 +50,7 @@ exports.deleteOrder = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).send({
-      message: err.message
-    });
+    errHandler(e, res);
   }
 }
 
@@ -89,8 +84,6 @@ exports.createOrder = async (req, res) => {
     await order.save();
     return res.status(201).send(order);
   } catch (err) {
-    res.status(500).send({
-      message: err.message
-    });
+    errHandler(e, res);
   }
 }
