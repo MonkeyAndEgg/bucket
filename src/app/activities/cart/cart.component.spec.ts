@@ -96,7 +96,7 @@ describe('CartComponent', () => {
   it('should display 2 buttons under actions div', () => {
     const buttons = el.queryAll(By.css('.actions button'));
     expect(buttons.length).toEqual(2);
-    expect(buttons[0].nativeElement.textContent).toEqual('Continue Shipping');
+    expect(buttons[0].nativeElement.textContent).toEqual('Continue Shopping');
     expect(buttons[1].nativeElement.textContent).toEqual('Checkout');
   });
 
