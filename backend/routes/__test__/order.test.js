@@ -46,7 +46,22 @@ it('returns 201 for creating orders and 200 for getting the orders', async () =>
     userId: userResponse.body.userId,
     productDataList: [
       { productId: `${response.body._id}`, quantity: 2 }
-    ]
+    ],
+    address: {
+      shipping: {
+        address: 'dummy road',
+        city: 'dummy city',
+        state: 'dummy state',
+        postCode: 'v7c2r2'
+      },
+      billing: {
+        address: 'dummy road',
+        city: 'dummy city',
+        state: 'dummy state',
+        postCode: 'v7c2r2'
+      }
+    },
+    total: 500
   }).expect(201);
 
   await request(app).get(`/api/orders/${userResponse.body.userId}`).send({}).expect(200);

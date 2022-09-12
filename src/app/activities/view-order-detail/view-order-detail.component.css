@@ -12,6 +12,14 @@
   align-items: center;
 }
 
+.progress-tracker label {
+  color: var(--primary);
+}
+
+.progress-tracker span {
+  margin-top: 20px;
+}
+
 .container {
   flex-direction: column;
   justify-content: space-around;
