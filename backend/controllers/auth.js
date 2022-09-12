@@ -92,7 +92,7 @@ exports.logoutUser = async (req, res) => {
         message: `The token with user id: ${userId} does not exist.`
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
@@ -196,18 +196,12 @@ exports.getUser = async (req, res) => {
     let currentUser = undefined;
     const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : undefined;
     if (token) {
-      try {
-        const payload = jwt.verify(token, process.env.JWT_KEY);
-        const { id, email } = payload;
-        const user = await User.findById(id);
-        currentUser = {
-          id, email, isAdmin: user.isAdmin
-        };
-      } catch (err) {
-        res.status(500).send({
-          message: err.message
-        })
-      }
+      const payload = jwt.verify(token, process.env.JWT_KEY);
+      const { id, email } = payload;
+      const user = await User.findById(id);
+      currentUser = {
+        id, email, isAdmin: user.isAdmin
+      };
     }
     res.status(200).send({
       currentUser
@@ -230,7 +224,7 @@ exports.getUserToken = async (req, res) => {
         message: `The token with user id: ${userId} does not exist`
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }

@@ -13,7 +13,7 @@ exports.getOrder = async (req, res) => {
         message: `Cannot find the order with given id: ${req.params.id}`
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
@@ -30,7 +30,7 @@ exports.getOrders = async (req, res) => {
         message: `Cannot find the cart with given user id: ${req.params.userId}`
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
@@ -49,14 +49,14 @@ exports.deleteOrder = async (req, res) => {
         message: 'The order does not exist or you are not authorized to delete it.'
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
 
 exports.createOrder = async (req, res) => {
   try {
-    const { userId, productDataList } = req.body;
+    const { userId, productDataList, total, address } = req.body;
     let products = [];
     if (productDataList.length === 0) {
       return res.status(400).send({
@@ -75,15 +75,18 @@ exports.createOrder = async (req, res) => {
         quantity: productData.quantity
       });
     }
+
     const order = new Order({
       userId,
       products,
       status: ORDER_STATUS.WAIT_TO_DELIVER,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      total,
+      address,
     });
     await order.save();
     return res.status(201).send(order);
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }

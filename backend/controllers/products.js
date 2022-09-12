@@ -21,7 +21,7 @@ exports.createProduct = async (req, res) => {
     });
     await product.save();
     res.status(201).send(product);
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
@@ -117,7 +117,7 @@ exports.getProduct = async (req, res) => {
         message: 'The target product does not exist.'
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
@@ -136,7 +136,7 @@ exports.deleteProduct = async (req, res) => {
         message: 'The product may not exist or you are not authorized to delete it.'
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }

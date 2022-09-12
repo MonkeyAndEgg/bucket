@@ -84,7 +84,7 @@ exports.getCart = async (req, res) => {
         message: `Cannot find the cart with given user id: ${req.params.userId}`
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
@@ -113,7 +113,7 @@ exports.deleteCart = async (req, res) => {
         message: 'The cart may not exist or you are not authorized to delete it.'
       });
     }
-  } catch (err) {
+  } catch (e) {
     errHandler(e, res);
   }
 }
