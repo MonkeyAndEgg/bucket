@@ -4,6 +4,7 @@ const Order = require('../models/order');
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const ORDER_STATUS = require('../constants/order-status');
 const errHandler = require('../util/errorHandler');
+const roundNum = require('../util/roundNum');
 
 exports.createPayment = async (req, res) => {
   try {
@@ -22,7 +23,7 @@ exports.createPayment = async (req, res) => {
     }
     let totalAmount = 0;
     for (const productData of cart.products) {
-      totalAmount += Math.round(productData.product.price * productData.quantity * 100) / 100;
+      totalAmount += roundNum(productData.product.price * productData.quantity);
     }
     const charge = await stripe.charges.create({
       currency: 'usd',
@@ -37,7 +38,7 @@ exports.createPayment = async (req, res) => {
         status: ORDER_STATUS.WAIT_TO_DELIVER,
         createdAt: new Date().toISOString(),
         address,
-        total: totalAmount
+        total: roundNum(totalAmount)
       });
       await order.save();
 
@@ -50,7 +51,7 @@ exports.createPayment = async (req, res) => {
       const payment = new Payment({
         stripeId: charge.id,
         order: order,
-        amount: totalAmount
+        amount: roundNum(totalAmount)
       });
       await payment.save();
       res.status(201).send({ payment });
